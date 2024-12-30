@@ -616,13 +616,20 @@ input[type='checkbox'] {
 	margin-bottom: 0.125rem;
 }
 
+.centered-div {
+	display: flex;
+	justify-content: center;
+	/* Horizontally center */
+	align-items: center;
+}
+
 
 /********************/
 /*     Services     */
 /********************/
 .basic-2 {
-	padding-top: 7.75rem;
-	padding-bottom: 5.25rem;
+	padding-top: 1rem;
+	padding-bottom: 2rem;
 }
 
 .basic-2 .h2-heading {
@@ -658,7 +665,7 @@ input[type='checkbox'] {
 /*******************/
 .split .area-1 {
 	height: 430px;
-	background: linear-gradient(to bottom right, rgba(25, 26, 29, 0.5), rgba(25, 26, 29, 0.5)), url('../images/details-background.jpg') center center no-repeat;
+	background: linear-gradient(to bottom right, rgba(25, 26, 29, 0.5), rgba(25, 26, 29, 0.5)), url('../images/education.jpg') center center no-repeat;
 	background-size: cover;
 }
 
