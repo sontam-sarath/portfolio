@@ -522,9 +522,29 @@ input[type='checkbox'] {
 	padding-top: 7rem;
 	padding-bottom: 5.5rem;
 	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/sarath.jpg') center center no-repeat;
-	/* background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/header-background.jpg') center center no-repeat; */
 	background-size: cover;
 	text-align: center;
+}
+
+@media (max-width: 768px) {
+	.header {
+		background-size: contain;
+		/* Adjust for smaller screens */
+	}
+}
+
+.skill-category {
+	margin-top: 20px;
+}
+
+.skill-category h4 {
+	margin-bottom: 10px;	
+}
+
+.badge-primary {
+	font-size: 14px;
+	padding: 10px 15px;
+	margin: 5px;
 }
 
 .background-overlay {
@@ -648,11 +668,10 @@ input[type='checkbox'] {
 	border: 1px solid #cfd7de;
 }
 
-.basic-2 .fas,
-.basic-2 .far {
+.my-icons {
 	margin-bottom: 1.75rem;
 	color: #0b36a8;
-	font-size: 3.5rem;
+	font-size: 2.5rem;
 }
 
 .basic-2 h4 {
