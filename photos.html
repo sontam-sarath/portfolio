@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Your description">
+    <meta name="author" content="Your name">
+    
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+    <meta property="og:site_name" content="" /> <!-- website name -->
+    <meta property="og:site" content="" /> <!-- website link -->
+    <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+    <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+    
+    <!-- Webpage Title -->
+    <title>Sarath Sontam</title>
+    
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@600&display=swap"
+        rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    
+    <!-- Favicon  -->
+    <link rel="icon" href="images/favicon.png">
+    <style>
+        /* Gallery container */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        /* Image style */
+        .gallery img {
+            width: 100px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Photo viewer modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Image inside the modal */
+        .modal img {
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+        }
+
+        /* Navigation buttons */
+        .modal .prev,
+        .modal .next {
+            position: absolute;
+            top: 50%;
+            font-size: 2em;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .modal .prev {
+            left: 10px;
+        }
+
+        .modal .next {
+            right: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+    
+            <!-- Image Logo -->
+            <a class="navbar-brand logo-image" href="index.html"><img src="images/sarath-logo-icon.png"
+                    alt="alternative"></a>
+    
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Sarath</a> -->
+    
+            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="index.html#header"">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Drop</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item page-scroll" href="devops_class.html">DevOps Class</a>
+                            <div class="dropdown-divider"></div>
+                            <!-- <a class="dropdown-item page-scroll" href="devops_class.html">DevOps Class</a> -->
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <a class="dropdown-item page-scroll" href="photos.html">Photos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item page-scroll" href="#">Projects</a>
+    
+    
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <span class="nav-item social-icons">
+                    <!-- <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span> -->
+                    <!-- <span class="fa-stack">
+                            <a target="_blank" href="https://www.instagram.com/sontamsarath/">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span> -->
+                    <span class="fa-stack">
+                        <a target="_blank" href="https://www.linkedin.com/in/sontamsarath/">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-linkedin fa-stack-1x"></i>
+                        </a>
+                    </span>
+                </span>
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+    
+    
+    <!-- Header -->
+    <header class="ex-header" id="devOpsHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1>Photos</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+    <h2 style="text-align: center;">Image Gallery with Photo Viewer</h2>
+
+    <div class="gallery" id="gallery">        
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="photoModal">
+        <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+        <img id="modalImage" src="" alt="Photo">
+        <button class="next" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <script>
+        const image_count = 24
+        const gallery = document.getElementById("gallery");
+
+        let images = []
+        for (let i = 1; i <= image_count; i++) {
+            const img = document.createElement("img");
+            img.src = `./images/my-photos/${i}.jpg`;
+            img.alt = `Image ${i}`;
+            img.setAttribute("onclick", `openModal(${i - 1})`);
+            gallery.appendChild(img);
+            images.push(`./images/my-photos/${i}.jpg`)
+        }   
+
+        let currentImageIndex = -1;
+
+        function openModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById("photoModal");
+            const modalImage = document.getElementById("modalImage");
+            modalImage.src = images[currentImageIndex];
+            modal.style.display = "flex";
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1; // Loop to the last image
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0; // Loop to the first image
+            }
+
+            const modalImage = document.getElementById("modalImage");
+            modalImage.src = images[currentImageIndex];
+        }
+
+        // Close the modal if clicked outside the image
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("photoModal")) {
+                document.getElementById("photoModal").style.display = "none";
+            }
+        }
+    </script>
+
+    <div style="height: inherit;">
+
+    </div>
+
+    <!-- Section Divider -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <hr class="section-divider">
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+    <!-- end of section divider -->
+    
+    
+    <!-- Footer -->
+    <div id="contact" class="footer bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>
+                        Contact me
+                    </p>
+                    <div class="social-container">
+                        <span class="fa-stack">
+                            <a href="tel:+17059219416" title="+1(705)-921-9416">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-phone fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="mailto:ssontamwork@gmail.com" title="ssontamwork@gmail.com">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a target="_blank" href="https://www.linkedin.com/in/sontamsarath/" title="sontamsarath">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div> <!-- end of social-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->
+
+
+    
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+
+</body>
+
+</html>
