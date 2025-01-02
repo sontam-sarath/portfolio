@@ -859,6 +859,59 @@
                         </li>
                     </ul>
 
+                    <h2>2025-01-01 - 20:00</h2>
+                        <h6>Steps to Set Up Ansible</h6>
+                        <ol>
+                            <li>Install Ansible:
+                                <pre>
+                    #!/bin/bash
+                    sudo apt update
+                    sudo apt install software-properties-common
+                    sudo add-apt-repository --yes --update ppa:ansible/ansible
+                    sudo apt install ansible
+                                </pre>
+                            </li>
+                            <li>Generate SSH identity for the server:
+                                <pre>ssh-keygen -t rsa</pre>
+                                <ul>
+                                    <li>By default, public/private RSA key pair is stored at: <code>/home/ubuntu/.ssh/id_rsa</code></li>
+                                    <li>Identity of server is located at: <code>/home/ubuntu/.ssh/id_rsa.pub</code></li>
+                                </ul>
+                            </li>
+                            <li>Create other managed nodes (target nodes/servers).</li>
+                            <li>Add the public key from Ansible server (<code>/home/ubuntu/.ssh/id_rsa.pub</code>) to new nodes:
+                                <ul>
+                                    <li>Append the key to <code>/home/ubuntu/.ssh/authorized_keys</code> on the managed nodes.</li>
+                                </ul>
+                            </li>
+                            <li>Change the hostname of the Ansible controller:
+                                <pre>sudo hostnamectl set-hostname ansible-controller && exec bash</pre>
+                            </li>
+                            <li>Open the hosts file on the Ansible controller and add the IP addresses of managed nodes:
+                                <pre>sudo nano /etc/ansible/hosts</pre>
+                            </li>
+                            <li>Perform administrative activities on managed nodes using Ansible commands.</li>
+                        </ol>
+                        <h6>Ad-Hoc Commands in Ansible</h6>
+                        <ul>
+                            <li>Install default JDK on all managed nodes:
+                                <pre>ansible all -m apt -a 'name=default-jdk state=present' -b</pre>
+                            </li>
+                            <li>Add a user named "sarath" on all managed nodes:
+                                <pre>ansible all -m user -a 'name=sarath state=present' -b</pre>
+                            </li>
+                            <li>General command structure:
+                                <pre>ansible all/<individual_ip_address>/<group_ip_address> -i inventoryfile -m module -a "command related to the module"</pre>
+                            </li>
+                        </ul>
+                        <p>Refer to the official Ansible documentation for more details:</p>
+                        <ul>
+                            <li><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
+                                    target="_blank">Introduction to Installation</a></li>
+                            <li><a href="https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu"
+                                    target="_blank">Installing Ansible on Ubuntu</a></li>
+                        </ul>                   
+
 
                     <a class="btn-solid-reg mb-5" href="#devOpsHeader">Go To Top</a>
 
