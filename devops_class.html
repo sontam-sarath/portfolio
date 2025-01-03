@@ -910,7 +910,178 @@
                                     target="_blank">Introduction to Installation</a></li>
                             <li><a href="https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu"
                                     target="_blank">Installing Ansible on Ubuntu</a></li>
-                        </ul>                   
+                        </ul>                  
+                        
+                        
+                        <h2>2025-01-02 - 20:10</h2>
+                        
+                        <h6>Ansible Version</h6>
+                        <p>2.17.7</p>
+                        
+                        <h6>List of Modules We Can Use in Ansible</h6>
+                        <ul>
+                            <li>
+                                <p>command</p>
+                            </li>
+                            <li>
+                                <p>shell</p>
+                            </li>
+                            <li>
+                                <p>ping</p>
+                            </li>
+                            <li>
+                                <p>copy</p>
+                            </li>
+                            <li>
+                                <p>apt</p>
+                            </li>
+                            <li>
+                                <p>user</p>
+                            </li>
+                            <li>
+                                <p>service</p>
+                            </li>
+                        </ul>
+                        
+                        <h6>Adhoc Commands</h6>
+                        <ul>
+                            <li>
+                                <p><code>ansible all -m ping</code>: Check if all the IP addresses listed in <code>/etc/ansible/hosts</code>
+                                    file are active.</p>
+                            </li>
+                            <li>
+                                <p><code>ansible sarath -a 'ls'</code></p>
+                                <ul>
+                                    <li>
+                                        <p>Ansible on groups.</p>
+                                    </li>
+                                    <li>
+                                        <p>Create groups in <code>/etc/ansible/hosts</code>:</p>
+                                        <pre>
+                        [sarath]
+                        ip_address
+                        ip_address
+                        [group2]
+                        ip_address
+                        ip_address
+                                            </pre>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Sample Commands:</p>
+                                <ul>
+                                    <li>
+                                        <p><code>ansible all -m command -a 'date'</code></p>
+                                    </li>
+                                    <li>
+                                        <p><code>ansible all -m command -a 'ls'</code></p>
+                                    </li>
+                                    <li>
+                                        <p><code>ansible all -m command -a 'mkdir from_ansible'</code>: Creates a folder
+                                            <code>from_ansible</code> in the default folder <code>/home/ubuntu</code>.</p>
+                                    </li>
+                                    <li>
+                                        <p><code>ansible all -a 'ls'</code></p>
+                                    </li>
+                                    <li>
+                                        <p><code>ansible all -m command -a 'cat /etc/passwd | grep -i ubuntu'</code>: Use <code>shell</code> for
+                                            complex commands.</p>
+                                    </li>
+                                    <li>
+                                        <p><code>ansible all -m shell -a 'cat /etc/passwd | grep -i sarath'</code></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Copy Files from Ansible Controller to Managed Nodes:</p>
+                                <ul>
+                                    <li>
+                                        <p><code>ansible all -m copy -a 'src=script1.sh dest=/home/ubuntu'</code></p>
+                                    </li>
+                                    <li>
+                                        <p><code>ansible all -m copy -a 'src=text dest=/home/ubuntu mode=0600'</code>: Set mode using
+                                            <code>mode</code> keyword (optional).</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Install Using Ansible:</p>
+                                <ul>
+                                    <li>
+                                        <p><code>ansible all -m apt -a 'name=figlet state=present update_cache=yes'</code></p>
+                                    </li>
+                                    <li>
+                                        <p>Options for <code>state</code>: <code>present</code> (install), <code>absent</code> (uninstall),
+                                            <code>latest</code> (update).</p>
+                                    </li>
+                                    <li>
+                                        <p>Add privilege escalation: <code>-b</code>.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>User Module:</p>
+                                <ul>
+                                    <li>
+                                        <p><code>ansible all -m user -a 'name=ansible_user password=1234 shell=/bin/bash home=/home/ansible_user comment=developer' -b</code>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p><code>name</code> is mandatory; rest are optional.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Task: Install a Web Server, Add a Website, and Restart:</p>
+                                <ul>
+                                    <li>
+                                        <p>Create a nano <code>index.html</code>.</p>
+                                    </li>
+                                    <li>
+                                        <p>Install Apache2: <code>ansible all -m apt -a 'name=apache2 state=present update_cache=yes' -b</code>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>Copy <code>index.html</code> to <code>/var/www/html</code>:
+                                            <code>ansible all -m copy -a 'src=index.html dest=/var/www/html'</code></p>
+                                    </li>
+                                    <li>
+                                        <p>Stop Apache2: <code>ansible all -m service -a 'name=apache2 state=stopped' -b</code></p>
+                                    </li>
+                                    <li>
+                                        <p>Start Apache2: <code>ansible all -m service -a 'name=apache2 state=started' -b</code></p>
+                                    </li>
+                                    <li>
+                                        <p>Restart Apache2: <code>ansible all -m service -a 'name=apache2 state=restarted' -b</code></p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>Challenges/Drawbacks:</p>
+                                <ul>
+                                    <li>
+                                        <p>Can run one module at a time.</p>
+                                    </li>
+                                    <li>
+                                        <p>High chance of errors when running multiple commands in series.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h2>Playbooks</h2>
+                        <ul>
+                            <li>
+                                <p>Configure playbook with all required configurations.</p>
+                            </li>
+                            <li>
+                                <p>Use the same playbook across all nodes.</p>
+                            </li>
+                            <li>
+                                <p>Can run multiple modules in playbooks.</p>
+                            </li>
+                        </ul>
 
 
                     <a class="btn-solid-reg mb-5" href="#devOpsHeader">Go To Top</a>
