@@ -1083,6 +1083,102 @@
                             </li>
                         </ul>
 
+                        <h2>2025-01-03 - 20:10</h2>
+                        
+                        <h6>Adhoc Commands</h6>
+                        <ul>
+                            <li>
+                                <p>Fetch:</p>
+                                <ul>
+                                    <li>
+                                        <p><code>ansible sarath -m fetch -a 'src=/etc/tomcat10/tomcat-users.xml dest=/home/ubuntu/' -b</code>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>You can give 'sarath' group name of group of IP addresses, or a single IP address.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h6>Playbooks</h6>
+                        <ul>
+                            <li>
+                                <p>Reusability</p>
+                            </li>
+                            <li>
+                                <p>Auditing Purpose</p>
+                            </li>
+                            <li>
+                                <p>Written in YAML (YAML Ain't Markup Language / Yet Another Markup Language) - YAML is not a markup language.
+                                </p>
+                            </li>
+                            <li>
+                                <p>Data Serialization Languages:</p>
+                                <ul>
+                                    <li>
+                                        <p>JSON</p>
+                                    </li>
+                                    <li>
+                                        <p>XML</p>
+                                    </li>
+                                    <li>
+                                        <p>YAML</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p>YAML Use Case in DevOps Journey:</p>
+                                <ul>
+                                    <li>
+                                        <p>Ansible Playbooks</p>
+                                    </li>
+                                    <li>
+                                        <p>Docker Compose Files</p>
+                                    </li>
+                                    <li>
+                                        <p>Kubernetes Manifests</p>
+                                    </li>
+                                    <li>
+                                        <p>Prometheus Config</p>
+                                    </li>
+                                    <li>
+                                        <p>GitHub Actions</p>
+                                    </li>
+                                </ul>
+                            </li>                            
+                            <li>
+                                <p>Sample Playbook File:</p>
+                                <pre><code>
+                        ---
+                        - name: Playbook to install Tomcat, change port, restart, and deploy app
+                          hosts: all
+                          become: true
+                          tasks:
+                            - name: Install Tomcat
+                              apt:
+                                name: tomcat10
+                                state: present
+                        
+                            - name: Change the port
+                              replace:
+                                path: /etc/tomcat10/server.xml
+                                regex: '8080'
+                                replace: '9090'
+                        
+                            - name: Restart Tomcat
+                              service:
+                                name: tomcat10
+                                state: restarted
+                        
+                            - name: Deploy an app
+                              copy:
+                                src: devops.war
+                                dest: /var/lib/tomcat10/webapps/
+                                    </code></pre>
+                            </li>
+                        </ul>
+
 
                     <a class="btn-solid-reg mb-5" href="#devOpsHeader">Go To Top</a>
 
