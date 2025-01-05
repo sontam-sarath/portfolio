@@ -1178,6 +1178,32 @@
                                     </code></pre>
                             </li>
                         </ul>
+                        <h2>2025-01-02 - 20:10</h2>
+                        <ul>
+                            <li>
+                                <h6>Update Ansible Config</h6>
+                                <ul>
+                                    <li>View the current configuration: <code>cat /etc/ansible/ansible.cfg</code></li>
+                                    <li>Copy default configuration: <code>ansible-config init --disabled > ansible.cfg</code></li>
+                                    <li>Switch to root user: <code>sudo su</code></li>
+                                    <li>Run the copied command to initialize the configuration:
+                                        <code>ansible-config init --disabled > ansible.cfg</code></li>
+                                    <li>Open the configuration file in edit mode: <code>nano /etc/ansible/ansible.cfg</code></li>
+                                    <li>To change the default module:
+                                        <ul>
+                                            <li>Search for <code>module=command</code> and replace it with your preferred module, such as
+                                                <code>module=shell</code>.</li>
+                                        </ul>
+                                    </li>
+                                    <li>To update the default inventory for hosts' IP addresses:
+                                        <ul>
+                                            <li>Search for <code>;inventory=/etc/ansible/hosts</code> and replace the file location with your
+                                                preferred file path where you have saved all hosts' IP addresses.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
 
 
                     <a class="btn-solid-reg mb-5" href="#devOpsHeader">Go To Top</a>
