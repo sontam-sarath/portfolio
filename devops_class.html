@@ -1204,6 +1204,175 @@
                                 </ul>
                             </li>
                         </ul>
+                        <h2>2025-01-05 - 20:00</h2>
+                        <ul>
+                            <li>Ansible Playbooks
+                                <ul>
+                                    <li>Create a sample playbook to install elinks
+                                        <pre><code>---
+                        - name: Playbook to install elinks
+                          hosts: all
+                          tasks:
+                            - name: install elinks
+                              apt:
+                                name: elinks
+                                state: present
+                                update_cache: yes
+                        ...</code></pre>
+                                        <p>Equivalent Ansible Adhoc Command:
+                                            <code>ansible all -m apt 'name=elinks state=present update_cache:yes' -b</code></p>
+                                    </li>
+                                    <li>Command to run playbook: <code>ansible-playbook &lt;playbook_name.yaml&gt;</code></li>
+                                    <li>Check if syntax is valid: <code>ansible-playbook &lt;playbook_name.yaml&gt; --syntax-check</code></li>
+                                    <li>To include privileges: <code>ansible-playbook &lt;playbook_name.yaml&gt; -b</code> or add
+                                        <code>become: true</code> in playbook</li>
+                                    <li>Multiple playbooks in one file
+                                        <pre><code>---
+                        - name: Playbook to install elinks in group1
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install elinks
+                              apt:
+                                name: elinks
+                                state: present
+                                update_cache: yes
+                        
+                        - name: Playbook to install tree in group2
+                          hosts: linux
+                          become: true
+                          tasks:
+                            - name: install tree
+                              yum:
+                                name: tree
+                                state: present
+                                update_cache: yes
+                        ...</code></pre>
+                                    </li>
+                                    <li>Do multiple tasks in one playbook
+                                        <pre><code>---
+                        - name: Playbook to install elinks in group1
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install elinks
+                              apt:
+                                name: elinks
+                                state: present
+                                update_cache: yes
+                            - name: install apache2
+                              apt:
+                                name: apache2
+                                state: present
+                                update_cache: yes
+                        
+                        - name: Playbook to install tree in group2
+                          hosts: linux
+                          become: true
+                          tasks:
+                            - name: install tree
+                              yum:
+                                name: tree
+                                state: present
+                                update_cache: yes
+                        ...</code></pre>
+                                    </li>
+                                    <li>Other examples
+                                        <pre><code>---
+                        - name: Playbook to install elinks in group1
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install all packages
+                              apt:
+                                name: ["git", "maven", "tree", "elinks", "apache2", "figlet"]
+                                state: present
+                                update_cache: yes
+                        
+                        - name: Playbook to install tree in group2
+                          hosts: linux
+                          become: true
+                          tasks:
+                            - name: install tree
+                              yum:
+                                name: ["git", "maven", "tree", "tomcat10", "figlet"]
+                                state: present
+                                update_cache: yes
+                        
+                        - name: Playbook to uninstall tree in group2
+                          hosts: linux
+                          become: true
+                          tasks:
+                            - name: install tree
+                              yum:
+                                name: ["git"]
+                                state: present
+                                update_cache: yes
+                        ...</code></pre>
+                                    </li>
+                                    <li>Launch a website: install apache2, move index.html, restart service
+                                        <pre><code>---
+                        - name: Playbook to launch a website
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install apache2
+                              apt:
+                                name: ["apache2"]
+                                state: present
+                                update_cache: yes
+                            - name: update code
+                              copy:
+                                src: /home/ubuntu/playbooks/index.html
+                                dest: /var/www/html/
+                            - name: restart apache2
+                              service:
+                                name: apache2
+                                state: restarted
+                        ...</code></pre>
+                                    </li>
+                                    <li>Launch a website: create new content, restart service
+                                        <pre><code>---
+                        - name: Playbook to launch a website
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install apache2
+                              apt:
+                                name: ["apache2"]
+                                state: present
+                                update_cache: yes
+                            - name: update code
+                              copy:
+                                content: "content in new"
+                                dest: /var/www/html/index.html
+                            - name: restart apache2
+                              service:
+                                name: apache2
+                                state: restarted
+                        ...</code></pre>
+                                    </li>
+                                    <li>Hide sensitive information with Ansible Vault
+                                        <pre><code>---
+                        - name: Playbook to create user
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: create a user
+                              user:
+                                name: important
+                                password: 1234
+                        ...</code></pre>
+                                        <p>Encrypt playbook: <code>ansible-vault encrypt sensitive_playbook.yaml</code></p>
+                                        <p>Run encrypted playbook: <code>ansible-playbook sensitive_playbook.yaml --ask-vault-pass</code></p>
+                                        <p>Edit encrypted playbook: <code>ansible-vault edit sensitive_playbook.yaml</code></p>
+
+                                        <p>Decrypt playbook: <code>ansible-vault decrypt sensitive_playbook.yaml</code></p>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                 </div> <!-- end of col -->                
 
             </div> <!-- end of row -->
