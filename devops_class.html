@@ -175,7 +175,30 @@
     <div class="ex-basic-1 pt-4">
         <div class="container">
             <div class="row">
-                <div class="col-xl-10 offset-xl-1 mb-4" style="height: 1000px; overflow: auto;">
+                <!-- <div class="container py-5">
+                    <h1 class="text-center mb-4">Badge Grid</h1>
+                    <div class="row g-3">
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <button class="badge bg-primary text-wrap w-100 p-3" data-bs-toggle="modal" data-bs-target="#badgeModal"
+                                data-bs-note="Note for Badge 1">Badge 1</button>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <button class="badge bg-success text-wrap w-100 p-3" data-bs-toggle="modal" data-bs-target="#badgeModal"
+                                data-bs-note="Note for Badge 2">Badge 2</button>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <button class="badge bg-warning text-wrap w-100 p-3" data-bs-toggle="modal" data-bs-target="#badgeModal"
+                                data-bs-note="Note for Badge 3">Badge 3</button>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <button class="badge bg-danger text-wrap w-100 p-3" data-bs-toggle="modal" data-bs-target="#badgeModal"
+                                data-bs-note="Note for Badge 4">Badge 4</button>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="col-xl-10 offset-xl-1 mb-4">
+                    
                     <h2>2024-12-02 - 20:30</h2>
                     <ul>
                         <li><strong>What:</strong> Defines the subject or matter at hand.</li>
@@ -1369,6 +1392,208 @@
 
                                         <p>Decrypt playbook: <code>ansible-vault decrypt sensitive_playbook.yaml</code></p>
 
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h2>2025-01-06 - 20:10</h2>
+                        <h6>Ansible Variables</h6>
+                        <ul>
+                            <li>Use the keyword <code>vars_prompt</code> to prompt the user for input. Refer to the sample code below and use
+                                variables wherever necessary using <code>{{ input_variable }}</code>:
+                                <pre>
+                        ---
+                        - name: interactive playbook
+                          hosts: all
+                          vars_prompt:
+                            - name: package_name
+                              prompt: "What package do you want to install?"
+                          become: true
+                          tasks:
+                            - name: install a package
+                              apt:
+                                name: "{{ package_name }}"
+                                state: present
+                                update_cache: yes
+                                    </pre>
+                            </li>
+                            <li>By default, Ansible inputs are private, meaning the input is not visible when typed.</li>
+                            <li>To make the input public, add the keyword <code>private: false</code> after every input:
+                                <pre>
+                        vars_prompt:
+                          - name: package_name
+                            prompt: "What package do you want to install?"
+                            private: false
+                                    </pre>
+                            </li>
+                            <li>Example with multiple types of variables (private or public) - Create User Example:
+                                <pre>
+                        ---
+                        - name: interactive playbook to create a user account
+                          hosts: all
+                          vars_prompt:
+                            - name: username
+                              prompt: "Enter user name?"
+                              private: false
+                            - name: password
+                              prompt: "Enter password?"
+                            - name: designation
+                              prompt: "Enter designation?"
+                              private: false
+                          become: true
+                          tasks:
+                            - name: create a user
+                              user:
+                                name: "{{ username }}"
+                                password: "{{ password }}"
+                                comment: "{{ designation }}"
+                                    </pre>
+                            </li>
+                        </ul>
+                        <h6>Ansible Variables and Loops</h6>
+                        <ul>
+                            <li>Play Scope Variables:
+                                <ul>
+                                    <li>Variables created within the playbook are called play scope variables.</li>
+                                    <li>Example Playbook:
+                                        <pre>
+                        ---
+                        - name: Playbook to install tomcat, change the port, restart tomcat, and deploy an application
+                          hosts: sarath    
+                          vars:
+                            tomcat_version: tomcat10
+                          become: true
+                          tasks:
+                            - name: install tomcat
+                              apt:
+                                name: "{{ tomcat_version }}"
+                                state: present
+                                update_cache: yes
+                            - name: change the port
+                              replace:
+                                regexp: 8080
+                                replace: 9090
+                                path: "/etc/{{ tomcat_version }}/server.xml"
+                            - name: restart tomcat10
+                              service:
+                                name: "{{ tomcat_version }}"
+                                state: restarted
+                            - name: deploy an application
+                              copy:
+                                src: devops.war
+                                dest: "/var/lib/{{ tomcat_version }}/webapps/"
+                        ...
+                                            </pre>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Host Scope Variables:
+                                <ul>
+                                    <li>Variables specific to hosts or managed nodes.</li>
+                                    <li>Steps:
+                                        <ol>
+                                            <li>Create a directory: <code>mkdir host_vars</code></li>
+                                            <li>Navigate to the directory: <code>cd host_vars</code></li>
+                                            <li>Create a file with the private IP of the managed node: <code>nano 111.11.11.11</code></li>
+                                            <li>Add variables:
+                                                <ul>
+                                                    <li>var1: apache2</li>
+                                                    <li>var2: "hello there, welcome to boa website"</li>
+                                                    <li>var3: /var/www/html/index.html</li>
+                                                    <li>var4: present</li>
+                                                    <li>var5: yes</li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>Example Playbook:
+                                        <pre>
+                        ---
+                        - name: Playbook to install apache and deploy website using host variables
+                          hosts: 172.31.11.128
+                          become: true
+                          tasks:
+                            - name: install package
+                              apt:
+                                name: "{{ var1 }}"
+                                state: "{{ var4 }}"
+                                update_cache: "{{ var5 }}"
+                            - name: modify default content
+                              copy:
+                                content: "{{ var2 }}"
+                                dest: "{{ var3 }}"
+                        ...
+                                            </pre>
+                                    </li>
+                                    <li>Group Scope Variables:
+                                        <ul>
+                                            <li>Create a directory: <code>mkdir group_vars</code></li>
+                                            <li>Create a file with the group name: <code>nano &lt;group_name&gt;</code></li>
+                                            <li>Example Playbook:
+                                                <pre>
+                        ---
+                        - name: Playbook to create users
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: create user
+                              user:
+                                name: "{{ item }}"
+                              with_items:
+                                - "{{ user1 }}"
+                                - "{{ user2 }}"
+                                - "{{ user3 }}"
+                        ...
+                                                    </pre>
+                                                <p><b>Note:</b> <code>with_items</code> is similar to a for loop and iterates through all
+                                                    variables listed.</p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Loop in Playbook:
+                                <ul>
+                                    <li>Install multiple packages:
+                                        <pre>
+                        ---
+                        - name: Playbook to install packages using loops
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install packages
+                              apt:
+                                name: "{{ item }}"
+                                state: present
+                                update_cache: yes
+                              with_items:
+                                - figlet
+                                - apache2
+                                - tomcat10
+                                - git
+                        ...
+                                            </pre>
+                                    </li>
+                                    <li>Install, update, or uninstall packages using multiple items in loops:
+                                        <pre>
+                        ---
+                        - name: Playbook to install packages using loops
+                          hosts: sarath
+                          become: true
+                          tasks:
+                            - name: install packages
+                              apt:
+                                name: "{{ item.a }}"
+                                state: "{{ item.b }}"
+                                update_cache: yes
+                              with_items:
+                                - {a: figlet, b: present}
+                                - {a: apache2, b: latest}
+                                - {a: tomcat10, b: absent}
+                                - {a: git, b: latest}
+                        ...
+                                            </pre>
                                     </li>
                                 </ul>
                             </li>
