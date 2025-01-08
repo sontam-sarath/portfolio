@@ -928,6 +928,7 @@
                     </div>
                     <div class="tab-pane fade m-2" id="ansible" role="tabpanel" aria-labelledby="ansible-tab">
                         <div style="height: 1500px; overflow: scroll;">
+                            <a href="https://docs.ansible.com/"> Ansible documentation</a>
                             <h2>
                                 2024-12-30 - 20:20
                             </h2>
@@ -1761,16 +1762,177 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <h2>2025-01-07 : 20:00</h2>
+                            <h6>Ansible Debug and When</h6>
+                            <ul>
+                                <li>Debug:
+                                    <ul>
+                                        <li>In ad-hoc commands, logs are displayed by default.</li>
+                                        <li>Logs can be saved in playbooks.</li>
+                                        <li>Example Playbook to Save Logs:
+                                            <pre>
+                            ---
+                            - name: Install a package to check if we can save logs
+                              hosts: all
+                              become: true
+                              tasks:
+                                - name: Install package git
+                                  apt:
+                                    name: git
+                                    state: present
+                                    update_cache: yes
+                                  register: results
+                                - name: Print the logs
+                                  debug:
+                                    var: results
+                            ...
+                                                </pre>
+                                        </li>
+                                        <li>Use <code>register</code> to save results and display logs using <code>debug</code>.</li>
+                                        <li>Save logs to a file using redirection:
+                                            <pre>
+                            ansible-playbook playbook_save_logs.yaml >> save-logs.log
+                                                </pre>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>When:
+                                    <ul>
+                                        <li>Used for conditions inside a playbook.</li>
+                                        <li>Example Playbook with a Condition:
+                                            <pre>
+                            ---
+                            - name: Install a package based on condition
+                              hosts: all
+                              vars:
+                                num: 50
+                              become: true
+                              tasks:
+                                - name: Install package git
+                                  apt:
+                                    name: git
+                                    state: present
+                                    update_cache: yes
+                                  when:
+                                    num == 50
+                            ...
+                                                </pre>
+                                        </li>
+                                        <li>Create a variable (e.g., <code>num: 50</code>), and apply a condition using <code>when</code>. The task
+                                            executes only if the condition matches; otherwise, it is skipped.</li>
+                                        <li>Integrating <code>when</code> and <code>debug</code>:
+                                            <ul>
+                                                <li>Write a playbook to create a user. If the user already exists, do nothing; if not, update the
+                                                    password.</li>
+                                                <li>Example:
+                                                    <pre>
+                            ---
+                            - name: Create a user and update password if newly created
+                              hosts: all
+                              become: true
+                              tasks:
+                                - name: Create a user if not exists
+                                  user:
+                                    name: sarath_new
+                                  register: user_logs
+                                - name: Write logs
+                                  debug:
+                                    var: user_logs
+                                - name: If user exists, update password
+                                  user:
+                                    name: sarath_new
+                                    password: 123456
+                                  when:
+                                    user_logs.changed == false
+                            ...
+                                                        </pre>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>Example with Input:
+                                            <pre>
+                            ---
+                            - name: Create user
+                              hosts: sarath
+                              vars_prompt:
+                                - name: user_name
+                                  prompt: "Enter user name"
+                              become: true
+                              tasks:
+                                - name: Create user
+                                  user:
+                                    name: "{{ user_name }}"
+                                  register: user_logs
+                                - name: Output logs
+                                  debug:
+                                    var: user_logs
+                                - name: Update password
+                                  user:
+                                    name: "{{ user_name }}"
+                                    password: 12345687
+                                  when:
+                                    user_logs.changed == true
+                            ...
+                                                </pre>
+                                        </li>
+                                        <li>Example with <code>when</code> Condition:
+                                            <pre>
+                            ---
+                            - name: Install a package default-jdk only if specified
+                              hosts: all
+                              vars:
+                                og_package: default-jdk
+                              vars_prompt:
+                                - name: package_name
+                                  prompt: "Enter package name you want to install"
+                              become: true
+                              tasks:
+                                - name: Install package
+                                  apt:
+                                    name: "{{ package_name }}"
+                                    state: present
+                                    update_cache: yes
+                                  when:
+                                    package_name == og_package
+                            ...
+                                                </pre>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>Stat:
+                                    <ul>
+                                        <li>Command:
+                                            <code>ansible all -m stat -a 'path=/home/ubuntu/filename.ext'</code>
+                                        </li>
+                                        <li>Task:
+                                            <ol>
+                                                <li>Create a user.</li>
+                                                <li>Create a file in the user's workspace.</li>
+                                                <li>Check if the file is present.</li>
+                                                <li>If not present, create a new file by the name of the user.</li>
+                                            </ol>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>Handlers:
+                                    <ul>
+                                        <li>4 key things to remember about handlers:
+                                            <ol>
+                                                <li>Handlers are executed after all the tasks are executed.</li>
+                                                <li>Handlers are executed in the order in which they are mentioned, but not in the order in which
+                                                    they are called.</li>
+                                                <li>Even though a handler is called multiple times, it is executed only once.</li>
+                                                <li>Handlers execute if and only if there is a change in the task.</li>
+                                            </ol>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-10 offset-xl-1 mb-4">
-
-
-
-
-                </div> <!-- end of col -->
+                </div>               
 
             </div> <!-- end of row -->
         </div> <!-- end of container -->
