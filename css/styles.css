@@ -657,6 +657,10 @@ input[type='checkbox'] {
 	text-align: center;
 }
 
+.classTab{
+	color: #0b36a8 !important;
+}
+
 .basic-2 .p-heading {
 	margin-bottom: 4rem;
 	text-align: center;
