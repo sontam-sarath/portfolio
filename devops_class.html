@@ -1930,6 +1930,103 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <h2>2025-01-08 - 21:00</h2>
+                            <h6>Ansible Notes</h6>
+                            <ul>
+                                <li>
+                                    <strong>2025-01-08 - 20:10</strong>
+                                    <ul>
+                                        <li>
+                                            <strong>ansible all -m setup</strong>
+                                            <ul>
+                                                <li>List all keywords that we can use in ansible playbooks for conditioning.</li>
+                                                <li>Use <code>ansible_os_family</code> ('Debian' or 'RedHat') to determine the type of host.</li>
+                                                <li>
+                                                    Example playbook to install either nginx or httpd based on managed host type:
+                                                    <pre>
+                            ---
+                            - name: Install a specific package (e.g., nginx or httpd) on multiple servers. Ensure the service is running and enabled on boot.
+                              hosts: all
+                              vars_prompt:
+                                - name: package_name
+                                  prompt: "Enter your package name (nginx/httpd): "
+                                  private: false
+                              become: true
+                              tasks:
+                                - name: install package
+                                  apt:
+                                    name: "{{ package_name }}"
+                                    state: present
+                                    update_cache: yes
+                                  when:
+                                    ansible_os_family == "Debian" and package_name == 'nginx'
+                                  register: install_apt_logs
+                                - name: print logs
+                                  debug:
+                                    var: install_apt_logs
+                                - name: install package yum
+                                  yum:
+                                    name: "{{ package_name }}"
+                                    state: present
+                                    update_cache: yes
+                                  when: ansible_os_family == 'RedHat' and package_name == 'httpd'
+                                  register: install_yum_logs
+                                - name: print logs
+                                  debug:
+                                    var: install_yum_logs
+                            ...
+                                                        </pre>
+                                                </li>
+                                            </ul>
+                                        </li>                                            
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h6>Ansible parent-child</h6>
+                            
+                            
+                                <ul>
+                                    <li>Create individual tasks in different files.</li>
+                                    <li>
+                                        Example: <code>child1.yaml</code> (create user)
+                                        <pre>
+                                                        - name: create a user
+                                                          user:
+                                                            name: sarath007
+                                                            password: 1234
+                                                                                    </pre>
+                                    </li>
+                                    <li>
+                                        Example: <code>child2.yaml</code> (install a package)
+                                        <pre>
+                                                        - name: install java
+                                                          apt:
+                                                            name: default-jdk
+                                                            state: present
+                                                            update_cache: yes
+                                                                                    </pre>
+                                    </li>
+                                    <li>You can create n number of child elements.</li>
+                                    <li>You cannot run child elements directly.</li>
+                                    <li>
+                                        Create a parent playbook:
+                                        <pre>
+                                                        ---
+                                                        - name: parent playbook, that runs all the child elements
+                                                          hosts: all
+                                                          become: true
+                                                          tasks:
+                                                            - name: call child elements
+                                                              include_tasks: "{{ item }}"
+                                                              with_items:
+                                                                - createuser.yaml
+                                                                - installjava.yaml
+                                                        ...
+                                                                                    </pre>
+                                    </li>
+                                    <li>Include or import child YAML files that you want to run as part of the task.</li>
+                                </ul>
+                            
                         </div>
                     </div>
                 </div>               
