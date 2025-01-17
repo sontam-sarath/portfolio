@@ -2026,10 +2026,10 @@
                                     </li>
                                     <li>Include or import child YAML files that you want to run as part of the task.</li>
                                 </ul>
-                                <h2>2025-01-05 - 20:00</h2>
+                                <h2>2025-01-15 - 20:00</h2>
                                 <ul>
                                     <li>
-                                        <strong>Review what to learn:</strong>
+                                        <h6>Review what to learn:</h6>
                                         <ul>
                                             <li>Ansible</li>
                                             <li>Terraform</li>
@@ -2050,7 +2050,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <strong>Ansible Handlers:</strong>
+                                        <h6>Ansible Handlers:</h6>
                                         <ul>
                                             <li>Playbooks follow a top-down approach.</li>
                                             <li>
@@ -2090,7 +2090,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <strong>Ansible Error Handling:</strong>
+                                        <h6>Ansible Error Handling:</h6>
                                         <ul>
                                             <li>Error handling is similar to exception handling in other programming languages.</li>
                                             <li>
@@ -2117,6 +2117,110 @@
                                           msg: "Completed execution"
                                 ...
                                                             </pre>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <h2>2025-01-16 - 20:00</h2>
+                                <h6>Ansible Notes</h6>
+                                <ul>
+                                    <li><strong>Ansible Roles:</strong>
+                                        <ul>
+                                            <li>Self-contained directory structure.</li>
+                                            <li>Roles are prepared using templates.</li>
+                                            <li>Example task: Creating a role for Apache2.</li>
+                                            <li>
+                                                Directory structure for Apache2 role:
+                                                <pre>
+                                                                apache2/
+                                                                ├── README.md
+                                                                ├── defaults
+                                                                │   └── main.yml
+                                                                ├── files
+                                                                ├── handlers
+                                                                │   └── main.yml
+                                                                ├── meta
+                                                                │   └── main.yml
+                                                                ├── tasks
+                                                                │   └── main.yml
+                                                                ├── templates
+                                                                ├── tests
+                                                                │   ├── inventory
+                                                                │   └── test.yml
+                                                                └── vars
+                                                                    └── main.yml
+                                                                                            </pre>
+                                            </li>
+                                            <li>Roles can be published to Ansible Galaxy.</li>
+                                            <li>Existing roles on Ansible Galaxy can be consumed.</li>
+                                            <li>Roles should be maintained in <code>/etc/ansible/roles</code>.</li>
+                                            <li>
+                                                Steps to create an Apache2 role:
+                                                <ul>
+                                                    <li>Switch to root user using <code>sudo su</code>.</li>
+                                                    <li>Run <code>ansible-galaxy init apache2 --offline</code>.</li>
+                                                    <li>
+                                                        Maintain variables in <code>apache2/vars/main.yml</code>:
+                                                        <pre>
+                                                                ---
+                                                                # vars file for apache2
+                                                                package1: apache2
+                                                                website: index.html
+                                                                location: /var/www/html
+                                                                action: restarted
+                                                                content: Hi Sarath you're on right track
+                                                                                                    </pre>
+                                                    </li>
+                                                    <li>
+                                                        Maintain files in <code>apache2/files</code>:
+                                                        <pre>
+                                                                index.html
+                                                                                                    </pre>
+                                                    </li>
+                                                    <li>
+                                                        Maintain tasks in <code>apache2/tasks</code>:
+                                                        <pre>
+                                                                # Task 1: Install Apache2
+                                                                ---
+                                                                - name: install apache2
+                                                                  apt:
+                                                                    name: "{{package1}}"
+                                                                    state: present
+                                                                    update-cache: yes
+                                                                
+                                                                # Task 2: Deploy website
+                                                                ---
+                                                                - name: deploy website
+                                                                  copy:
+                                                                    src: "{{website}}"
+                                                                    dest: "{{location}}"
+                                                                                                    </pre>
+                                                    </li>
+                                                    <li>Create a playbook:</li>
+                                                    <pre>
+                                                                ---
+                                                                - name: roles
+                                                                  hosts: all
+                                                                  become: true
+                                                                  roles:
+                                                                    - apache2
+                                                                                                </pre>
+                                                    <li>Run the playbook to execute the Apache2 role.</li>
+                                                    <li>
+                                                        Execution process:
+                                                        <ul>
+                                                            <li>Starts with <code>tasks/main.yml</code> and other tasks.</li>
+                                                            <li>Uses variables from <code>vars</code> folder.</li>
+                                                            <li>Executes handlers from <code>handlers</code> folder.</li>
+                                                            <li>Uses files like <code>index.html</code> from <code>files</code> folder.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        Share roles using Ansible Galaxy:
+                                                        <a href="https://galaxy.ansible.com/ui/standalone/roles/" target="_blank">Ansible
+                                                            Galaxy</a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         </ul>
                                     </li>
