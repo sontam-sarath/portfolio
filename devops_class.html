@@ -2026,6 +2026,101 @@
                                     </li>
                                     <li>Include or import child YAML files that you want to run as part of the task.</li>
                                 </ul>
+                                <h2>2025-01-05 - 20:00</h2>
+                                <ul>
+                                    <li>
+                                        <strong>Review what to learn:</strong>
+                                        <ul>
+                                            <li>Ansible</li>
+                                            <li>Terraform</li>
+                                            <li>Maven</li>
+                                            <li>Tomcat</li>
+                                            <li>Sonarqube</li>
+                                            <li>Jenkins</li>
+                                            <li>Docker</li>
+                                            <li>Docker Swarm</li>
+                                            <li>Kubernetes</li>
+                                            <li>Prometheus</li>
+                                            <li>Grafana</li>
+                                            <li>Trivy</li>
+                                            <li>
+                                                AWS SAA (Solutions Architect Associate Certification)
+                                                <a href="https://aws.amazon.com/certification/exams/" target="_blank">Learn more</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Ansible Handlers:</strong>
+                                        <ul>
+                                            <li>Playbooks follow a top-down approach.</li>
+                                            <li>
+                                                Example tasks for installing and managing Tomcat:
+                                                <ul>
+                                                    <li>Task 1: Install Tomcat</li>
+                                                    <li>Task 2: Change port 8080 to 9090</li>
+                                                    <li>Task 3: Restart Tomcat</li>
+                                                    <li>Task 4: Deploy an application</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                Handlers execute after all tasks and ensure task dependencies are respected. Example playbook:
+                                                <pre>
+                                ---
+                                - name: handlers in playbooks, install tomcat, and tomcat_admin
+                                  hosts: all
+                                  become: true
+                                  tasks:
+                                    - name: install tomcat10
+                                      apt:
+                                        name: tomcat10
+                                        state: present
+                                        update_cache: yes
+                                      notify: install tomcat_admin
+                                  handlers:
+                                    - name: install tomcat_admin
+                                      apt:
+                                        name: tomcat10-admin
+                                        state: present
+                                        update_cache: yes
+                                ...
+                                                            </pre>
+                                            </li>
+                                            <li>Handlers are executed in the order they are defined, not the order they are called.</li>
+                                            <li>Handlers execute only once, even if called multiple times.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Ansible Error Handling:</strong>
+                                        <ul>
+                                            <li>Error handling is similar to exception handling in other programming languages.</li>
+                                            <li>
+                                                Use <code>block</code>, <code>rescue</code>, and <code>always</code> keywords to manage errors:
+                                                <pre>
+                                ---
+                                - name: error handling
+                                  hosts: all
+                                  become: true
+                                  tasks:
+                                    - block:
+                                      - name: install elinks - block
+                                        yum:
+                                          name: elinks
+                                          state: present
+                                      rescue:
+                                      - name: install elinks - rescue
+                                        apt:
+                                          name: elinks
+                                          state: present
+                                      always:
+                                      - name: cleanup task
+                                        debug:
+                                          msg: "Completed execution"
+                                ...
+                                                            </pre>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             
                         </div>
                     </div>
