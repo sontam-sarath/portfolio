@@ -2228,13 +2228,120 @@
                                             </li>
                                         </ul>
                                     </li>
-                                </ul>
-                            
+                                </ul>                            
                         </div>
                     </div>
                     <div class="tab-pane fade m-2" id="terraform" role="tabpanel" aria-labelledby="git-tab">
                         <div style="height: 1500px; overflow: scroll;">
-                            - Terraform
+                            <h2>2025-01-19 - 20:00</h2>
+                            <h6>Terraform Overview</h6>
+                            <ul>
+                                <li><strong>Terraform:</strong> An open-source Infrastructure as Code (IaC) tool developed by HashiCorp.
+                                    <ul>
+                                        <li>Uses a declarative configuration language called HashiCorp Configuration Language (HCL).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Key Features of Terraform:</strong>
+                                    <ul>
+                                        <li><strong>Declarative Language:</strong> Describes the desired end state of infrastructure, and Terraform
+                                            figures out how to achieve it.</li>
+                                        <li><strong>Provider Support:</strong> Supports multiple cloud providers like AWS, Azure, Google Cloud, and
+                                            on-premises solutions.</li>
+                                        <li><strong>Execution Plans:</strong> Generates an execution plan showing changes before applying them.</li>
+                                        <li><strong>State Management:</strong> Tracks the current state of infrastructure in a state file.</li>
+                                        <li><strong>Modularity:</strong> Allows reusable modules for common infrastructure patterns.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Why Do We Need Terraform?</strong>
+                                    <ul>
+                                        <li>Automates infrastructure management to reduce manual effort and errors.</li>
+                                        <li>Manages multi-cloud and on-premises environments with a unified workflow.</li>
+                                        <li>Ensures consistency and versioning by storing configurations in version control systems.</li>
+                                        <li>Enables scalability by reusing configurations for complex environments.</li>
+                                        <li>Supports Infrastructure as Code (IaC) for better documentation, review, and testing.</li>
+                                        <li>Provides change management through execution plans.</li>
+                                        <li>Improves team collaboration by sharing configurations and state files.</li>
+                                        <li>Facilitates disaster recovery by defining infrastructure as code.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>5 Major Stages in Terraform:</strong>
+                                    <ul>
+                                        <li><strong>init:</strong> Initializes Terraform to manage infrastructure.</li>
+                                        <li><strong>validate:</strong> Checks syntax and validates the script.</li>
+                                        <li><strong>plan:</strong> Verifies existing infrastructure and previews changes.</li>
+                                        <li><strong>apply:</strong> Executes the Terraform script.</li>
+                                        <li><strong>destroy:</strong> Releases or removes all resources mentioned in the script.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Terraform Installation:</strong>
+                                    <ul>
+                                        <li>Install Terraform on the server where Terraform activities will be performed.</li>
+                                        <li>Obtain AWS access and secret keys for managing infrastructure.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Useful Links:</strong>
+                                    <ul>
+                                        <li><a href="https://terraform.io">terraform.io</a></li>
+                                        <li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">AWS Terraform Provider</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>Commands to Install Terraform:</strong>
+                                    <ul>
+                                        <li><code>wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg</code>
+                                        </li>
+                                        <li><code>echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list</code>
+                                        </li>
+                                        <li><code>sudo apt update && sudo apt install terraform</code></li>
+                                    </ul>
+                                </li>
+                                <li><strong>Terraform Script Segments:</strong>
+                                    <ul>
+                                        <li><strong>Provider Plugin Block:</strong> Adds information related to the cloud provider (e.g., AWS,
+                                            Azure).</li>
+                                        <li><strong>Provider Credential Block:</strong> Contains credentials for the target AWS account.</li>
+                                        <li><strong>Resource Block:</strong> Specifies infrastructure to manage.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Example Terraform Script:</strong>
+                                    <pre>
+                            terraform {
+                              required_providers {
+                                aws = {
+                                  source  = "hashicorp/aws"
+                                  version = "~> 5.0"
+                                }
+                              }
+                            }
+                            
+                            provider "aws" {
+                              region     = "us-east-2"
+                              access_key = "my-key"
+                              secret_key = "my-key"
+                            }
+                            
+                            resource "aws_instance" "web" {
+                              ami           = "amiid"
+                              instance_type = "t3.micro"
+                              count         = 1
+                              tags = {
+                                Name = "ServerFromTerraform"
+                              }
+                            }
+                                        </pre>
+                                </li>
+                                <li><strong>Steps to Run a Terraform Script:</strong>
+                                    <ol>
+                                        <li><code>terraform init</code></li>
+                                        <li><code>terraform validate</code></li>
+                                        <li><code>terraform plan</code></li>
+                                        <li><code>terraform apply</code> (enter <code>yes</code> when prompted)</li>
+                                        <li><code>terraform plan</code> (re-run to compare infrastructure changes; should return no changes needed
+                                            if nothing has been updated).</li>
+                                        <li><code>terraform destroy</code> (deletes resources).</li>
+                                    </ol>
+                                </li>
+                            </ul>
                         </div>
                     </div>  
                 </div>               
