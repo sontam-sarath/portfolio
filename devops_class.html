@@ -2281,8 +2281,8 @@
                                 </li>
                                 <li><strong>Useful Links:</strong>
                                     <ul>
-                                        <li><a href="https://terraform.io">terraform.io</a></li>
-                                        <li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">AWS Terraform Provider</a>
+                                        <li><a target="_blank" href="https://terraform.io">terraform.io</a></li>
+                                        <li><a target="_blank" href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">AWS Terraform Provider</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -2340,6 +2340,143 @@
                                             if nothing has been updated).</li>
                                         <li><code>terraform destroy</code> (deletes resources).</li>
                                     </ol>
+                                </li>
+                            </ul>
+                            <h2>2025-01-20 - 20:00</h2>
+                            <h6>Terraform Notes</h6>
+                            <ul>
+                                <li>
+                                    <strong>Terraform Instance Count:</strong>
+                                    If you update the <code>count</code> in an existing script and run <code>terraform apply</code>, it will create
+                                    new instances based on the count you increased.
+                                    Example: Original count = 2, updated count = 5 → 3 new instances will be created.
+                                </li>
+                                <li>
+                                    <strong>Provider Access Keys (AWS Access Keys):</strong>
+                                    <ul>
+                                        <li>Never publish your access keys.</li>
+                                        <li>Always use access keys through environment variables.</li>
+                                        <li>
+                                            <strong>Steps to hide access keys:</strong>
+                                            <ol>
+                                                <li>
+                                                    <strong>First Approach:</strong>
+                                                    Create a new file <code>provider.tf</code> and add access key information in it.
+                                                </li>
+                                                <li>
+                                                    <strong>Second Approach:</strong>
+                                                    Install AWS CLI in the source machine where Terraform is installed:
+                                                    <ol>
+                                                        <li><code>sudo apt update</code></li>
+                                                        <li><code>sudo apt install curl -y</code></li>
+                                                        <li><code>curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"</code>
+                                                        </li>
+                                                        <li><code>sudo apt install unzip -y</code></li>
+                                                        <li><code>unzip awscliv2.zip</code></li>
+                                                        <li><code>sudo ./aws/install</code></li>
+                                                        <li><code>aws --version</code></li>
+                                                        <li>
+                                                            Add AWS CLI to path:
+                                                            <ul>
+                                                                <li><code>echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc</code></li>
+                                                                <li><code>source ~/.bashrc</code></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>Clean up: <code>rm -rf awscliv2.zip aws</code></li>
+                                                        <li>Run <code>aws configure</code> and input the following:
+                                                            <ul>
+                                                                <li>AWS Access Key</li>
+                                                                <li>AWS Secret Access Key</li>
+                                                                <li>Region (optional)</li>
+                                                                <li>Output Type (optional)</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>Remove access key information from <code>provider.tf</code> and maintain the file with
+                                                            just region.</li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <strong>Third Approach:</strong>
+                                                    Create environment variables:
+                                                    <ul>
+                                                        <li><code>export AWS_ACCESS_KEY_ID="my-access-key"</code></li>
+                                                        <li><code>export AWS_SECRET_ACCESS_KEY="my-secret-access-key"</code></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <strong>Fourth Approach:</strong> Use Terraform Secret Manager.
+                                                </li>
+                                                <li>
+                                                    <strong>Fifth Approach:</strong> Use an interactive Terraform script that prompts the user to
+                                                    enter access keys during runtime.
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        <li>
+                                            <strong>Best Practices:</strong>
+                                            <ul>
+                                                <li>Always create access keys from user accounts instead of root accounts, as user accounts have
+                                                    limited permissions.</li>
+                                                <li>Add user access keys to CLI:
+                                                    <ul>
+                                                        <li><code>aws configure --profile=user_name</code></li>
+                                                        <li>Enter access key and secret key.</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Update <code>provider.tf</code> to use user access keys for Terraform tasks:
+                                                    <pre><code>provider "aws" {
+                                profile = "user_name"
+                            }</code></pre>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Files Created by Terraform:</strong>
+                                    <ul>
+                                        <li>
+                                            <strong>.terraform/ (Directory):</strong>
+                                            <ul>
+                                                <li>Created when you initialize a Terraform project using <code>terraform init</code>.</li>
+                                                <li>Contains essential files and plugins required for Terraform.</li>
+                                                <li>Includes:
+                                                    <ul>
+                                                        <li>Plugins for providers like AWS, Azure, etc.</li>
+                                                        <li>Cached information about providers and module dependencies.</li>
+                                                        <li>Cached modules if used.</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Usage: Generally not modified manually, used internally during operations like
+                                                    <code>terraform plan</code> and <code>terraform apply</code>.</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong>.terraform.lock.hcl:</strong>
+                                            <ul>
+                                                <li>Ensures consistent provider versions across machines or team members.</li>
+                                                <li>Automatically updated during <code>terraform init</code> or when provider versions change.</li>
+                                                <li>Usage: Commit this file to version control for consistency across environments.</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong>terraform.tfstate:</strong>
+                                            <ul>
+                                                <li>Tracks the current state of your infrastructure.</li>
+                                                <li>Includes information about created resources, their attributes, and relationships.</li>
+                                                <li>Usage: Do not edit manually; manage changes via Terraform commands. Store in a remote backend
+                                                    for team collaboration and state locking.</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong>terraform.tfstate.backup:</strong>
+                                            <ul>
+                                                <li>Automatic backup of the <code>terraform.tfstate</code> file.</li>
+                                                <li>Acts as a safety net for state recovery.</li>
+                                                <li>Usage: Typically not interacted with directly, used for manual recovery if needed.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
