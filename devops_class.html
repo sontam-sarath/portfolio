@@ -220,6 +220,10 @@
                         <button class="nav-link classTab" id="terraform-tab" data-bs-toggle="tab" data-bs-target="#terraform" type="button"
                             role="tab" aria-controls="terraform" aria-selected="false">Terraform</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link classTab" id="maven-tab" data-bs-toggle="tab" data-bs-target="#maven" type="button"
+                            role="tab" aria-controls="maven" aria-selected="false">Maven</button>
+                    </li>
                     
                 </ul>
 
@@ -2479,7 +2483,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <h2>2025-01-20 - 20:15</h2>
+                            <h2>2025-01-21 - 20:15</h2>
                             <h6>Interactive Terraform Notes</h6>
                             <ul>
                                 <li>
@@ -2665,8 +2669,160 @@
                             }</code></pre>
                                 </li>
                             </ul>
+                            <h2>2025-01-22 : 20:00</h2>
+                                <h6>Virtual Private Cloud (VPC) in AWS</h6>
+                                <ul>
+                                    <li><strong>Core Features of VPC:</strong>
+                                        <ul>
+                                            <li><strong>Subnetting:</strong> Divide the VPC into public and private subnets.</li>
+                                            <li><strong>IP Addressing:</strong> Define IP address ranges using CIDR (e.g., 10.0.0.0/16).</li>
+                                            <li><strong>Route Tables:</strong> Control network traffic within the VPC.</li>
+                                            <li><strong>Internet Gateway:</strong> Enables communication between VPC resources and the internet.</li>
+                                            <li><strong>NAT Gateway/Instance:</strong> Allows private subnet instances to access the internet securely.
+                                            </li>
+                                            <li><strong>Security Groups and Network ACLs:</strong> Control traffic at the instance and subnet levels.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Use Cases:</strong>
+                                        <ul>
+                                            <li>Host scalable applications.</li>
+                                            <li>Enable hybrid cloud configurations with VPN or AWS Direct Connect.</li>
+                                            <li>Implement multi-tier architectures with separate subnets.</li>
+                                            <li>Secure networking with private subnets and tight access control.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>VPC Components:</strong>
+                                        <ul>
+                                            <li><strong>VPC Peering:</strong> Connect two VPCs privately.</li>
+                                            <li><strong>Transit Gateway:</strong> Hub for connecting multiple VPCs and networks.</li>
+                                            <li><strong>Elastic IP (EIP):</strong> Static public IP address for resources.</li>
+                                            <li><strong>AWS PrivateLink:</strong> Secure connectivity between VPCs and services.</li>
+                                            <li><strong>Endpoints:</strong> Private access to AWS services like S3 and DynamoDB.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Advantages:</strong>
+                                        <ul>
+                                            <li>Customization of network configurations.</li>
+                                            <li>Scalability to accommodate workloads.</li>
+                                            <li>Isolation for resources in a dedicated network.</li>
+                                            <li>Robust security controls.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Example Scenario:</strong>
+                                        <ul>
+                                            <li>Public-facing web servers in a public subnet with an internet gateway.</li>
+                                            <li>Databases in a private subnet for isolation.</li>
+                                            <li>NAT gateway for secure internet access by private resources.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            <h2>2025-01-24 : 20:00</h2>
                         </div>
                     </div>  
+                    <div class="tab-pane fade m-2" id="maven" role="tabpanel" aria-labelledby="git-tab">
+                        <div style="height: 1500px; overflow: scroll;">
+                            <h2>2025-01-27 : 20:00</h2>
+                            <h6>CI-CD Integration</h6>
+                            <h6>Tools</h6>
+                            <ul>
+                                <li>Maven</li>
+                                <li>Tomcat</li>
+                                <li>SonarQube</li>
+                                <li>Nexus</li>
+                                <li>Jenkins</li>
+                            </ul>
+                            
+                            <h6>CI-CD Process</h6>
+                            <ul>
+                                <li>DevOps is a culture and set of principles adapted in SDLC to deliver products faster with higher quality.</li>
+                                <li>Process starts when code is uploaded to the GitHub repository:</li>
+                                <ul>
+                                    <li>Compile the source code</li>
+                                    <li>Run unit test codes</li>
+                                    <li>Scan (e.g., Trivy)</li>
+                                    <li>Code quality check using SonarQube</li>
+                                    <ul>
+                                        <li>Security hotspots</li>
+                                        <li>Code smells</li>
+                                        <li>Vulnerabilities</li>
+                                    </ul>
+                                    <li>Pass the quality gate</li>
+                                    <li>Package all compiled code</li>
+                                    <li>Use Jenkins for automation</li>
+                                </ul>
+                            </ul>
+                            
+                            <h6>Maven</h6>
+                            <h6>Overview</h6>
+                            <ul>
+                                <li>Written in Java</li>
+                                <li>A build tool developed by Apache Software Foundation</li>
+                                <li>Open source</li>
+                                <li>Used to compile and build Java-based projects</li>
+                                <li>Uses <code>pom.xml</code> for instructions</li>
+                                <ul>
+                                    <li>Project Object Model Extensible Markup Language</li>
+                                    <li>Contains all build activities:
+                                        <ul>
+                                            <li>Dependencies (e.g., compiler, test plugins)</li>
+                                            <li>How to package: <code>.jar</code>, <code>.war</code>, <code>.ear</code></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <li>Alternatives: <code>build.gradle</code>, <code>setup.py</code>, <code>makefile</code> (for non-Java projects)
+                                </li>
+                            </ul>
+                            
+                            <h6>How Maven Works</h6>
+                            <ul>
+                                <li>Maven build lifecycle comprises three stages:
+                                    <ul>
+                                        <li>Default</li>
+                                        <li>Site</li>
+                                        <li>Clean</li>
+                                    </ul>
+                                </li>
+                                <li>Default lifecycle phases:
+                                    <ul>
+                                        <li><strong>Validate:</strong> <code>mvn validate</code> - Checks files in <code>src/</code>,
+                                            <code>test/</code>, and <code>pom.xml</code>.</li>
+                                        <li><strong>Compile:</strong> Compiles Java files into <code>.class</code> files.</li>
+                                        <li><strong>Test:</strong> Runs unit tests in <code>test/</code>.</li>
+                                        <li><strong>Package:</strong> Compiles data into a single product (<code>.war</code>, <code>.jar</code>,
+                                            <code>.ear</code>).</li>
+                                        <li><strong>Verify:</strong> Ensures packaged content is synced.</li>
+                                        <li><strong>Install:</strong> Installs the package locally.</li>
+                                        <li><strong>Deploy:</strong> Deploys artifacts into a private registry.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Site:</strong> <code>mvn site</code> - Generates documentation as a web page (not widely used).</li>
+                                <li><strong>Clean:</strong> <code>mvn clean</code> - Clears earlier versions when a new version is launched.</li>
+                            </ul>
+
+                            <h6>Packages Created by Maven</h6>
+                            <ul>
+                                <li><strong>.jar:</strong> (Java Archive) Packages all <code>.class</code> files.</li>
+                                <li><strong>.war:</strong> (Web Archive) Used for Java-based web applications; a combination of <code>.jar</code>
+                                    files and web content.</li>
+                                <li><strong>.ear:</strong> (Enterprise Archive) Used for high-end applications; a combination of <code>.jar</code>
+                                    and <code>.war</code> files.</li>
+                            </ul>
+
+                            <h6>Repositories in Maven</h6>
+                            <ul>
+                                <li><strong>Local:</strong> Maintains in local machine, shared with other developers.</li>
+                                <li><strong>Remote:</strong> Packages in build repositories.</li>
+                                <li><strong>Central:</strong> Maintained by the Maven community.</li>
+                                <li>During the build process, all required dependencies are downloaded from repositories mentioned in
+                                    <code>pom.xml</code>.</li>
+                            </ul>
+                            
+                            <p>For more information, visit the <a
+                                    href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">Maven Lifecycle
+                                    Guide</a>.</p>
+                        </div>
+                    </div>
                 </div>               
 
             </div> <!-- end of row -->
