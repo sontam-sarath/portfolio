@@ -14,13 +14,25 @@ function closeMobileMenu() {
   navToggle.classList.remove('active');
   navToggle.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  // iOS Safari scroll position fix
+  if (window.scrollPosition !== undefined) {
+    window.scrollTo(0, window.scrollPosition);
+  }
 }
 
 function openMobileMenu() {
+  // iOS Safari scroll lock fix
+  window.scrollPosition = window.pageYOffset;
   navLinks.classList.add('open');
   navToggle.classList.add('active');
   navToggle.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden'; // lock background scroll
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${window.scrollPosition}px`;
+  document.body.style.width = '100%';
 }
 
 if (navToggle) {
