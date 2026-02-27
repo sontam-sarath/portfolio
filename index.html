@@ -1,606 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Your description">
-    <meta name="author" content="Your name">
-
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-	<meta property="og:site_name" content="" /> <!-- website name -->
-	<meta property="og:site" content="" /> <!-- website link -->
-	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-	<meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
-
-    <!-- Webpage Title -->
-    <title>Sarath Sontam</title>
-    
-    <!-- Styles -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@600&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/fontawesome-all.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">
-	
-	<!-- Favicon  -->
-    <link rel="icon" href="images/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarath Sontam – Software Developer</title>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
-<body data-spy="scroll" data-target=".fixed-top">
-    
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-        <div class="container">
-            
-            <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.html"><img src="images/sarath-logo-icon.png" alt="alternative"></a>  
-
-            <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Sarath</a> -->
-
-            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#header">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#about">About</a>
-                    </li>                      
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#github"><i class="fab fa-git"></i></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Drop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item page-scroll" href="devops_class.html">DevOps Class</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item page-scroll" href="aws_class.html">AWS Class</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item page-scroll" href="photos.html">Photos</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item page-scroll" href="#">Projects</a>
-
-                            
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-                <span class="nav-item social-icons">
-                    <!-- <span class="fa-stack">
-                        <a href="#your-link">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-facebook-f fa-stack-1x"></i>
-                        </a>
-                    </span> -->
-                    <!-- <span class="fa-stack">
-                        <a target="_blank" href="https://www.instagram.com/sontamsarath/">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-instagram fa-stack-1x"></i>
-                        </a>
-                    </span> -->
-                    <span class="fa-stack">
-                        <a target="_blank" href="https://www.linkedin.com/in/sontamsarath/">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-linkedin fa-stack-1x"></i>
-                        </a>
-                    </span>
-                    <span class="fa-stack">
-                        <a target="_blank" href="https://github.com/orgs/sontam-sarath/repositories" title="sontamsarath">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-github fa-stack-1x"></i>
-                        </a>
-                    </span>
-                </span>
-            </div> <!-- end of navbar-collapse -->
-        </div> <!-- end of container -->
-    </nav> <!-- end of navbar -->
-    <!-- end of navigation -->
-
-
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h1 class="h1-large">Learner Developer</h1>
-                        <a class="btn-solid-lg page-scroll" href="#about">Discover</a>
-                        <a class="btn-solid-lg page-scroll" target="_blank" href="files/sarath_sontam.pdf">Download Resume</a>
-                        <a class="btn-outline-lg page-scroll" href="#contact"><i class="fas fa-user"></i>Contact Me</a>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </header> <!-- end of header -->
-    <!-- end of header -->
-
-
-    <!-- About-->
-    <div id="about" class="basic-1 bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="text-container first">
-                        <h2>Hi there I'm Sarath,</h2>
-                        <p class="justified-text">I'm an experienced Software Developer with 4+ years in backend (Python) and frontend (AngularJS), specializing in Django REST
-                            APIs, Flask, and complex ORM queries. Skilled in database management, version control, and beginner-level Kubernetes and
-                            AWS, with a passion for expanding cloud expertise.
-                        </p>
-                        <p class="justified-text">
-                            Over the years, I’ve gained valuable insights from working alongside many brilliant people. As a result, I’ve developed three essential traits:
-                            <ul>
-                                <li>A solid grasp of what I'm working on.</li>
-                                <li>A clear understanding of my responsibilities.</li>
-                                <li>Familiarity with the work environment.</li>
-                            </ul>
-                        </p>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-4">
-                    <div class="text-container second">
-                        <div class="time">2020 - PRESENT</div>
-                        <h6>Software developer</h6>
-                        <p class="justified-text">I have been working with Sofvie Inc. for over four years as a key developer.
-                            <br>
-                            Sofvie Inc. is a Canadian company that provides innovative digital solutions designed to enhance workplace safety,
-                            collaboration, and efficiency, particularly in high-risk industries like mining, construction, and manufacturing.
-                        </p>                        
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <!-- <div class="col-lg-4"> -->
-                    <!-- <div class="text-container third">       
-                        <div class="time">2019 - 2020</div>
-                        <h6>Business Analytics Student</h6>
-                        <p>I studied Business Analytics at Cambrian College of Applied Arts and Technology, where I developed a strong
-                            foundation
-                            in Python, primarily for creating data dashboards using tools like Power BI and Tableau. After graduating, I
-                            had the opportunity to join
-                            Sofvie Inc. as a developer, which allowed me to further apply and expand my skills.</p>
-                    </div>  -->
-                    <!-- end of text-container -->
-                <!-- </div> end of col -->
-                <div class="col-lg-4">
-                    <div class="text-container third">
-                        <div class="time">2014 - 2016</div>
-                        <h6>Junior software developer</h6>
-                        <p class="justified-text">
-                            While working at Roopasoft LLP, I was introduced to the world of web development, which marked the beginning of my
-                            journey in building and maintaining web-based applications.
-                            <br>
-                            Roopasoft LLP is an IT services company based in Hyderabad, India. The company specializes in a range of software
-                            development solutions, including cloud services, mobile and web application development
-                        </p>                        
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of about -->
-
-    <!-- skills -->
-    <div class="basic-2" id="skills">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Skills and Tools</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-box">
-                        <!-- Technical Skills -->
-                        <div class="skill-category">
-                            <h4><i class="fas fa-code"></i> Technical Skills</h4>
-                            <div>
-                                <span class="badge bg-primary"><i class="fab fa-python"></i> Python</span>
-                                <span class="badge bg-primary"><i class="fas fa-code"></i> Django</span>
-                                <span class="badge bg-primary"><i class="fas fa-database"></i> Django ORM</span>
-                                <span class="badge bg-primary"><i class="fas fa-network-wired"></i> REST APIs</span>
-                                <span class="badge bg-primary"><i class="fas fa-code"></i> Flask</span>
-                                <span class="badge bg-primary"><i class="fas fa-table"></i> Pandas</span>
-                                <span class="badge bg-primary"><i class="fab fa-aws"></i> AWS</span>
-                                <span class="badge bg-primary"><i class="fas fa-cubes"></i> Kubernetes</span>
-                                <span class="badge bg-primary"><i class="fas fa-file-code"></i> Jinja 2</span>
-                            </div>
-                        </div>
-    
-                        <!-- Frontend Skills -->
-                        <div class="skill-category">
-                            <h4><i class="fas fa-desktop"></i> Frontend Skills</h4>
-                            <div>
-                                <span class="badge bg-primary"><i class="fab fa-js"></i> JavaScript</span>
-                                <span class="badge bg-primary"><i class="fas fa-code"></i> jQuery</span>
-                                <span class="badge bg-primary"><i class="fab fa-html5"></i> HTML</span>
-                                <span class="badge bg-primary"><i class="fab fa-css3-alt"></i> CSS</span>
-                            </div>
-                        </div>
-    
-                        <!-- Database Skills -->
-                        <div class="skill-category">
-                            <h4><i class="fas fa-database"></i> Database Skills</h4>
-                            <div>
-                                <span class="badge bg-primary"><i class="fas fa-database"></i> MySQL</span>
-                                <span class="badge bg-primary"><i class="fas fa-database"></i> Postgres SQL</span>
-                            </div>
-                        </div>
-    
-                        <!-- Tools and Frameworks -->
-                        <div class="skill-category">
-                            <h4><i class="fas fa-tools"></i> Tools and Frameworks</h4>
-                            <div>
-                                <span class="badge bg-primary"><i class="fas fa-file-word"></i> Ms-Office </span>
-                                <span class="badge bg-primary"><i class="fas fa-chart-bar"></i> Power BI </span>
-                                <span class="badge bg-primary"><i class="fas fa-chart-pie"></i> R (Statistics)</span>
-                                <span class="badge bg-primary"><i class="fas fa-laptop-code"></i> Atlassian Suite</span>
-                                <span class="badge bg-primary"><i class="fas fa-tasks"></i> ClickUp</span>
-                                <span class="badge bg-primary"><i class="fab fa-git"></i> Git</span>
-                            </div>
-                        </div>
-    
-                        <!-- Working Modal -->
-                        <div class="skill-category">
-                            <h4><i class="fas fa-project-diagram"></i> Working Modal</h4>
-                            <div>
-                                <span class="badge bg-primary"><i class="fas fa-sync-alt"></i> Agile</span>
-                                <span class="badge bg-primary"><i class="fas fa-water"></i> Waterfall</span>
-                            </div>
-                        </div>
-    
-                        <!-- Soft Skills -->
-                        <div class="skill-category">
-                            <h4><i class="fas fa-user"></i> Soft Skills</h4>
-                            <div>
-                                <span class="badge bg-primary"><i class="fas fa-clock"></i> Time Management</span>
-                                <span class="badge bg-primary"><i class="fas fa-users"></i> Teamwork</span>
-                                <span class="badge bg-primary"><i class="fas fa-lightbulb"></i> Adaptability</span>
-                                <span class="badge bg-primary"><i class="fas fa-brain"></i> Problem Solving</span>
-                            </div>
-                        </div>
-    
-    
-                    </div>
-    
-                </div>
-    
-            </div>
-    
-        </div>
-    
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">S<span>.</span>Sontam</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="pages/about.html">About</a></li>
+      <li><a href="pages/projects.html">Projects</a></li>
+      <li><a href="pages/experience.html">Experience</a></li>
+      <li><a href="pages/personal.html">What I Am</a></li>
+      <li><a href="pages/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
     </div>
-    <!-- end of skills -->
+  </nav>
 
-    <!-- github -->
-    <div id="github" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-    
-                    <h2 class="h2-heading"><a target="_blank" href="https://github.com/orgs/sontam-sarath/repositories" title="sontam sarath git hub">
-                        <i class="fab fa-github"></i> GitHub</a></h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-box">
-                        <ul>
-                            <li><a target="_blank" href="https://github.com/sontam-sarath/shell_scripts.git"
-                                    title="practice shell scripts">
-                                    <i class=" mr-2 far fa-file-code" style="font-size: 20px;"></i>Practice Shell
-                                    Scripts</a></li>
-                            <li><a target="_blank" href="https://github.com/sontam-sarath/passwordCheck.git"
-                                    title="Password check">
-                                    <i class=" mr-2 far fa-file-code" style="font-size: 20px;"></i>Password Check</a></li>
-                            <li><a target="_blank" href="https://github.com/sontam-sarath/practice-playbooks.git" title="Practice playbooks">
-                                <i class=" mr-2 far fa-file-code" style="font-size: 20px;"></i>Practice playbooks</a></li>
-                            <li><a target="_blank" href="https://github.com/sontam-sarath/headless-chrome.git" title="Headless Chrome">
-                                    <i class=" mr-2 far fa-file-code" style="font-size: 20px;"></i>Headless Chrome</a></li>
-                        </ul>
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of github -->
+  <div class="page-container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-bg-gradient"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-eyebrow fade-in">Software Developer</div>
+            <h1 class="hero-name fade-in">Sarath<br>Sontam</h1>
+            <p class="hero-title fade-in">Python Backend &amp; Cloud Engineer</p>
+            <p class="hero-summary fade-in">
+              6+ years delivering high-performance Python backend services, REST APIs,
+              and cloud infrastructure. Passionate about scalability, data accuracy, and
+              shipping reliable software that teams can trust.
+            </p>
+            <div class="hero-actions fade-in">
+              <a href="pages/experience.html" class="btn btn-primary">View Experience</a>
+              <a href="pages/contact.html" class="btn btn-outline">Get in Touch</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-avatar-wrapper">
+              <div class="hero-avatar-bg"></div>
+              <div class="hero-avatar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item fade-in">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Years Exp.</div>
+          </div>
+          <div class="stat-item fade-in">
+            <div class="stat-number">4+</div>
+            <div class="stat-label">Years at Sofvie</div>
+          </div>
+          <div class="stat-item fade-in">
+            <div class="stat-number">AWS</div>
+            <div class="stat-label">Certified Dev</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    
+    <!-- TECH STACK -->
+    <section class="tech-stack-section">
+      <div class="container">
+        <div class="section-label">Core Technologies</div>
+        <div class="tech-scroll">
+          <span class="tech-pill featured">Python</span>
+          <span class="tech-pill featured">Django</span>
+          <span class="tech-pill featured">FastAPI</span>
+          <span class="tech-pill featured">Flask</span>
+          <span class="tech-pill featured">AWS</span>
+          <span class="tech-pill featured">Docker</span>
+          <span class="tech-pill featured">Kubernetes</span>
+          <span class="tech-pill">MySQL</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">SQL Server</span>
+          <span class="tech-pill">Redis</span>
+          <span class="tech-pill">AngularJS</span>
+          <span class="tech-pill">JavaScript</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Power BI</span>
+          <span class="tech-pill">Keycloak</span>
+          <span class="tech-pill">JWT/OAuth2</span>
+          <span class="tech-pill">GitHub Actions</span>
+          <span class="tech-pill">EC2</span>
+          <span class="tech-pill">S3</span>
+          <span class="tech-pill">RDS</span>
+          <span class="tech-pill">Lambda</span>
+          <span class="tech-pill">SQLAlchemy</span>
+          <span class="tech-pill">Jinja2</span>
+        </div>
+      </div>
+    </section>
 
-    <!-- experience -->
-    <div id="experience" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">What I learnt</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-box">
-                        <i class="fas fa-code my-icons"></i>
-                        <h4>My first Job</h4>
-                        <p>
-                            In my first job, I worked as a beginner on various tasks. I created <strong>HTML web pages</strong> for a project
-                            and developed <strong>login pages</strong> using <strong>ASP.NET</strong>. Additionally, I wrote <strong>SQL
-                                queries</strong> to support data retrieval and management. I was also involved in <strong>gathering project
-                                requirements</strong> by meeting with clients and participated in <strong>project planning</strong> and
-                            coordination sessions with them.
-                        </p>
-                        <h4>After MBA</h4>
-                        <p>
-                            After completing my <strong>MBA</strong>, I worked as a <strong>Business Development Executive</strong>, where I
-                            played a key role in building relationships with <strong>potential clients</strong> to create new <strong>business
-                                opportunities</strong>. I was responsible for maintaining updated <strong>prospective client databases</strong>
-                            and <strong>estimating project costs</strong> while preparing <strong>quotations</strong> for clients. My role also
-                            involved <strong>managing client requirements</strong> and maintaining regular <strong>communication</strong> to
-                            ensure their needs were met.
-                        </p>
-                        <h4>My Experience at Sofvie </h4>
-                        <p>
-                            I have extensive experience working with various technologies and frameworks. On the backend, I specialize in
-                            <strong>Python</strong> and frameworks like <strong>Django REST API</strong> and <strong>Flask</strong>, where I
-                            write complex queries using <strong>ORM</strong> to extract data from <strong>MySQL</strong> databases.
-                            Additionally, I utilize <strong>Pandas</strong> for generating analytic reports and create dynamic content using
-                            <strong>Jinja2 HTML templates</strong>. For database management, I have hands-on experience in <strong>MySQL
-                                (MariaDB)</strong>, including creating tables, migrations, stored procedures, views, and triggers. I am also
-                            skilled in using <strong>SQL Server Management Studio</strong>, <strong>SQL Developer</strong>, and <strong>MySQL
-                                Workbench</strong>. In project management, I am proficient in using tools like <strong>JIRA</strong> and
-                            <strong>ClickUp</strong>, and I use <strong>GitHub</strong>, <strong>Bitbucket</strong>, and
-                            <strong>SourceTree</strong> for version control. My experience extends to setting up <strong>Kubernetes</strong>
-                            clusters and managing basic AWS infrastructure such as <strong>EC2 instances</strong>. I am continually eager to
-                            expand my knowledge in <strong>cloud services</strong> and <strong>container orchestration</strong>.
-                        </p>
+    <!-- FEATURED PROJECTS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-label">Featured Work</div>
+        <h2 class="section-title">What I've Built</h2>
+        <p class="section-subtitle">
+          Selected projects from my time at Sofvie Inc. and independent work — focusing on
+          backend APIs, analytics platforms, and cloud infrastructure.
+        </p>
+        <div class="divider"></div>
 
-                        
-                        
+        <div class="projects-grid">
+          <div class="project-card reveal">
+            <div class="project-number">01</div>
+            <h3 class="project-title">High-Performance REST API Platform</h3>
+            <p class="project-desc">Designed and delivered RESTful APIs in Django and Flask enabling seamless integration between AngularJS frontends and Python backends. Optimized ORM queries and Pandas pipelines to cut response times under high data volumes.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span><span class="tag">Django REST</span>
+              <span class="tag">Flask</span><span class="tag">AngularJS</span><span class="tag">MySQL</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">↗ Live Demo (placeholder)</a>
+              <a href="#" class="project-link">⎔ GitHub (placeholder)</a>
+            </div>
+          </div>
 
+          <div class="project-card reveal">
+            <div class="project-number">02</div>
+            <h3 class="project-title">Analytics & Reporting Pipeline</h3>
+            <p class="project-desc">Built Python-based reporting pipelines with Pandas automating data extraction and transformation for enterprise analytics dashboards. Reduced reporting latency by ~35% via FastAPI services integrated with MySQL stored procedures.</p>
+            <div class="project-tags">
+              <span class="tag">FastAPI</span><span class="tag">Pandas</span>
+              <span class="tag">Power BI</span><span class="tag">MySQL</span><span class="tag">Plotly</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">↗ Live Demo (placeholder)</a>
+              <a href="#" class="project-link">⎔ GitHub (placeholder)</a>
+            </div>
+          </div>
 
+          <div class="project-card reveal">
+            <div class="project-number">03</div>
+            <h3 class="project-title">Cloud-Native Kubernetes Deployment</h3>
+            <p class="project-desc">Containerized Python services with Docker and orchestrated deployments across Kubernetes dev/test environments. Configured namespaces and pods for isolated parallel development. Reduced environment issues by ~40%.</p>
+            <div class="project-tags">
+              <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+              <span class="tag">AWS EKS</span><span class="tag">EC2</span><span class="tag">RDS</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">↗ Case Study (placeholder)</a>
+              <a href="#" class="project-link">⎔ GitHub (placeholder)</a>
+            </div>
+          </div>
 
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-                <div class="col-lg-12">
-                    <div class="text-box">
-                        <i class="fas fa-gem my-icons"></i>
-                        <h4>Extracurricular at Cambrian</h4>
-                        <p>
-                            During my time studying Business Analytics at Cambrian College of Applied Arts and Technology, I took on part-time
-                            roles that enriched my learning experience. As an <strong>Applied Research Assistant</strong>, I worked on a
-                            project that involved the extensive use of <strong>Arduinos</strong> to build and program electronics for a
-                            <strong>remote sensing vehicle</strong>, aimed at risk analysis through live visualizations. Additionally, I served
-                            as a <strong>Peer Tutor</strong>, where I provided tutoring support to fellow students in key subjects such as
-                            <strong>Python</strong>, <strong>SQL</strong>, and <strong>Excel</strong>, helping them grasp complex concepts and
-                            improve their technical skills.
-                        </p>
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col --> 
-                
-                <div class="col-lg-12">
-                    <div class="text-box">
-                        <i class="fas fa-award my-icons"></i>
-                        <h4>Awards or Articles</h4>                       
+          <div class="project-card reveal">
+            <div class="project-number">04</div>
+            <h3 class="project-title">Enterprise Auth with Keycloak</h3>
+            <p class="project-desc">Implemented secure Keycloak-based authentication with JWT/OAuth2 for enterprise clients. Set up VPN-based access with AWS and Docker to protect sensitive development environments and data.</p>
+            <div class="project-tags">
+              <span class="tag">Keycloak</span><span class="tag">JWT</span>
+              <span class="tag">OAuth2</span><span class="tag">AWS VPN</span><span class="tag">Docker</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">↗ Case Study (placeholder)</a>
+              <a href="#" class="project-link">⎔ GitHub (placeholder)</a>
+            </div>
+          </div>
 
-                        <p>
-                            The winners of the 2020 Cambrian R&D Student Innovation Challenge, an event organized by Cambrian R&D, the college's
-                            applied research department, were announced. This competition encourages students to present innovative, actionable
-                            ideas with potential applications in the marketplace or broader community. The Grand Prize of $2,500, sponsored by
-                            Agilis Networks, was awarded to a team that also secured an additional $250 prize for best use of technology. The
-                            winning team comprised <strong> Sarath Sontam, Gowtham Ravindran, and Roshan Sivasankar. </strong>
-                        </p>
-                        <P>
-                            References: 
-                            <ul>
-                                <li><a target="_blank"
-                                    href="https://www.linkedin.com/posts/cambrian-college_congratulations-to-the-winners-of-this-years-activity-6663141152851656704-6fMR?utm_source=share&utm_medium=member_desktop">Congratulations
-                                    to the winners of this year's Cambrian R&D Student Innovation Challenge.</a></li>
-                                <li><a target="_blank"
-                                    href="https://www.sudbury.com/discover/discover-how-innovative-thinking-kept-cambrians-innovation-challenge-alive-during-covid-19-2421106">Discover:
-                                    How innovative thinking kept Cambrian’s Innovation Challenge alive during COVID-19</a></li>
-                            </ul>
-                            
-                            
-                        </P>                        
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of experience -->
+          <div class="project-card reveal">
+            <div class="project-number">05</div>
+            <h3 class="project-title">Live IoT Data Visualization</h3>
+            <p class="project-desc">Engineered live data visualization tools using Python and Arduino-based sensors for remote risk analysis at Cambrian College's Applied Research program. Translated technical results into actionable insights.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span><span class="tag">Arduino</span>
+              <span class="tag">Plotly</span><span class="tag">Data Viz</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">↗ Research Paper (placeholder)</a>
+              <a href="#" class="project-link">⎔ GitHub (placeholder)</a>
+            </div>
+          </div>
 
-    
+          <div class="project-card reveal">
+            <div class="project-number">06</div>
+            <h3 class="project-title">Progressive Web App (PWA)</h3>
+            <p class="project-desc">Built progressive web application features including service workers and offline capabilities, improving frontend performance and user experience for clients in the field with intermittent connectivity.</p>
+            <div class="project-tags">
+              <span class="tag">PWA</span><span class="tag">Service Workers</span>
+              <span class="tag">JavaScript</span><span class="tag">AngularJS</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">↗ Live Demo (placeholder)</a>
+              <a href="#" class="project-link">⎔ GitHub (placeholder)</a>
+            </div>
+          </div>
+        </div>
 
+        <div style="text-align:center; margin-top: 3rem;">
+          <a href="pages/projects.html" class="btn btn-outline">View All Projects</a>
+        </div>
+      </div>
+    </section>
 
-    <!-- education -->
-    <div id="education" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Education</h2>                    
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="text-box">
-                        <!-- <i class="far fa-gem"></i> -->
-                        <h4>Cambrian College of Applied Arts and Technology</h4>
-                        <h6><i>September 2019–July 2020</i></h6>
-                        <h6><i>Business Analytics</i></h4>
-                        <p>As part of this course, I worked with a wide range of tools such as Microsoft Excel, Microsoft Power BI, Matplotlib
-                        (Python), PyPlot (Python) for data analytics and visualization, R for statistics, MYSQL Workbench for database
-                        management, and Python (web scraping, Streamdata, and Twitter chatbots).</p>
-                        <p>This exposure introduced me to the world of
-                        Python, igniting my interest to explore further. This journey led me to Sofvie, where I learned a great deal while
-                        developing applications using Django, Flask</p>
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-                <div class="col-lg-4">
-                    <div class="text-box">
-                        <!-- <i class="fas fa-code"></i> -->
-                        <h4>Pendekanti Institute of Management (Osmania University)</h4>
-                        <h6><i>September 2016–July 2018</i></h6>
-                        <h6><i>Master of Business Administration (MBA - Marketing)</i></h4>
-                        <p>I did MBA to learn more about how businesses work, improve my leadership skills, and understand how companies are
-                        managed. I thought that combining my technical knowledge with business skills would help me in roles where technology
-                        and business come together.</p>
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-                <div class="col-lg-4">
-                    <div class="text-box">
-                        <!-- <i class="fas fa-tv"></i> -->
-                        <h4>DRK College of Engineering and Technology (Jawahrlal Nehru Technological University-Hyderabad)</h4>
-                        <h6><i>October 2010–July 2014</i></h6>
-                        <h6><i>Bachelor of Technology (Computer Science Engineering)</i></h6>
-                        <p>
-                            During my B.Tech, I was introduced to the world of coding, starting with C, C++, and an introduction to Java and SQL.
-                            From the very beginning, I was highly enthusiastic about learning to code. For some reason, it gave me a sense of
-                            motivation and drive that only grew stronger as I progressed.
-                        </p>
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of education -->
+    <!-- CTA -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-accent); border-radius: 12px; padding: 3rem; text-align: center; position: relative; overflow: hidden;">
+          <div style="position:absolute; inset:0; background: radial-gradient(circle at 50% 0%, rgba(232,160,69,0.08) 0%, transparent 60%); pointer-events:none;"></div>
+          <div class="section-label" style="justify-content: center; display:flex;">Open to Opportunities</div>
+          <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight:900; margin-bottom: 1rem; line-height:1.15;">Let's build something<br><span style="color:var(--accent)">remarkable together</span></h2>
+          <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem; line-height:1.7;">
+            I'm currently based in Toronto and open to backend, full-stack, or cloud engineering roles.
+            Let's connect.
+          </p>
+          <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+            <a href="pages/contact.html" class="btn btn-primary">Start a Conversation</a>
+            <a href="pages/experience.html" class="btn btn-outline">See My Work</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">S<span>.</span>Sontam</div>
+          <nav class="footer-links">
+            <a href="pages/about.html">About</a>
+            <a href="pages/projects.html">Projects</a>
+            <a href="pages/experience.html">Experience</a>
+            <a href="pages/contact.html">Contact</a>
+          </nav>
+          <p class="footer-copy">© 2025 Sarath Sontam. Toronto, Ontario.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
 
-    <!-- hobbies -->
-    <div id="hobbies" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">What I do in my freetime</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">                
-                <div class="col-lg-12">
-                    <div class="text-box">
-                        <div class="icons-container centered-div ">
-                            <i class="my-icons m-2 fas fa-table-tennis"></i>
-                            <i class="my-icons m-2 fas fa-camera-retro"></i>
-                            <i class="my-icons m-2 fas fa-film"></i>
-                            <i class="my-icons m-2 fas fa-walking"></i>
-                            <i class="my-icons m-2 fas fa-utensils"></i>                        
-                        </div> <!-- end of icons-container -->
-                        <p>
-                            I love playing table tennis or badminton whenever I get the chance. If I’m at the office and an opportunity arises to
-                            play, I never miss it—it’s a great stress buster for me. When I feel bored, I enjoy watching movies or cooking my favorite dishes. <a href="photos.html">Photography</a> is another favorite hobby of mine. I particularly love taking early morning walks to capture sunrise shots, which bring me immense joy.
-                        </p>
-                                         
-                    </div> <!-- end of text-box -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of hobbies -->
-
-    <!-- Testimonials -->
-    <div id-"testinomials" class="cards-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">What my friend says about me?</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="testimonial-text">
-                                "Sarath was an outstanding student during his college years. He not only paid close attention to lectures but also took
-                                the initiative to explain subjects to his friends.
-                                
-                                He had a deep passion for photography and a creative flair for editing, bringing out the beauty in every shot.
-                                
-                                A loyal and dependable friend, Sarath was always there for his friends in tough times. His calm demeanor and humble
-                                attitude are qualities that will pave the way for his future successes as he continues to grow with time."
-                            </p>
-                            <div class="details">
-                                <!-- <img src="images/testimonial-1.jpg" alt="alternative"> -->
-                                <div class="text">
-                                    <div class="testimonial-author">Hari Priya Ponnam</div>
-                                    <div class="occupation">HR Business Partner | Assisstant Manager - Tata Consultancy Services</div>
-                                </div> <!-- end of text -->
-                            </div> <!-- end of testimonial-details -->
-                        </div>
-                    </div>
-                    <!-- end of card -->                    
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-1 -->
-    <!-- end of testimonials -->
-
-
-    <!-- Section Divider -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <hr class="section-divider">
-            </div> <!-- end of col -->
-        </div> <!-- end of row -->
-    </div> <!-- end of container -->
-    <!-- end of section divider -->  
-
-
-    <!-- Footer -->
-    <div id="contact" class="footer bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>
-                        Contact me
-                    </p>
-                    <div class="social-container">
-                        <span class="fa-stack">
-                            <a href="tel:+17059219416" title="+1(705)-921-9416">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-phone fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="mailto:ssontamwork@gmail.com" title="ssontamwork@gmail.com">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-envelope fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a target="_blank" href="https://www.linkedin.com/in/sontamsarath/" title="sontamsarath">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-linkedin fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a target="_blank" href="https://github.com/orgs/sontam-sarath/repositories" title="sontamsarath">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-github fa-stack-1x"></i>
-                            </a>
-                        </span>
-                    </div> <!-- end of social-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of footer -->  
-    <!-- end of footer -->
-    	
-    <!-- Scripts -->
-    <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
-    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+  <script src="js/main.js"></script>
 </body>
 </html>
