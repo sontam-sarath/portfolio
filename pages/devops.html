@@ -1,0 +1,2838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>DevOps Class Notes – Sarath Sontam</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* ── TAB SYSTEM ─────────────────────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 2.5rem;
+      padding: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+    }
+    .tab-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--accent); background: var(--accent-dim); }
+    .tab-btn.active {
+      color: var(--accent);
+      background: var(--accent-dim);
+      border-color: var(--border-accent);
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── SESSION BLOCKS ─────────────────────────────────────────── */
+    .session {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 160px;
+    }
+    .session-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+    .session h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem;
+    }
+    .session h4 {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 1.25rem 0 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .session p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .session ul, .session ol {
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .session li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
+    }
+    .session li strong {
+      color: var(--text-primary);
+    }
+    .session ul ul, .session ol ol, .session ul ol, .session ol ul {
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .session-divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── CODE BLOCKS ────────────────────────────────────────────── */
+    .code-block {
+      background: #0d0d0f;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 0.75rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #c9d1d9;
+      overflow-x: auto;
+      line-height: 1.8;
+      white-space: pre;
+    }
+    .code-block .cm  { color: #8b949e; }  /* comment */
+    .code-block .kw  { color: #ff7b72; }  /* keyword */
+    .code-block .st  { color: #a5d6ff; }  /* string */
+    .code-block .fn  { color: #d2a8ff; }  /* function */
+    .code-block .nb  { color: #ffa657; }  /* number/flag */
+    .code-block .op  { color: #79c0ff; }  /* operator/command */
+
+    /* inline code */
+    .session code {
+      font-family: var(--font-mono);
+      font-size: 0.8em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    /* ── CONCEPT GRID ───────────────────────────────────────────── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.9rem;
+      margin: 1rem 0;
+    }
+    .concept-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.25rem;
+      transition: border-color var(--transition);
+    }
+    .concept-card:hover { border-color: var(--border-accent); }
+    .concept-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .concept-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── CALLOUT ────────────────────────────────────────────────── */
+    .callout {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: var(--radius);
+      margin: 1rem 0;
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+    .callout-tip  { background: rgba(232,160,69,0.07); border: 1px solid var(--border-accent); }
+    .callout-info { background: rgba(79,140,255,0.07); border: 1px solid rgba(79,140,255,0.25); }
+    .callout-icon { flex-shrink: 0; margin-top: 0.1rem; }
+
+    /* ── CERT BANNER ────────────────────────────────────────────── */
+    .cert-banner {
+      background: linear-gradient(135deg, rgba(232,160,69,0.1), rgba(232,160,69,0.03));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .cert-banner-text {}
+    .cert-banner-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
+    .cert-banner-sub   { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); margin-top: 0.25rem; }
+
+    /* ── ROADMAP LIST ───────────────────────────────────────────── */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.6rem;
+      margin: 0.75rem 0;
+    }
+    .roadmap-item {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .roadmap-item::before { content: '→'; color: var(--accent); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .tab-bar { top: 70px; gap: 0.3rem; }
+      .tab-btn { font-size: 0.68rem; padding: 0.4rem 0.7rem; }
+      .concept-grid { grid-template-columns: 1fr; }
+      .cert-banner { flex-direction: column; gap: 0.75rem; }
+      .roadmap-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">S<span>.</span>Sontam</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="personal.html">What I Am</a></li>
+      <li class="nav-has-dropdown"><a href="learning.html">Learning</a>
+        <ul class="nav-dropdown">
+          <li><a href="devops.html" class="active">DevOps &amp; AWS</a></li>
+          <li><a href="django.html">Django Framework</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="container">
+        <div class="section-label">Learning / DevOps &amp; AWS</div>
+        <h1 class="section-title" style="font-size: clamp(2rem,5vw,3rem); margin-bottom: 0.75rem;">
+          DevOps Class<br>Notes
+        </h1>
+        <p class="section-subtitle">
+          Real class notes from a structured DevOps course by Prashanth — covering Linux, Git, Ansible,
+          Terraform, Maven and the full CI/CD pipeline. Dated sessions from Dec 2024 – Jan 2025.
+        </p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.25rem;">
+          <span class="tech-pill featured">DevOps — Prashanth</span>
+          <span class="tech-pill">Linux</span>
+          <span class="tech-pill">Git</span>
+          <span class="tech-pill">Ansible</span>
+          <span class="tech-pill">Terraform</span>
+          <span class="tech-pill">Maven · CI/CD</span>
+          <span class="tech-pill">Jenkins</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="padding-bottom: 5rem;">
+
+      <!-- CERT GOALS BANNER -->
+      <div class="cert-banner reveal">
+        <div style="font-size: 2.5rem; flex-shrink:0;">🎯</div>
+        <div class="cert-banner-text">
+          <div class="cert-banner-title">Certification Goals from This Course</div>
+          <div class="cert-banner-sub">Targets set in class · Jan 2025</div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem;">
+            <span class="tech-pill featured">AWS Solutions Architect Associate</span>
+            <span class="tech-pill">CKA — Certified Kubernetes Administrator</span>
+            <span class="tech-pill">CKAD — Kubernetes Application Developer</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTRO -->
+      <div class="reveal" style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+        <h4 style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.75rem;">What is DevOps?</h4>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin:0;">
+          DevOps is a cultural and technical approach that unifies software development (Dev) and IT operations (Ops) to enhance
+          collaboration, streamline processes, and deliver software faster and more reliably. Key principles include
+          <strong style="color:var(--text-primary)">automation</strong> (reducing repetitive tasks),
+          <strong style="color:var(--text-primary)">collaboration</strong> (open communication across teams), and
+          <strong style="color:var(--text-primary)">continuous feedback</strong> (evolving products based on metrics and user needs).
+          Tools include Git, Jenkins/GitHub Actions, Terraform, Prometheus, and Grafana.
+        </p>
+      </div>
+
+      <!-- TAB BAR -->
+      <div class="tab-bar" role="tablist">
+        <button class="tab-btn active" role="tab" onclick="switchTab(event,'linux')">🐧 Intro &amp; Linux</button>
+        <button class="tab-btn"         role="tab" onclick="switchTab(event,'git')">🌿 Git</button>
+        <button class="tab-btn"         role="tab" onclick="switchTab(event,'ansible')">⚙️ Ansible</button>
+        <button class="tab-btn"         role="tab" onclick="switchTab(event,'terraform')">🏗 Terraform</button>
+        <button class="tab-btn"         role="tab" onclick="switchTab(event,'maven')">📦 Maven &amp; CI/CD</button>
+        <button class="tab-btn"         role="tab" onclick="switchTab(event,'jenkins')">🔧 Jenkins</button>
+        <button class="tab-btn"         role="tab" onclick="switchTab(event,'github-actions')">🚀 GitHub Actions</button>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 1 — INTRO & LINUX
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane active" id="tab-linux">
+
+        <!-- 2024-12-02 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-02 · 20:30</span>
+          <h3>Learning Framework &amp; Linux OS Introduction</h3>
+
+          <h4>How to Learn Anything (Josh Kaufman — 4 Principles)</h4>
+          <ul>
+            <li><strong>Deconstruct the skill</strong> — Learn in a structured pattern: beginners → intermediate → expert concepts</li>
+            <li><strong>Learn enough to self-correct</strong> — Get just enough knowledge to identify and fix your own mistakes</li>
+            <li><strong>Remove practice barriers</strong> — Eliminate friction so you actually sit down and practice</li>
+            <li><strong>Practice 20 hours on the skill (unique concepts)</strong> — Weekly or monthly with schedule and discipline</li>
+          </ul>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Use the <strong>What / Why / When / Who / Where / How</strong> framework to break down any new concept before diving into it.</span>
+          </div>
+
+          <h4>Linux OS</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Windows</div>
+              <p>Personal computing, single user. Not designed for continuous multi-user server workloads.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Unix</div>
+              <p>Multi-user, multi-tasking. Runs on specific hardware (IBM-AIX, HP-UX, Mac OS, Sun Solaris). Proprietary.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Linux</div>
+              <p>Created by Linus Torvalds. Open source, multi-user, multi-tasking. Runs on commodity hardware. The backbone of cloud infrastructure.</p>
+            </div>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted);">📌 <a href="https://distrowatch.com" target="_blank" style="color:var(--accent)">distrowatch.com</a> — check all Linux distributions</p>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-03 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-03 · 20:30</span>
+          <h3>Basic Linux Commands</h3>
+          <div class="code-block"><span class="op">mkdir</span> new_folder          <span class="cm"># Create a new directory</span>
+<span class="op">ls</span>                       <span class="cm"># List contents of current directory</span>
+<span class="op">cd</span> new_folder             <span class="cm"># Change into directory</span>
+<span class="op">cd</span> ..                     <span class="cm"># Move up to parent directory</span>
+<span class="op">cat</span> /etc/shells           <span class="cm"># View all available shells on the system</span>
+<span class="op">mkdir</span> emplo{1..100}       <span class="cm"># Create 100 dirs named emplo1–emplo100</span></div>
+
+          <h4>Understanding the Bash Prompt</h4>
+          <div class="code-block">ssontamwork@cloudshell:~$
+
+<span class="cm">ssontamwork</span>  → Username
+<span class="cm">@cloudshell</span>  → Hostname (name of the server)
+<span class="cm">~</span>            → Current directory (~ = home directory)
+<span class="cm">$</span>            → Normal/regular user
+<span class="cm">#</span>            → Root user (full permissions)</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-04 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-04 · 20:30</span>
+          <h3>Directory Operations &amp; File Reading</h3>
+          <h4>Directory Commands</h4>
+          <div class="code-block"><span class="op">mkdir</span> <span class="nb">-v</span> kasjf               <span class="cm"># -v = verbose (confirms creation)</span>
+<span class="op">echo</span> $?                  <span class="cm"># 0 = success; non-zero = failed</span>
+<span class="op">mkdir</span> one/two/three      <span class="cm"># Create nested directories</span>
+<span class="op">rmdir</span> folder             <span class="cm"># Remove empty directory</span>
+<span class="op">rm</span> <span class="nb">-r</span> folder             <span class="cm"># Recursively remove directory + contents</span>
+<span class="op">rm</span> <span class="nb">-ri</span> folder            <span class="cm"># Prompt confirmation before each deletion</span>
+
+<span class="cm"># Helm (Kubernetes package manager) — creates full K8s dir structure</span>
+<span class="op">helm create</span> chart1       <span class="cm"># Creates charts/, chart.yaml, templates/, values.yaml</span></div>
+
+          <h4>File Reading Commands</h4>
+          <div class="code-block"><span class="op">cat</span> file.txt             <span class="cm"># Read file top to bottom</span>
+<span class="op">cat</span> <span class="nb">-n</span> file.txt          <span class="cm"># Read with line numbers</span>
+<span class="op">tac</span> file.txt             <span class="cm"># Read bottom to top</span>
+<span class="op">rev</span> file.txt             <span class="cm"># Mirror each line (right to left)</span>
+<span class="op">wc</span> file.txt              <span class="cm"># Word count: lines, words, characters</span></div>
+
+          <h4>Text Editors</h4>
+          <p><code>vim</code> &nbsp;·&nbsp; <code>vi</code> &nbsp;·&nbsp; <code>emacs</code> &nbsp;·&nbsp; <code>nano</code></p>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-05 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-05 · 20:30</span>
+          <h3>Redirection, Piping &amp; History</h3>
+          <h4>Redirection</h4>
+          <div class="code-block"><span class="cm"># Standard I/O file descriptors</span>
+<span class="cm">0 &lt;   → stdin   (standard input)</span>
+<span class="cm">1 &gt;   → stdout  (standard output) — overwrites</span>
+<span class="cm">1 &gt;&gt;  → stdout  — appends</span>
+<span class="cm">2 &gt;   → stderr  (error output)</span>
+
+<span class="op">date</span> &gt; date.txt               <span class="cm"># Write date output to file (overwrite)</span>
+<span class="op">echo</span> <span class="st">"hi welcome"</span> &gt;&gt; date.txt   <span class="cm"># Append a new line</span>
+<span class="op">data</span> 2&gt;&gt; date.txt              <span class="cm"># Capture error output to file</span>
+
+<span class="cm"># Multiple commands — redirect stdout only</span>
+(date; data; ls; pwd) &gt; date.txt
+
+<span class="cm"># Multiple commands — redirect stdout AND stderr</span>
+(date; data; ls; pwd) &amp;&gt; date.txt</div>
+
+          <h4>Piping</h4>
+          <div class="code-block"><span class="cm"># Output of one command → input of next</span>
+<span class="op">cat</span> <span class="nb">-n</span> devops.txt | <span class="op">grep</span> red         <span class="cm"># Search for "red" in file</span>
+<span class="op">cat</span> <span class="nb">-n</span> devops.txt | <span class="op">grep</span> <span class="nb">-i</span> red      <span class="cm"># Case-insensitive search</span>
+<span class="op">docker ps</span> <span class="nb">-a</span> | <span class="op">grep</span> <span class="nb">-i</span> sarath &gt; sarath_containers.txt
+
+<span class="cm"># Slicing line ranges</span>
+<span class="op">cat</span> <span class="nb">-n</span> date.txt | <span class="op">tail</span> <span class="nb">-5</span>             <span class="cm"># Last 5 lines</span>
+<span class="op">cat</span> <span class="nb">-n</span> date.txt | <span class="op">head</span> <span class="nb">-5</span>             <span class="cm"># First 5 lines</span>
+<span class="op">cat</span> <span class="nb">-n</span> devops.txt | <span class="op">head</span> <span class="nb">-30</span> | <span class="op">tail</span> <span class="nb">-10</span>  <span class="cm"># Lines 21–30</span></div>
+
+          <h4>Command History</h4>
+          <div class="code-block"><span class="op">history</span>      <span class="cm"># List all previously run commands</span>
+!10          <span class="cm"># Re-run command at line 10 in history</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-08 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-08 · 20:30</span>
+          <h3>File System Attributes &amp; Permissions</h3>
+          <h4>File Types (<code>ls -l</code> first character)</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">File Type Indicators</div>
+              <p><code>-</code> normal file &nbsp;·&nbsp; <code>d</code> directory &nbsp;·&nbsp; <code>p</code> named pipe &nbsp;·&nbsp; <code>s</code> socket &nbsp;·&nbsp; <code>b</code> block device &nbsp;·&nbsp; <code>c</code> special file</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Default Permissions</div>
+              <p><code>-rw-rw-r--</code><br>Owner: read/write · Group: read/write · Others: read only</p>
+            </div>
+          </div>
+          <div class="code-block"><span class="cm"># chmod — change permissions</span>
+<span class="op">chmod</span> g-rw,o-rw file.txt   <span class="cm"># Alphabetical: remove rw from group + others</span>
+<span class="op">chmod</span> 761 filename         <span class="cm"># Numerical: owner=rwx, group=rw, others=x</span>
+
+<span class="cm"># Numeric reference: r=4, w=2, x=1 (add values per entity)</span>
+<span class="cm"># 7 = 4+2+1 = rwx    6 = 4+2 = rw-    4 = r--    1 = --x</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-09 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-09 · 20:00</span>
+          <h3>Wildcards, Find &amp; File Archives</h3>
+          <h4>Wildcard Characters</h4>
+          <div class="code-block"><span class="cm">*      → zero or more characters</span>
+<span class="cm">?      → exactly one character</span>
+<span class="cm">[]     → set of characters</span>
+<span class="cm">[!]    → NOT set of characters</span>
+<span class="cm">{}     → brace expansion — create multiple files in one command</span>
+
+<span class="op">mv</span> *.txt folder_name        <span class="cm"># Move all .txt files to folder</span>
+<span class="op">rm</span> ds*.txt                  <span class="cm"># Remove all .txt files starting with ds</span>
+<span class="op">rm</span> a???.txt                 <span class="cm"># Remove files starting with 'a' and 4 chars total</span></div>
+
+          <h4>Find &amp; Archives</h4>
+          <div class="code-block"><span class="op">man</span> ls                           <span class="cm"># Manual for ls command</span>
+<span class="op">find</span> . <span class="nb">-name</span> <span class="st">"*.sh"</span>             <span class="cm"># Find all .sh files in current dir</span>
+<span class="op">sudo find</span> / <span class="nb">-name</span> <span class="st">"*.sh"</span>        <span class="cm"># Find all .sh files on entire OS</span>
+
+<span class="cm"># Zip / Unzip</span>
+<span class="op">zip</span> archive.zip file.txt         <span class="cm"># Create zip archive</span>
+<span class="op">unzip</span> archive.zip                <span class="cm"># Extract zip archive</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-10 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-10 · 20:00</span>
+          <h3>Cron Jobs &amp; Shell Scripting</h3>
+          <h4>Cron Job Syntax</h4>
+          <div class="code-block"><span class="cm"># Format: minute  hour  day-of-month  month  day-of-week  command</span>
+30 20 10 12 2   <span class="cm"># "At 20:30 on Dec 10th and on Tuesday in December"</span>
+
+30 20 * * *     <span class="cm"># Every day at 20:30</span>
+30 20 * * 2     <span class="cm"># Every Tuesday at 20:30</span>
+30 20 1 * *     <span class="cm"># 1st of every month at 20:30</span>
+30 * * * *      <span class="cm"># Every hour at :30</span>
+* * * * *       <span class="cm"># Every minute</span>
+
+<span class="op">crontab</span> <span class="nb">-e</span>     <span class="cm"># Edit your cron jobs (opens in editor)</span></div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Use <a href="https://crontab.guru" target="_blank" style="color:var(--accent)">crontab.guru</a> to visually build and test cron expressions before adding them.</span>
+          </div>
+
+          <h4>Shell Scripting Basics</h4>
+          <div class="code-block"><span class="cm">#!/bin/bash</span>           <span class="cm"># Shebang — define the shell interpreter</span>
+<span class="cm"># Extension: .sh or .bashrc</span>
+
+<span class="op">chmod</span> 777 filename.sh  <span class="cm"># Make script executable</span>
+./filename.sh          <span class="cm"># Execute script</span>
+
+<span class="op">set</span> <span class="nb">-x</span>                 <span class="cm"># Enable debug mode (shows each command + output)</span>
+<span class="op">set</span> <span class="nb">+x</span>                 <span class="cm"># Disable debug mode</span>
+<span class="op">set</span> <span class="nb">-B</span>                 <span class="cm"># Enable brace expansion</span>
+
+<span class="cm"># Multi-line comments</span>
+&lt;&lt; COMMENT
+  This is a
+  multi-line comment
+COMMENT</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-11 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-11 · 20:00</span>
+          <h3>Shell Scripting — If Conditions &amp; User Management</h3>
+          <h4>If Condition Comparison Operators</h4>
+          <div class="code-block"><span class="cm">-lt   → less than</span>
+<span class="cm">-gt   → greater than</span>
+<span class="cm">-le   → less than or equal to</span>
+<span class="cm">-ge   → greater than or equal to</span>
+<span class="cm">-eq   → equal to</span>
+<span class="cm">-ne   → not equal to</span>
+
+<span class="kw">if</span> [ $? <span class="nb">-eq</span> 0 ]
+<span class="kw">then</span>
+    <span class="op">echo</span> <span class="st">"success"</span>
+<span class="kw">else</span>
+    <span class="op">echo</span> <span class="st">"failed"</span>
+<span class="kw">fi</span></div>
+
+          <h4>User Management</h4>
+          <div class="code-block"><span class="op">useradd</span> username      <span class="cm"># Add a new user</span>
+<span class="op">cat</span> /etc/passwd        <span class="cm"># List all users</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-13 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-13 · 20:00</span>
+          <h3>Package Management &amp; User Creation</h3>
+          <h4>Package Managers by Distro</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Ubuntu / Debian / Kali</div>
+              <p><code>apt</code> or <code>apt-get</code></p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">CentOS / RedHat / AWS Linux</div>
+              <p><code>yum</code></p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Alpine</div>
+              <p><code>apk</code></p>
+            </div>
+          </div>
+          <div class="code-block"><span class="op">apt list</span>                          <span class="cm"># List all available packages</span>
+<span class="op">apt list</span> | <span class="op">grep</span> <span class="nb">-i</span> apache2         <span class="cm"># Search for a package</span>
+<span class="op">apt list</span> <span class="nb">--installed</span>                <span class="cm"># List installed packages</span>
+<span class="op">sudo apt remove</span> tomcat10           <span class="cm"># Uninstall a package</span>
+<span class="op">sudo apt-get purge</span> tomcat10        <span class="cm"># Remove + wipe config files</span>
+<span class="op">sudo apt autoremove</span>                <span class="cm"># Remove orphaned dependencies</span>
+<span class="op">sudo apt autoclean</span>                 <span class="cm"># Clean package cache</span></div>
+
+          <h4>Creating Users — UID Structure</h4>
+          <div class="code-block"><span class="cm"># /etc/passwd format:</span>
+root:x:0:0:root:/root:/bin/bash
+<span class="cm">#  ↑    ↑ ↑ ↑   ↑     ↑         ↑</span>
+<span class="cm">#  user x uid gid comment homedir shell</span>
+
+<span class="cm"># UID 0–1000:  system users   |  UID >1000: regular users</span>
+
+<span class="op">sudo useradd</span> madhu                                       <span class="cm"># Basic creation</span>
+<span class="op">sudo useradd</span> <span class="nb">-s</span> /bin/bash <span class="nb">-m -d</span> /home/prakash <span class="nb">-c</span> <span class="st">"developer"</span> prakash
+<span class="cm"># -s = shell  -m = create home  -d = home path  -c = comment</span>
+
+<span class="op">cat</span> /etc/passwd | <span class="op">grep</span> <span class="nb">-i</span> nanna     <span class="cm"># Verify user was created</span>
+<span class="op">man useradd</span>                          <span class="cm"># See all useradd options</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-14 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-14 · 20:50</span>
+          <h3>Networking Fundamentals</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Intranet vs Internet</div>
+              <p>Intranet: IP unique within the org, may duplicate across orgs. Internet: IP addresses are globally unique.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">IPv4</div>
+              <p>32-bit · 4 octets · each octet 0–255. Yields ~4 billion addresses (2³²). Nearly exhausted.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">IPv6</div>
+              <p>128-bit · 8 groups · each group 0–65535. Yields 2¹²⁸ addresses (~340 undecillion). Never runs out.</p>
+            </div>
+          </div>
+          <h4>IP Address Classes &amp; Private Ranges</h4>
+          <div class="code-block"><span class="cm"># IP Classes (IPv4)</span>
+Class A:  0–126.x.x.x       Private: 10.0.0.0     → 10.255.255.255
+Class B:  128–191.x.x.x     Private: 172.31.0.0   → 172.31.255.255
+Class C:  192–223.x.x.x     Private: 192.168.0.0  → 192.168.255.255
+Class D/E: 224–255.x.x.x    (multicast / reserved)
+
+<span class="cm"># Validity check: each octet must be 0–255</span>
+23.306.55.1221  → ❌ Invalid
+23.232.32.133   → ✅ Valid</div>
+        </div>
+
+      </div><!-- /tab-linux -->
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 2 — GIT
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane" id="tab-git">
+
+        <!-- 2024-12-15 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-15 · 20:10</span>
+          <h3>Git Overview &amp; Configuration</h3>
+          <h4>Topics in Version Control</h4>
+          <div class="roadmap-grid">
+            <div class="roadmap-item">Commits</div>
+            <div class="roadmap-item">Branching</div>
+            <div class="roadmap-item">.gitignore</div>
+            <div class="roadmap-item">Stash / Squash</div>
+            <div class="roadmap-item">Merge</div>
+            <div class="roadmap-item">Rebase</div>
+            <div class="roadmap-item">Tagging</div>
+            <div class="roadmap-item">Amend</div>
+          </div>
+          <h4>Initial Git Configuration</h4>
+          <div class="code-block"><span class="op">git config</span> <span class="nb">--global</span> user.name <span class="st">"sarath sontam"</span>
+<span class="op">git config</span> <span class="nb">--global</span> user.email <span class="st">"ssontamwork@gmail.com"</span>
+<span class="op">git config</span> <span class="nb">--global --list</span>         <span class="cm"># Verify: shows user.name and user.email</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-16 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-16 · 20:10</span>
+          <h3>Git Workflow — 4 Stages</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">1 · Untracked</div>
+              <p>New or modified files not yet added to Git's workflow. Git knows they exist but ignores them.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">2 · Staging</div>
+              <p>Files added with <code>git add</code>. Staged and ready for the next commit.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">3 · Local Repo</div>
+              <p>Committed with <code>git commit -m "message"</code>. Version saved in local history.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">4 · Remote Repo</div>
+              <p>Pushed to GitHub with <code>git push</code>. Code backed up and shared with the team.</p>
+            </div>
+          </div>
+          <div class="code-block"><span class="op">git init</span>                        <span class="cm"># Initialize git in current folder</span>
+<span class="op">git add</span> filename                <span class="cm"># Stage a specific file</span>
+<span class="op">git add</span> .                       <span class="cm"># Stage all changes</span>
+<span class="op">git commit</span> <span class="nb">-m</span> <span class="st">"first commit"</span>    <span class="cm"># Commit with message</span>
+<span class="op">git commit</span> <span class="nb">-am</span> <span class="st">"message"</span>        <span class="cm"># Express commit — stage + commit in one</span>
+<span class="op">git status</span>                      <span class="cm"># Show untracked/unstaged files</span>
+<span class="op">git log</span>                         <span class="cm"># View full commit history</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-22 + 2024-12-23 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-22 &amp; 2024-12-23 · 20:00</span>
+          <h3>Git Reset &amp; Branching</h3>
+          <h4>Git Reset — 3 Modes</h4>
+          <div class="code-block"><span class="op">git checkout</span> &lt;commit-id&gt;        <span class="cm"># Traverse between commits (non-destructive)</span>
+
+<span class="cm"># Reset modes</span>
+<span class="op">git reset</span> <span class="nb">--hard</span> &lt;commit-id&gt;    <span class="cm"># Delete commits + delete changes in files</span>
+<span class="op">git reset</span> <span class="nb">--mixed</span> &lt;commit-id&gt;   <span class="cm"># Delete commits, keep changes unstaged (default)</span>
+<span class="op">git reset</span> <span class="nb">--soft</span> &lt;commit-id&gt;    <span class="cm"># Delete commits, keep changes staged</span></div>
+
+          <h4>Git Branching</h4>
+          <div class="code-block"><span class="op">git branch</span> &lt;branch-name&gt;        <span class="cm"># Create new branch</span>
+<span class="op">git checkout</span> &lt;branch-name&gt;      <span class="cm"># Switch to branch</span>
+<span class="op">git checkout</span> <span class="nb">-b</span> &lt;branch-name&gt;   <span class="cm"># Create + switch in one command</span>
+<span class="op">git switch</span> <span class="nb">-c</span> &lt;branch-name&gt;     <span class="cm"># Modern syntax for create + switch</span>
+<span class="op">git branch</span> <span class="nb">-d</span> &lt;branch-name&gt;     <span class="cm"># Delete branch</span>
+<span class="op">git cherry-pick</span> &lt;commit-id&gt;     <span class="cm"># Apply a specific commit to current branch</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2024-12-27 + 2024-12-28 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-27 &amp; 2024-12-28 · 20:10</span>
+          <h3>Git Stash, Clean &amp; Remote</h3>
+          <h4>Git Stash — Save work without committing</h4>
+          <div class="code-block"><span class="op">git stash</span>                        <span class="cm"># Stash current changes</span>
+<span class="op">git stash</span> <span class="nb">-u</span>                     <span class="cm"># Include untracked files</span>
+<span class="op">git stash list</span>                   <span class="cm"># List all stashes</span>
+<span class="op">git stash pop</span>                    <span class="cm"># Apply most recent stash + remove it</span>
+<span class="op">git stash pop</span> stash@{0}          <span class="cm"># Apply specific stash</span></div>
+
+          <h4>Git Clean — Remove untracked files</h4>
+          <div class="code-block"><span class="op">git clean</span> <span class="nb">-f</span>                    <span class="cm"># Delete all untracked files</span>
+<span class="op">git clean</span> <span class="nb">-df</span>                   <span class="cm"># Delete untracked files + directories</span>
+<span class="op">git clean</span> <span class="nb">-rf</span>                   <span class="cm"># Delete including .gitignore'd files</span>
+<span class="op">git clean</span> <span class="nb">-i</span>                    <span class="cm"># Interactive — choose which files to delete</span></div>
+
+          <h4>Remote Repository Operations</h4>
+          <div class="code-block"><span class="op">git clone</span> &lt;url&gt;                 <span class="cm"># One-time: get code from remote repo</span>
+<span class="op">git fetch</span>                        <span class="cm"># Check differences between remote and local</span>
+<span class="op">git pull</span>                         <span class="cm"># Download + merge changes from remote</span>
+<span class="op">git push</span>                         <span class="cm"># Upload local commits to remote</span></div>
+        </div>
+
+      </div><!-- /tab-git -->
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 3 — ANSIBLE
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane" id="tab-ansible">
+
+        <!-- 2024-12-30 -->
+        <div class="session reveal">
+          <span class="session-date">2024-12-30 · 20:20</span>
+          <h3>Ansible Introduction</h3>
+          <p>
+            <a href="https://docs.ansible.com/" target="_blank" style="color:var(--accent); font-family:var(--font-mono); font-size:0.82rem;">📚 docs.ansible.com</a>
+          </p>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">What is Ansible?</div>
+              <p>A configuration management tool for performing admin tasks — installing/removing packages, CRUD on users, managing services — across thousands of servers simultaneously.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Why Ansible?</div>
+              <p>Open source (owned by Red Hat). Written in Python. Uses SSH for Linux, RDP for Windows. <strong>No agent required</strong> on target servers (push-based model).</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Push vs Pull</div>
+              <p><strong>Ansible (push)</strong>: controller pushes configs to nodes.<br><strong>Chef/Puppet/SaltStack (pull)</strong>: nodes pull configs from a central server. Requires agents on every target.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Key Features</div>
+              <p>Idempotence (skips already-configured servers) · Parallel execution · Disaster recovery · Snowflake server support</p>
+            </div>
+          </div>
+
+          <h4>3 Ways to Use Ansible</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Ad-Hoc Commands</div>
+              <p>Simple one-off commands. Fast to run, not reusable.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Playbooks</div>
+              <p>YAML files for configuring web servers, deploying apps. Reusable, auditable.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Roles</div>
+              <p>For large-scale operations. Self-contained directory structure. Can be shared via Ansible Galaxy.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-01 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-01 · 20:00</span>
+          <h3>Ansible Setup &amp; Ad-Hoc Commands</h3>
+          <h4>Installing Ansible</h4>
+          <div class="code-block">#!/bin/bash
+<span class="op">sudo apt update</span>
+<span class="op">sudo apt install</span> software-properties-common
+<span class="op">sudo add-apt-repository</span> <span class="nb">--yes --update</span> ppa:ansible/ansible
+<span class="op">sudo apt install</span> ansible</div>
+
+          <h4>Setup Steps</h4>
+          <div class="code-block"><span class="cm"># 1. Generate SSH key on Ansible controller</span>
+<span class="op">ssh-keygen</span> <span class="nb">-t</span> rsa
+<span class="cm"># Private key: /home/ubuntu/.ssh/id_rsa</span>
+<span class="cm"># Public key:  /home/ubuntu/.ssh/id_rsa.pub</span>
+
+<span class="cm"># 2. Copy public key to each managed node</span>
+<span class="cm"># Append to: /home/ubuntu/.ssh/authorized_keys on each node</span>
+
+<span class="cm"># 3. Set hostname on controller</span>
+<span class="op">sudo hostnamectl set-hostname</span> ansible-controller &amp;&amp; <span class="op">exec bash</span>
+
+<span class="cm"># 4. Add managed node IPs to hosts file</span>
+<span class="op">sudo nano</span> /etc/ansible/hosts</div>
+
+          <h4>Ad-Hoc Commands — Modules</h4>
+          <div class="code-block"><span class="cm"># Available modules: command, shell, ping, copy, apt, user, service</span>
+
+<span class="op">ansible all</span> <span class="nb">-m</span> ping                           <span class="cm"># Check all nodes are active</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> command <span class="nb">-a</span> <span class="st">'date'</span>             <span class="cm"># Run date on all nodes</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> command <span class="nb">-a</span> <span class="st">'ls'</span>               <span class="cm"># List files on all nodes</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> shell <span class="nb">-a</span> <span class="st">'cat /etc/passwd | grep -i sarath'</span>  <span class="cm"># Use shell for complex cmds</span>
+
+<span class="cm"># Copy files from controller to managed nodes</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> copy <span class="nb">-a</span> <span class="st">'src=script1.sh dest=/home/ubuntu'</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> copy <span class="nb">-a</span> <span class="st">'src=text dest=/home/ubuntu mode=0600'</span>
+
+<span class="cm"># Install packages (state: present=install, absent=remove, latest=update)</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> apt <span class="nb">-a</span> <span class="st">'name=default-jdk state=present update_cache=yes'</span> <span class="nb">-b</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> apt <span class="nb">-a</span> <span class="st">'name=apache2 state=present update_cache=yes'</span> <span class="nb">-b</span>
+
+<span class="cm"># User management</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> user <span class="nb">-a</span> <span class="st">'name=sarath state=present'</span> <span class="nb">-b</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> user <span class="nb">-a</span> <span class="st">'name=ansible_user password=1234 shell=/bin/bash home=/home/ansible_user comment=developer'</span> <span class="nb">-b</span>
+
+<span class="cm"># Service management</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> service <span class="nb">-a</span> <span class="st">'name=apache2 state=started'</span> <span class="nb">-b</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> service <span class="nb">-a</span> <span class="st">'name=apache2 state=restarted'</span> <span class="nb">-b</span>
+<span class="op">ansible all</span> <span class="nb">-m</span> service <span class="nb">-a</span> <span class="st">'name=apache2 state=stopped'</span> <span class="nb">-b</span>
+
+<span class="cm"># Fetch files FROM managed nodes TO controller</span>
+<span class="op">ansible sarath</span> <span class="nb">-m</span> fetch <span class="nb">-a</span> <span class="st">'src=/etc/tomcat10/tomcat-users.xml dest=/home/ubuntu/'</span> <span class="nb">-b</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-03 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-03 · 20:10</span>
+          <h3>Ansible Playbooks — YAML Basics</h3>
+          <div class="callout callout-info">
+            <span class="callout-icon">ℹ️</span>
+            <span>YAML is used in: Ansible Playbooks · Docker Compose · Kubernetes Manifests · Prometheus Config · GitHub Actions</span>
+          </div>
+          <h4>Sample Playbooks</h4>
+          <div class="code-block"><span class="cm">---  # Install Tomcat, change port, restart, deploy app</span>
+- <span class="kw">name:</span> <span class="st">Playbook to install Tomcat</span>
+  <span class="kw">hosts:</span> all
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Install Tomcat</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> tomcat10
+        <span class="kw">state:</span> present
+
+    - <span class="kw">name:</span> <span class="st">Change port 8080 to 9090</span>
+      <span class="kw">replace:</span>
+        <span class="kw">path:</span> /etc/tomcat10/server.xml
+        <span class="kw">regex:</span> <span class="st">'8080'</span>
+        <span class="kw">replace:</span> <span class="st">'9090'</span>
+
+    - <span class="kw">name:</span> <span class="st">Restart Tomcat</span>
+      <span class="kw">service:</span>
+        <span class="kw">name:</span> tomcat10
+        <span class="kw">state:</span> restarted
+
+    - <span class="kw">name:</span> <span class="st">Deploy an app</span>
+      <span class="kw">copy:</span>
+        <span class="kw">src:</span> devops.war
+        <span class="kw">dest:</span> /var/lib/tomcat10/webapps/</div>
+
+          <div class="code-block"><span class="cm">---  # Launch a website</span>
+- <span class="kw">name:</span> <span class="st">Playbook to launch a website</span>
+  <span class="kw">hosts:</span> sarath
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Install apache2</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> [<span class="st">"apache2"</span>]
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes
+    - <span class="kw">name:</span> <span class="st">Deploy index.html</span>
+      <span class="kw">copy:</span>
+        <span class="kw">src:</span> /home/ubuntu/playbooks/index.html
+        <span class="kw">dest:</span> /var/www/html/
+    - <span class="kw">name:</span> <span class="st">Restart apache2</span>
+      <span class="kw">service:</span>
+        <span class="kw">name:</span> apache2
+        <span class="kw">state:</span> restarted</div>
+
+          <h4>Playbook Commands</h4>
+          <div class="code-block"><span class="op">ansible-playbook</span> playbook.yaml              <span class="cm"># Run a playbook</span>
+<span class="op">ansible-playbook</span> playbook.yaml <span class="nb">--syntax-check</span> <span class="cm"># Validate syntax</span>
+<span class="op">ansible-playbook</span> playbook.yaml <span class="nb">-b</span>             <span class="cm"># Run with privilege escalation</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-05 + 2025-01-06 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-05 &amp; 2025-01-06 · 20:00</span>
+          <h3>Variables, Loops &amp; Ansible Vault</h3>
+          <h4>Interactive Playbook with vars_prompt</h4>
+          <div class="code-block"><span class="cm">---</span>
+- <span class="kw">name:</span> <span class="st">Interactive playbook</span>
+  <span class="kw">hosts:</span> all
+  <span class="kw">vars_prompt:</span>
+    - <span class="kw">name:</span> package_name
+      <span class="kw">prompt:</span> <span class="st">"What package do you want to install?"</span>
+      <span class="kw">private:</span> false   <span class="cm"># false = show input as user types</span>
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Install package</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> <span class="st">"{{ package_name }}"</span>
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes</div>
+
+          <h4>Play Scope Variables + Loops</h4>
+          <div class="code-block"><span class="cm">---  # Install multiple packages with a loop</span>
+- <span class="kw">name:</span> <span class="st">Install packages using loops</span>
+  <span class="kw">hosts:</span> sarath
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Install packages</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> <span class="st">"{{ item }}"</span>
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes
+      <span class="kw">with_items:</span>
+        - figlet
+        - apache2
+        - tomcat10
+        - git</div>
+
+          <div class="code-block"><span class="cm">---  # Loop with multiple attributes per item</span>
+      <span class="kw">with_items:</span>
+        - {<span class="kw">a:</span> figlet,   <span class="kw">b:</span> present}
+        - {<span class="kw">a:</span> apache2,  <span class="kw">b:</span> latest}
+        - {<span class="kw">a:</span> tomcat10, <span class="kw">b:</span> absent}    <span class="cm"># absent = uninstall</span></div>
+
+          <h4>Ansible Vault — Encrypt Sensitive Playbooks</h4>
+          <div class="code-block"><span class="op">ansible-vault encrypt</span> sensitive_playbook.yaml   <span class="cm"># Encrypt</span>
+<span class="op">ansible-playbook</span> sensitive_playbook.yaml <span class="nb">--ask-vault-pass</span>  <span class="cm"># Run encrypted</span>
+<span class="op">ansible-vault edit</span> sensitive_playbook.yaml       <span class="cm"># Edit encrypted</span>
+<span class="op">ansible-vault decrypt</span> sensitive_playbook.yaml    <span class="cm"># Decrypt</span></div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-07 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-07 · 20:00</span>
+          <h3>Debug, When &amp; Handlers</h3>
+          <h4>Debug — Save &amp; Print Logs</h4>
+          <div class="code-block"><span class="cm">---</span>
+- <span class="kw">name:</span> <span class="st">Install git and print logs</span>
+  <span class="kw">hosts:</span> all
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Install git</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> git
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes
+      <span class="kw">register:</span> results          <span class="cm"># Save output to variable</span>
+    - <span class="kw">name:</span> <span class="st">Print logs</span>
+      <span class="kw">debug:</span>
+        <span class="kw">var:</span> results               <span class="cm"># Display saved variable</span>
+
+<span class="cm"># Save output to a file</span>
+<span class="op">ansible-playbook</span> playbook.yaml &gt;&gt; save-logs.log</div>
+
+          <h4>When Conditions</h4>
+          <div class="code-block"><span class="cm">---  # Only runs task if condition matches</span>
+      <span class="kw">when:</span> num == 50
+
+<span class="cm">---  # Create user + update password only if newly created</span>
+    - <span class="kw">name:</span> <span class="st">Create user</span>
+      <span class="kw">user:</span>
+        <span class="kw">name:</span> sarath_new
+      <span class="kw">register:</span> user_logs
+    - <span class="kw">name:</span> <span class="st">Update password if user is new</span>
+      <span class="kw">user:</span>
+        <span class="kw">name:</span> sarath_new
+        <span class="kw">password:</span> 123456
+      <span class="kw">when:</span> user_logs.changed == true</div>
+
+          <h4>Handlers — 4 Key Rules</h4>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <strong>1.</strong> Handlers execute after <em>all tasks</em> complete.<br>
+              <strong>2.</strong> Handlers run in the order they are <em>defined</em>, not called.<br>
+              <strong>3.</strong> A handler executes only <em>once</em> even if called multiple times.<br>
+              <strong>4.</strong> Handlers only execute if the calling task produced a <em>change</em>.
+            </div>
+          </div>
+          <div class="code-block"><span class="cm">---</span>
+- <span class="kw">name:</span> <span class="st">Install tomcat, notify handler to install admin</span>
+  <span class="kw">hosts:</span> all
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Install tomcat10</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> tomcat10
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes
+      <span class="kw">notify:</span> <span class="st">install tomcat_admin</span>   <span class="cm"># Trigger handler by name</span>
+  <span class="kw">handlers:</span>
+    - <span class="kw">name:</span> <span class="st">install tomcat_admin</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> tomcat10-admin
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-08 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-08 · 21:00</span>
+          <h3>Setup Module, OS Conditionals &amp; Roles</h3>
+          <h4>ansible_os_family — Multi-Distro Playbooks</h4>
+          <div class="code-block"><span class="op">ansible all</span> <span class="nb">-m</span> setup   <span class="cm"># List all facts (keywords) about managed nodes</span>
+                            <span class="cm"># e.g., ansible_os_family → "Debian" or "RedHat"</span></div>
+          <div class="code-block"><span class="cm">---  # Install nginx on Debian, httpd on RedHat</span>
+    - <span class="kw">name:</span> <span class="st">Install nginx on Debian</span>
+      <span class="kw">apt:</span>
+        <span class="kw">name:</span> nginx
+        <span class="kw">state:</span> present
+        <span class="kw">update_cache:</span> yes
+      <span class="kw">when:</span> ansible_os_family == <span class="st">"Debian"</span> and package_name == <span class="st">'nginx'</span>
+    - <span class="kw">name:</span> <span class="st">Install httpd on RedHat</span>
+      <span class="kw">yum:</span>
+        <span class="kw">name:</span> httpd
+        <span class="kw">state:</span> present
+      <span class="kw">when:</span> ansible_os_family == <span class="st">'RedHat'</span> and package_name == <span class="st">'httpd'</span></div>
+
+          <h4>Parent / Child Playbooks</h4>
+          <div class="code-block"><span class="cm"># child1.yaml — create user task only (no hosts: block)</span>
+- <span class="kw">name:</span> <span class="st">create a user</span>
+  <span class="kw">user:</span>
+    <span class="kw">name:</span> sarath007
+    <span class="kw">password:</span> 1234
+
+<span class="cm"># parent.yaml — runs all children</span>
+<span class="cm">---</span>
+- <span class="kw">name:</span> <span class="st">Parent playbook</span>
+  <span class="kw">hosts:</span> all
+  <span class="kw">become:</span> true
+  <span class="kw">tasks:</span>
+    - <span class="kw">name:</span> <span class="st">Run child tasks</span>
+      <span class="kw">include_tasks:</span> <span class="st">"{{ item }}"</span>
+      <span class="kw">with_items:</span>
+        - createuser.yaml
+        - installjava.yaml</div>
+
+          <h4>Ansible Roles Structure</h4>
+          <div class="code-block">apache2/
+├── README.md
+├── defaults/main.yml    <span class="cm"># default variable values</span>
+├── files/               <span class="cm"># static files (e.g. index.html)</span>
+├── handlers/main.yml    <span class="cm"># handlers</span>
+├── meta/main.yml        <span class="cm"># role metadata</span>
+├── tasks/main.yml       <span class="cm"># task definitions</span>
+├── templates/           <span class="cm"># Jinja2 templates</span>
+├── tests/               <span class="cm"># test inventory and test.yml</span>
+└── vars/main.yml        <span class="cm"># variables</span>
+
+<span class="cm"># Create a role skeleton</span>
+<span class="op">ansible-galaxy init</span> apache2 <span class="nb">--offline</span>
+
+<span class="cm"># Use the role in a playbook</span>
+<span class="cm">---</span>
+- <span class="kw">name:</span> <span class="st">Run apache2 role</span>
+  <span class="kw">hosts:</span> all
+  <span class="kw">become:</span> true
+  <span class="kw">roles:</span>
+    - apache2</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-15 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-15 · 20:00</span>
+          <h3>Error Handling &amp; Full DevOps Roadmap</h3>
+          <h4>Error Handling — block / rescue / always</h4>
+          <div class="code-block"><span class="cm">---  # Like try/catch/finally in other languages</span>
+    - <span class="kw">block:</span>
+      - <span class="kw">name:</span> <span class="st">Try — install with yum</span>
+        <span class="kw">yum:</span>
+          <span class="kw">name:</span> elinks
+          <span class="kw">state:</span> present
+      <span class="kw">rescue:</span>
+      - <span class="kw">name:</span> <span class="st">Catch — fallback to apt</span>
+        <span class="kw">apt:</span>
+          <span class="kw">name:</span> elinks
+          <span class="kw">state:</span> present
+      <span class="kw">always:</span>
+      - <span class="kw">name:</span> <span class="st">Finally — always run cleanup</span>
+        <span class="kw">debug:</span>
+          <span class="kw">msg:</span> <span class="st">"Completed execution"</span></div>
+
+          <h4>Full DevOps Learning Roadmap (from class)</h4>
+          <div class="roadmap-grid">
+            <div class="roadmap-item">Ansible</div>
+            <div class="roadmap-item">Terraform</div>
+            <div class="roadmap-item">Maven</div>
+            <div class="roadmap-item">Tomcat</div>
+            <div class="roadmap-item">SonarQube</div>
+            <div class="roadmap-item">Jenkins</div>
+            <div class="roadmap-item">Docker</div>
+            <div class="roadmap-item">Docker Swarm</div>
+            <div class="roadmap-item">Kubernetes</div>
+            <div class="roadmap-item">Prometheus</div>
+            <div class="roadmap-item">Grafana</div>
+            <div class="roadmap-item">Trivy</div>
+            <div class="roadmap-item">AWS SAA</div>
+          </div>
+        </div>
+
+      </div><!-- /tab-ansible -->
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 4 — TERRAFORM
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane" id="tab-terraform">
+
+        <!-- 2025-01-19 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-19 · 20:00</span>
+          <h3>Terraform Introduction</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">What is Terraform?</div>
+              <p>Open-source IaC tool by HashiCorp. Uses HCL (HashiCorp Configuration Language) — declarative. Describes desired end state; Terraform figures out how to get there.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Key Features</div>
+              <p>Multi-cloud (AWS, Azure, GCP) · Execution plans · State file tracking · Modular reuse · Version-controlled infrastructure</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Why Terraform?</div>
+              <p>Reduces manual errors · Ensures consistency across environments · Enables disaster recovery · Better team collaboration via shared state</p>
+            </div>
+          </div>
+
+          <h4>5 Major Stages</h4>
+          <div class="code-block"><span class="op">terraform init</span>      <span class="cm"># Download provider plugins, init working dir</span>
+<span class="op">terraform validate</span>  <span class="cm"># Check syntax and validate the script</span>
+<span class="op">terraform plan</span>      <span class="cm"># Preview what changes will be made</span>
+<span class="op">terraform apply</span>     <span class="cm"># Execute the script (type 'yes' to confirm)</span>
+<span class="op">terraform destroy</span>   <span class="cm"># Remove all resources defined in the script</span></div>
+
+          <h4>Basic Terraform Script</h4>
+          <div class="code-block"><span class="kw">terraform</span> {
+  <span class="kw">required_providers</span> {
+    <span class="kw">aws</span> = {
+      <span class="kw">source</span>  = <span class="st">"hashicorp/aws"</span>
+      <span class="kw">version</span> = <span class="st">"~> 5.0"</span>
+    }
+  }
+}
+
+<span class="kw">provider</span> <span class="st">"aws"</span> {
+  <span class="kw">region</span>     = <span class="st">"us-east-2"</span>
+  <span class="kw">access_key</span> = <span class="st">"my-key"</span>   <span class="cm"># ⚠️ Never hardcode in real scripts</span>
+  <span class="kw">secret_key</span> = <span class="st">"my-key"</span>
+}
+
+<span class="kw">resource</span> <span class="st">"aws_instance"</span> <span class="st">"web"</span> {
+  <span class="kw">ami</span>           = <span class="st">"ami-036841078a4b68e14"</span>
+  <span class="kw">instance_type</span> = <span class="st">"t3.micro"</span>
+  <span class="kw">count</span>         = 1
+  <span class="kw">tags</span> = {
+    <span class="kw">Name</span> = <span class="st">"ServerFromTerraform"</span>
+  }
+}</div>
+
+          <h4>Files Created by Terraform</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">.terraform/ (dir)</div>
+              <p>Provider plugins and cached modules. Created on <code>terraform init</code>. Don't edit manually.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">.terraform.lock.hcl</div>
+              <p>Locks provider versions for consistency across the team. Commit this to Git.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">terraform.tfstate</div>
+              <p>Tracks current state of infrastructure. Do not edit manually. Use remote backend for team collaboration.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">terraform.tfstate.backup</div>
+              <p>Automatic backup of state file. Safety net for recovery if something goes wrong.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-20 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-20 · 20:00</span>
+          <h3>Managing AWS Keys &amp; Credentials</h3>
+          <h4>5 Approaches to Hide Access Keys</h4>
+          <div class="code-block"><span class="cm"># Approach 1: Separate provider.tf file</span>
+<span class="cm"># Approach 2: AWS CLI configure</span>
+<span class="op">aws configure</span>                      <span class="cm"># Prompts for access key, secret, region</span>
+<span class="op">aws configure</span> <span class="nb">--profile=</span>user_name  <span class="cm"># Per-user profile</span>
+
+<span class="cm"># Approach 3: Environment variables</span>
+<span class="op">export</span> AWS_ACCESS_KEY_ID=<span class="st">"my-key"</span>
+<span class="op">export</span> AWS_SECRET_ACCESS_KEY=<span class="st">"my-secret"</span>
+
+<span class="cm"># Approach 4: Terraform Secret Manager</span>
+<span class="cm"># Approach 5: Interactive — prompts at runtime</span>
+
+<span class="cm"># In provider.tf when using named CLI profile</span>
+<span class="kw">provider</span> <span class="st">"aws"</span> {
+  <span class="kw">profile</span> = <span class="st">"user_name"</span>
+}</div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Always create access keys from <strong>IAM user accounts</strong>, not the root account. Root keys have unlimited permissions — a leak is catastrophic. IAM users can be scoped to minimum required permissions.</span>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-21 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-21 · 20:15</span>
+          <h3>Terraform Variables &amp; Validation</h3>
+          <div class="code-block"><span class="cm"># Define a variable</span>
+<span class="kw">variable</span> <span class="st">"myvar"</span> {
+  <span class="kw">type</span>        = string
+  <span class="kw">description</span> = <span class="st">"Enter the value: "</span>
+  <span class="kw">default</span>     = <span class="st">"sarath"</span>    <span class="cm"># Optional — avoids prompting</span>
+}
+
+<span class="cm"># Read a variable: var.myvar</span>
+<span class="cm"># Sensitive variable (hides input)</span>
+<span class="kw">variable</span> <span class="st">"access_key"</span> {
+  <span class="kw">type</span>      = string
+  <span class="kw">sensitive</span> = true
+}
+
+<span class="cm"># Output variable</span>
+<span class="kw">output</span> <span class="st">"my_region"</span> {
+  <span class="kw">value</span>     = var.region
+  <span class="kw">sensitive</span> = true
+}
+
+<span class="cm"># Validation — must be greater than 0</span>
+<span class="kw">variable</span> <span class="st">"instance_count"</span> {
+  <span class="kw">type</span>        = number
+  <span class="kw">description</span> = <span class="st">"Number of instances"</span>
+  <span class="kw">validation</span> {
+    <span class="kw">condition</span>     = var.instance_count &gt; 0
+    <span class="kw">error_message</span> = <span class="st">"Instance count must be greater than 0."</span>
+  }
+}
+
+<span class="cm"># Validation — must be a valid AWS region</span>
+<span class="kw">variable</span> <span class="st">"region"</span> {
+  <span class="kw">type</span>    = string
+  <span class="kw">default</span> = <span class="st">"us-east-2"</span>
+  <span class="kw">validation</span> {
+    <span class="kw">condition</span>     = contains([<span class="st">"us-east-1"</span>, <span class="st">"us-east-2"</span>, <span class="st">"us-west-1"</span>, <span class="st">"us-west-2"</span>], var.region)
+    <span class="kw">error_message</span> = <span class="st">"Invalid AWS region."</span>
+  }
+}
+
+<span class="cm"># Unique names per instance using count.index</span>
+<span class="kw">resource</span> <span class="st">"aws_instance"</span> <span class="st">"web"</span> {
+  <span class="kw">ami</span>           = var.ami_id
+  <span class="kw">instance_type</span> = <span class="st">"t2.micro"</span>
+  <span class="kw">count</span>         = var.instance_count
+  <span class="kw">tags</span> = {
+    <span class="kw">Name</span>        = var.instance_names[count.index]
+    <span class="kw">Environment</span> = <span class="st">"Development"</span>
+  }
+}</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- 2025-01-22 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-22 · 20:00</span>
+          <h3>VPC in AWS (via Terraform)</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Subnetting</div>
+              <p>Divide VPC into public subnets (web servers / load balancers) and private subnets (databases / app servers).</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Internet Gateway</div>
+              <p>Enables communication between VPC resources and the public internet. Attached to public subnets.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">NAT Gateway</div>
+              <p>Allows private subnet instances to reach the internet for updates — without being directly reachable from outside.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Security Groups &amp; NACLs</div>
+              <p>Security Groups: stateful, per-instance. NACLs: stateless, per-subnet. Use both for layered defence.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">VPC Peering</div>
+              <p>Connect two VPCs privately — traffic stays on AWS backbone, never touches public internet.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">VPC Endpoints</div>
+              <p>Private access to AWS services like S3 and DynamoDB — no NAT gateway, no internet exposure needed.</p>
+            </div>
+          </div>
+          <div class="callout callout-info">
+            <span class="callout-icon">ℹ️</span>
+            <span>Standard 3-tier architecture: public subnet for ALB → private subnet for EC2 app servers → private subnet for RDS. NAT Gateway handles outbound from private subnets. No direct internet access to app or DB layer.</span>
+          </div>
+        </div>
+
+      </div><!-- /tab-terraform -->
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 5 — MAVEN & CI/CD
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane" id="tab-maven">
+
+        <!-- 2025-01-27 -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-27 · 20:00</span>
+          <h3>CI/CD Pipeline Overview</h3>
+          <div class="callout callout-info">
+            <span class="callout-icon">ℹ️</span>
+            <span>DevOps is a culture and set of principles adapted in SDLC to deliver products faster with higher quality. The CI/CD pipeline starts the moment code is pushed to GitHub.</span>
+          </div>
+          <h4>CI/CD Process — Step by Step</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">1 · Compile</div>
+              <p>Source code is compiled. Catches syntax errors immediately on push.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">2 · Unit Tests</div>
+              <p>Run test suite. Any failing test blocks the pipeline.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">3 · Security Scan</div>
+              <p>Trivy scans for CVEs in code and container images.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">4 · Code Quality</div>
+              <p>SonarQube checks: security hotspots · code smells · vulnerabilities · quality gate pass/fail.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">5 · Package</div>
+              <p>Maven packages all compiled code into .war / .jar / .ear artifact.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">6 · Automate</div>
+              <p>Jenkins or GitHub Actions orchestrates all stages on every merge to main.</p>
+            </div>
+          </div>
+
+          <h4>CI/CD Tools Stack</h4>
+          <div class="roadmap-grid">
+            <div class="roadmap-item">Maven</div>
+            <div class="roadmap-item">Tomcat</div>
+            <div class="roadmap-item">SonarQube</div>
+            <div class="roadmap-item">Nexus</div>
+            <div class="roadmap-item">Jenkins</div>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- Maven Deep Dive -->
+        <div class="session reveal">
+          <span class="session-date">2025-01-27 continued</span>
+          <h3>Maven — Java Build Tool</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">What is Maven?</div>
+              <p>Build tool by Apache Software Foundation, written in Java. Open source. Uses <code>pom.xml</code> (Project Object Model) to define dependencies, plugins, and packaging instructions.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Alternatives</div>
+              <p><code>build.gradle</code> (Groovy/Kotlin) · <code>setup.py</code> (Python) · <code>makefile</code> (C/C++) — Maven is the Java standard.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Package Types</div>
+              <p><strong>.jar</strong> — Java Archive (class files) · <strong>.war</strong> — Web Archive (jar + web content) · <strong>.ear</strong> — Enterprise Archive (jar + war)</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Repositories</div>
+              <p><strong>Local</strong> — developer's machine · <strong>Remote</strong> — corporate Nexus/Artifactory · <strong>Central</strong> — Maven community at maven.apache.org</p>
+            </div>
+          </div>
+
+          <h4>Maven Build Lifecycle</h4>
+          <div class="code-block"><span class="cm"># Default Lifecycle (most important)</span>
+<span class="op">mvn validate</span>   <span class="cm"># Checks src/, test/, pom.xml are valid</span>
+<span class="op">mvn compile</span>    <span class="cm"># Compiles .java → .class files</span>
+<span class="op">mvn test</span>       <span class="cm"># Runs unit tests in test/</span>
+<span class="op">mvn package</span>    <span class="cm"># Packages into .war/.jar/.ear</span>
+<span class="op">mvn verify</span>     <span class="cm"># Verifies packaged artifact is correct</span>
+<span class="op">mvn install</span>    <span class="cm"># Installs artifact to local repo</span>
+<span class="op">mvn deploy</span>     <span class="cm"># Deploys artifact to remote/private registry</span>
+
+<span class="cm"># Other Lifecycles</span>
+<span class="op">mvn site</span>       <span class="cm"># Generates documentation as web page</span>
+<span class="op">mvn clean</span>      <span class="cm"># Clears target/ — removes previous build artifacts</span>
+
+<span class="cm"># Common combined commands</span>
+<span class="op">mvn clean package</span>            <span class="cm"># Clean then build — standard for CI</span>
+<span class="op">mvn clean install</span> <span class="nb">-DskipTests</span> <span class="cm"># Skip tests for faster local builds</span></div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>In CI pipelines, always use <code>mvn clean package</code> — the <code>clean</code> step prevents stale artifacts from previous builds sneaking into the new package.</span>
+          </div>
+        </div>
+
+      </div><!-- /tab-maven -->
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 6 — JENKINS
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane" id="tab-jenkins">
+
+        <!-- INTRO -->
+        <div class="session reveal">
+          <span class="session-date">Jenkins · CI/CD Automation Server</span>
+          <h3>What is Jenkins?</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">What is Jenkins?</div>
+              <p>Open-source automation server written in Java. Orchestrates the full CI/CD pipeline — build, test, scan, package, deploy — triggered automatically on every code push to Git.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Why Jenkins?</div>
+              <p>1800+ plugins. Connects to Git, Docker, Kubernetes, AWS, SonarQube, Nexus, Google Chat, email. Free, open-source, self-hosted. Preferred in enterprises with custom infrastructure.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Jenkins vs GitHub Actions</div>
+              <p><strong>Jenkins</strong>: self-hosted, full control, more setup. <strong>GitHub Actions</strong>: managed, zero infra, tightly coupled to GitHub. Use Jenkins when you need on-prem runners or fine-grained plugin control.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Key Concepts</div>
+              <p><strong>Job/Project</strong>: task Jenkins runs · <strong>Build</strong>: one execution · <strong>Agent/Node</strong>: machine that runs the build · <strong>Controller</strong>: Jenkins server that schedules builds · <strong>Workspace</strong>: build directory</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- INSTALL -->
+        <div class="session reveal">
+          <span class="session-date">Installation · Ubuntu / AWS EC2</span>
+          <h3>Installing Jenkins</h3>
+          <div class="code-block"><span class="cm">#!/bin/bash — Install Jenkins on Ubuntu</span>
+
+<span class="cm"># Step 1: Install Java 17 (required)</span>
+<span class="op">sudo apt update</span>
+<span class="op">sudo apt install</span> <span class="nb">-y</span> fontconfig openjdk-17-jre
+<span class="op">java</span> <span class="nb">--version</span>
+
+<span class="cm"># Step 2: Add Jenkins repo</span>
+<span class="op">sudo wget</span> <span class="nb">-O</span> /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/" | \
+  <span class="op">sudo tee</span> /etc/apt/sources.list.d/jenkins.list &gt; /dev/null
+
+<span class="cm"># Step 3: Install</span>
+<span class="op">sudo apt update</span>
+<span class="op">sudo apt install</span> <span class="nb">-y</span> jenkins
+
+<span class="cm"># Step 4: Start and enable</span>
+<span class="op">sudo systemctl start</span> jenkins
+<span class="op">sudo systemctl enable</span> jenkins
+<span class="op">sudo systemctl status</span> jenkins
+
+<span class="cm"># Step 5: Get initial admin password</span>
+<span class="op">sudo cat</span> /var/lib/jenkins/secrets/initialAdminPassword</div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Jenkins runs on <strong>port 8080</strong> by default. Open <code>http://&lt;server-ip&gt;:8080</code> in your browser. On AWS EC2, add an inbound rule in the Security Group: TCP port 8080 from your IP.</span>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- JOB TYPES -->
+        <div class="session reveal">
+          <span class="session-date">Job Types · Freestyle vs Pipeline</span>
+          <h3>Types of Jenkins Jobs</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Freestyle Project</div>
+              <p>GUI-based click-through configuration. Good for quick experiments. Not version-controlled, hard to reuse. <strong>Avoid for real projects.</strong></p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Pipeline — Scripted</div>
+              <p>Written in Groovy DSL. Uses <code>node { }</code> blocks. Imperative style — you control every step. Very flexible, but verbose and harder to read.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Pipeline — Declarative ⭐</div>
+              <p>Structured, YAML-like syntax. Uses <code>pipeline { }</code> block. Easier to read and maintain. Supports built-in post-conditions, parallel stages, agents. <strong>Recommended approach.</strong></p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Multibranch Pipeline</div>
+              <p>Auto-creates a pipeline job for every branch containing a Jenkinsfile. Each branch gets its own build history. Perfect for feature-branch and PR workflows.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Organisation Folder</div>
+              <p>Scans an entire GitHub org or Bitbucket project. Auto-discovers all repos and creates Multibranch Pipelines for each. Used in large engineering teams.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Folder</div>
+              <p>Not a job type — a container for grouping related jobs. Supports folder-level credentials and views. Use to organise by team or environment.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- DECLARATIVE PIPELINE -->
+        <div class="session reveal">
+          <span class="session-date">Declarative Pipeline · Jenkinsfile</span>
+          <h3>Declarative Pipeline — Structure &amp; Syntax</h3>
+          <div class="callout callout-info">
+            <span class="callout-icon">ℹ️</span>
+            <span>Store your <code>Jenkinsfile</code> in the root of your Git repo. Jenkins reads it on every build — your entire pipeline is version-controlled alongside your code.</span>
+          </div>
+
+          <h4>Full Annotated Jenkinsfile</h4>
+          <div class="code-block"><span class="cm">// Jenkinsfile — Declarative Pipeline (store in repo root)</span>
+pipeline {
+    <span class="kw">agent</span> any                   <span class="cm">// Run on any available Jenkins agent</span>
+
+    <span class="kw">environment</span> {               <span class="cm">// Global env vars available in all stages</span>
+        APP_NAME = <span class="st">'myapp'</span>
+        ECR_REPO = <span class="st">'123456789.dkr.ecr.ca-central-1.amazonaws.com/myapp'</span>
+    }
+
+    <span class="kw">stages</span> {
+
+        <span class="kw">stage</span>(<span class="st">'Checkout'</span>) {
+            <span class="kw">steps</span> {
+                git branch: <span class="st">'main'</span>, url: <span class="st">'https://github.com/sontam-sarath/myapp.git'</span>
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Build'</span>) {
+            <span class="kw">steps</span> {
+                sh <span class="st">'mvn clean package -DskipTests'</span>
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Test'</span>) {
+            <span class="kw">steps</span> {
+                sh <span class="st">'mvn test'</span>
+            }
+            <span class="kw">post</span> {
+                <span class="kw">always</span> {
+                    junit <span class="st">'**/target/surefire-reports/*.xml'</span>  <span class="cm">// Publish test results</span>
+                }
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Code Quality — SonarQube'</span>) {
+            <span class="kw">steps</span> {
+                withSonarQubeEnv(<span class="st">'SonarQube-Server'</span>) {
+                    sh <span class="st">'mvn sonar:sonar'</span>
+                }
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Docker Build and Push to ECR'</span>) {
+            <span class="kw">steps</span> {
+                sh <span class="st">'''
+                    aws ecr get-login-password --region ca-central-1 |
+                      docker login --username AWS --password-stdin $ECR_REPO
+                    docker build -t $APP_NAME:$BUILD_NUMBER .
+                    docker tag  $APP_NAME:$BUILD_NUMBER $ECR_REPO:$BUILD_NUMBER
+                    docker push $ECR_REPO:$BUILD_NUMBER
+                '''</span>
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Deploy to Kubernetes'</span>) {
+            <span class="kw">steps</span> {
+                sh <span class="st">'''
+                    aws eks update-kubeconfig --name my-cluster
+                    kubectl set image deployment/$APP_NAME $APP_NAME=$ECR_REPO:$BUILD_NUMBER
+                    kubectl rollout status deployment/$APP_NAME
+                '''</span>
+            }
+        }
+    }
+
+    <span class="kw">post</span> {                         <span class="cm">// Runs after ALL stages regardless of outcome</span>
+        <span class="kw">success</span>  { echo <span class="st">'Pipeline succeeded!'</span> }
+        <span class="kw">failure</span>  { echo <span class="st">'Pipeline failed!'</span> }
+        <span class="kw">always</span>   { cleanWs() }        <span class="cm">// Always clean workspace after build</span>
+    }
+}</div>
+
+          <h4>Agent Options</h4>
+          <div class="code-block"><span class="kw">agent</span> any                           <span class="cm">// Any available node</span>
+<span class="kw">agent</span> none                          <span class="cm">// No global agent — each stage defines its own</span>
+<span class="kw">agent</span> { label <span class="st">'linux'</span> }             <span class="cm">// Run on node with label 'linux'</span>
+<span class="kw">agent</span> {                             <span class="cm">// Run inside a Docker container</span>
+    docker {
+        image <span class="st">'maven:3.9-eclipse-temurin-17'</span>
+        args  <span class="st">'-v /root/.m2:/root/.m2'</span>  <span class="cm">// Cache Maven deps between builds</span>
+    }
+}</div>
+
+          <h4>Post Condition Reference</h4>
+          <div class="code-block"><span class="kw">post</span> {
+    <span class="kw">always</span>   { <span class="cm">/* runs regardless of result — use for cleanWs(), reports */</span> }
+    <span class="kw">success</span>  { <span class="cm">/* only when build passes */</span> }
+    <span class="kw">failure</span>  { <span class="cm">/* only when build fails */</span> }
+    <span class="kw">unstable</span> { <span class="cm">/* build passed but tests failed */</span> }
+    <span class="kw">changed</span>  { <span class="cm">/* result is different from the previous build */</span> }
+    <span class="kw">fixed</span>    { <span class="cm">/* previous failed, this one succeeded */</span> }
+    <span class="kw">aborted</span>  { <span class="cm">/* build was manually cancelled */</span> }
+}</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- PARALLEL + SCRIPTED -->
+        <div class="session reveal">
+          <span class="session-date">Parallel Stages · Scripted Pipeline</span>
+          <h3>Parallel Stages &amp; Scripted Pipeline</h3>
+
+          <h4>Parallel Stages — Run Steps Simultaneously</h4>
+          <div class="code-block"><span class="cm">// Run unit tests + security scan + sonarqube at the same time</span>
+<span class="kw">stage</span>(<span class="st">'Test and Scan'</span>) {
+    parallel {
+        <span class="kw">stage</span>(<span class="st">'Unit Tests'</span>) {
+            <span class="kw">steps</span> { sh <span class="st">'mvn test'</span> }
+        }
+        <span class="kw">stage</span>(<span class="st">'Trivy Security Scan'</span>) {
+            <span class="kw">steps</span> { sh <span class="st">'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'</span> }
+        }
+        <span class="kw">stage</span>(<span class="st">'SonarQube Analysis'</span>) {
+            <span class="kw">steps</span> {
+                withSonarQubeEnv(<span class="st">'SonarQube-Server'</span>) {
+                    sh <span class="st">'mvn sonar:sonar'</span>
+                }
+            }
+        }
+    }
+}</div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Parallel stages cut pipeline time dramatically. Tests + security scan running simultaneously can halve a 12-minute pipeline to 6 minutes — use this pattern whenever stages don't depend on each other's output.</span>
+          </div>
+
+          <h4>Scripted Pipeline (Groovy) — for reference</h4>
+          <div class="code-block"><span class="cm">// Scripted pipeline — more flexible, more verbose, uses node blocks</span>
+node(<span class="st">'linux'</span>) {
+    try {
+        <span class="kw">stage</span>(<span class="st">'Checkout'</span>) { checkout scm }
+        <span class="kw">stage</span>(<span class="st">'Build'</span>)    { sh <span class="st">'mvn clean package'</span> }
+        <span class="kw">stage</span>(<span class="st">'Deploy'</span>)   { sh <span class="st">'./deploy.sh'</span> }
+        currentBuild.result = <span class="st">'SUCCESS'</span>
+    } catch (e) {
+        currentBuild.result = <span class="st">'FAILURE'</span>
+        throw e
+    } finally {
+        cleanWs()
+    }
+}</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- MULTIBRANCH -->
+        <div class="session reveal">
+          <span class="session-date">Multibranch Pipeline · Branch Strategies</span>
+          <h3>Multibranch Pipeline</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75;">
+            Jenkins scans your GitHub repo and automatically creates a separate pipeline for every branch
+            that contains a <code>Jenkinsfile</code>. Each branch gets its own build history and log.
+            Pull requests get their own pipeline too.
+          </p>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Setup Steps</div>
+              <p>New Item → Multibranch Pipeline → Add Source (GitHub) → enter repo URL + credentials → set Scan Interval → Save. Jenkins auto-discovers and creates jobs per branch.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Branch Strategies</div>
+              <p><strong>All branches</strong>: build every branch. <strong>Named branches only</strong>: main/develop. <strong>PR only</strong>: build pull requests. Use "Filter by name (wildcards)" to control scope.</p>
+            </div>
+          </div>
+
+          <h4>Branch-Specific Logic in Jenkinsfile</h4>
+          <div class="code-block">pipeline {
+    <span class="kw">agent</span> any
+    <span class="kw">stages</span> {
+        <span class="kw">stage</span>(<span class="st">'Build'</span>) {
+            <span class="kw">steps</span> { sh <span class="st">'mvn clean package'</span> }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Deploy to Staging'</span>) {
+            <span class="cm">// Only runs when branch is 'develop'</span>
+            when { branch <span class="st">'develop'</span> }
+            <span class="kw">steps</span> { sh <span class="st">'./deploy-staging.sh'</span> }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Deploy to Production'</span>) {
+            <span class="cm">// Only runs on main branch</span>
+            when { branch <span class="st">'main'</span> }
+            <span class="kw">steps</span> { sh <span class="st">'./deploy-prod.sh'</span> }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'PR Validation'</span>) {
+            <span class="cm">// Only on Pull Requests</span>
+            when { changeRequest() }
+            <span class="kw">steps</span> { sh <span class="st">'mvn test'</span> }
+        }
+    }
+}</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- GOOGLE CHAT -->
+        <div class="session reveal">
+          <span class="session-date">Notifications · Google Chat Webhook</span>
+          <h3>Google Chat Notifications</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75;">
+            Post build status messages directly into a Google Chat Space when a pipeline succeeds, fails,
+            or goes unstable. Two approaches: a plugin, or a raw <code>curl</code> call (no plugin needed).
+          </p>
+
+          <h4>Step 1 — Create a Webhook in Google Chat</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Create the Webhook</div>
+              <p>Open Google Chat Space → click space name at top → <strong>Apps &amp; Integrations</strong> → <strong>Webhooks</strong> → <strong>Add Webhook</strong> → name it "Jenkins" → copy the URL.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Webhook URL Format</div>
+              <p><code style="font-size:0.72em; word-break:break-all;">https://chat.googleapis.com/v1/spaces/SPACE_ID/messages?key=KEY&amp;token=TOKEN</code><br>Treat this like a password — anyone with the URL can post to your space.</p>
+            </div>
+          </div>
+
+          <h4>Step 2 — Store URL as a Jenkins Credential</h4>
+          <div class="code-block"><span class="cm"># Manage Jenkins → Credentials → System → Global credentials (unrestricted)</span>
+<span class="cm"># → Add Credentials</span>
+<span class="cm">#   Kind:        Secret text</span>
+<span class="cm">#   Secret:      (paste your full webhook URL here)</span>
+<span class="cm">#   ID:          GCHAT_WEBHOOK</span>
+<span class="cm">#   Description: Google Chat Jenkins Webhook</span></div>
+
+          <h4>Step 3 — Option A · Using the Google Chat Plugin</h4>
+          <div class="code-block"><span class="cm">// Install: Manage Jenkins → Plugins → "Google Chat Notification" → install</span>
+<span class="cm">// Then use googlechatnotification() in post block:</span>
+
+<span class="kw">post</span> {
+    <span class="kw">success</span> {
+        googlechatnotification(
+            url:     <span class="st">'cred:GCHAT_WEBHOOK'</span>,
+            message: <span class="st">'SUCCESS: ${JOB_NAME} #${BUILD_NUMBER} | ${GIT_BRANCH} | ${BUILD_URL}'</span>
+        )
+    }
+    <span class="kw">failure</span> {
+        googlechatnotification(
+            url:     <span class="st">'cred:GCHAT_WEBHOOK'</span>,
+            message: <span class="st">'FAILED: ${JOB_NAME} #${BUILD_NUMBER} | ${GIT_BRANCH} | ${BUILD_URL}'</span>
+        )
+    }
+}</div>
+
+          <h4>Step 3 — Option B · Raw curl (zero plugins needed) ⭐</h4>
+          <div class="code-block">pipeline {
+    <span class="kw">agent</span> any
+    <span class="kw">environment</span> {
+        GCHAT_URL = credentials(<span class="st">'GCHAT_WEBHOOK'</span>)   <span class="cm">// Pull from Jenkins credentials</span>
+    }
+    <span class="kw">stages</span> {
+        <span class="kw">stage</span>(<span class="st">'Build'</span>) {
+            <span class="kw">steps</span> { sh <span class="st">'mvn clean package'</span> }
+        }
+    }
+    <span class="kw">post</span> {
+        <span class="kw">success</span> {
+            sh <span class="st">'''
+                curl -s -X POST -H "Content-Type: application/json" \
+                  -d "{\"text\": \"SUCCESS  *$JOB_NAME* #$BUILD_NUMBER  Branch: $GIT_BRANCH  $BUILD_URL\"}" \
+                  "$GCHAT_URL"
+            '''</span>
+        }
+        <span class="kw">failure</span> {
+            sh <span class="st">'''
+                curl -s -X POST -H "Content-Type: application/json" \
+                  -d "{\"text\": \"FAILED  *$JOB_NAME* #$BUILD_NUMBER  Branch: $GIT_BRANCH  Check logs: $BUILD_URL\"}" \
+                  "$GCHAT_URL"
+            '''</span>
+        }
+        <span class="kw">unstable</span> {
+            sh <span class="st">'''
+                curl -s -X POST -H "Content-Type: application/json" \
+                  -d "{\"text\": \"UNSTABLE  *$JOB_NAME* #$BUILD_NUMBER  Some tests failed. $BUILD_URL\"}" \
+                  "$GCHAT_URL"
+            '''</span>
+        }
+    }
+}</div>
+
+          <h4>Rich Card Message (Google Chat Cards v2)</h4>
+          <div class="code-block"><span class="cm">// Send a formatted card — more visual than plain text</span>
+sh <span class="st">'''
+  curl -s -X POST -H "Content-Type: application/json" -d "{
+    \"cardsV2\": [{
+      \"card\": {
+        \"header\": {
+          \"title\": \"Jenkins Build Result\",
+          \"subtitle\": \"$JOB_NAME #$BUILD_NUMBER\"
+        },
+        \"sections\": [{
+          \"widgets\": [
+            {\"keyValue\": {\"topLabel\": \"Status\",   \"content\": \"$currentBuild_result\"}},
+            {\"keyValue\": {\"topLabel\": \"Branch\",   \"content\": \"$GIT_BRANCH\"}},
+            {\"keyValue\": {\"topLabel\": \"Duration\", \"content\": \"$currentBuild_durationString\"}},
+            {\"buttons\": [{\"textButton\": {\"text\": \"View Build\",
+              \"onClick\": {\"openLink\": {\"url\": \"$BUILD_URL\"}}}}]}
+          ]
+        }]
+      }
+    }]
+  }" "$GCHAT_URL"
+'''</span></div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Use <strong>Option B (curl)</strong> for zero plugin dependencies — works on any Jenkins instance and gives full control over message format. Use the plugin if you prefer simpler Groovy syntax and don't mind an extra dependency to maintain.</span>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- EMAIL -->
+        <div class="session reveal">
+          <span class="session-date">Notifications · Email (SMTP)</span>
+          <h3>Email Notifications</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75;">
+            Two options: built-in <strong>Email Notification</strong> (simple plain text) or the
+            <strong>Email Extension Plugin</strong> (HTML, per-recipient logic, log attachments).
+            The extension plugin is recommended for anything beyond basic alerts.
+          </p>
+
+          <h4>Step 1 — Configure SMTP in Jenkins</h4>
+          <div class="code-block"><span class="cm"># Manage Jenkins → System → E-mail Notification (scroll down)</span>
+
+SMTP server:  smtp.gmail.com
+Use SSL:      checked
+SMTP Port:    465
+User name:    ssontamwork@gmail.com
+Password:     (Gmail App Password — NOT your regular login password)
+
+<span class="cm"># How to get a Gmail App Password:</span>
+<span class="cm"># Google Account → Security → 2-Step Verification → App Passwords</span>
+<span class="cm"># → Select app: Mail → Select device: Other → Generate</span>
+<span class="cm"># Copy the 16-character password and paste into Jenkins</span></div>
+
+          <h4>Step 2 — Install Email Extension Plugin</h4>
+          <div class="code-block"><span class="cm"># Manage Jenkins → Plugins → Available plugins</span>
+<span class="cm"># Search: "Email Extension Plugin"  → Install → Restart Jenkins</span>
+<span class="cm"># Then: Manage Jenkins → System → Extended E-mail Notification</span>
+<span class="cm"># Configure the same SMTP settings there too</span>
+<span class="cm"># Set Default Recipients: ssontamwork@gmail.com</span></div>
+
+          <h4>Step 3 — Basic email() in Jenkinsfile</h4>
+          <div class="code-block"><span class="kw">post</span> {
+    <span class="kw">failure</span> {
+        mail(
+            to:      <span class="st">'ssontamwork@gmail.com'</span>,
+            subject: <span class="st">"FAILED: ${JOB_NAME} #${BUILD_NUMBER}"</span>,
+            body:    <span class="st">"Build failed.\nJob: ${JOB_NAME}\nBuild #${BUILD_NUMBER}\n${BUILD_URL}"</span>
+        )
+    }
+}</div>
+
+          <h4>Step 4 — Extended emailext() with HTML</h4>
+          <div class="code-block"><span class="kw">post</span> {
+    <span class="kw">failure</span> {
+        emailext(
+            to:       <span class="st">'ssontamwork@gmail.com, team@company.com'</span>,
+            subject:  <span class="st">"FAILED: ${JOB_NAME} #${BUILD_NUMBER}"</span>,
+            mimeType: <span class="st">'text/html'</span>,
+            body:     <span class="st">"""
+                &lt;h2 style="color:#e53e3e"&gt;Build Failed&lt;/h2&gt;
+                &lt;table cellpadding="8" style="border-collapse:collapse"&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;b&gt;Job&lt;/b&gt;&lt;/td&gt;&lt;td&gt;${JOB_NAME}&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;b&gt;Build&lt;/b&gt;&lt;/td&gt;&lt;td&gt;#${BUILD_NUMBER}&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;b&gt;Branch&lt;/b&gt;&lt;/td&gt;&lt;td&gt;${GIT_BRANCH}&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;&lt;td&gt;&lt;b&gt;Duration&lt;/b&gt;&lt;/td&gt;&lt;td&gt;${currentBuild.durationString}&lt;/td&gt;&lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p&gt;&lt;a href="${BUILD_URL}"&gt;View Full Build Log&lt;/a&gt;&lt;/p&gt;
+            """</span>,
+            attachLog: true      <span class="cm">// Attach the full console log to the email</span>
+        )
+    }
+    <span class="kw">always</span> {
+        emailext(
+            to:       <span class="st">'${DEFAULT_RECIPIENTS}'</span>,
+            subject:  <span class="st">'${DEFAULT_SUBJECT}'</span>,
+            body:     <span class="st">'${SCRIPT, template="groovy-html.template"}'</span>,
+            mimeType: <span class="st">'text/html'</span>
+        )
+    }
+}</div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <span>Set <code>${DEFAULT_RECIPIENTS}</code> once in <em>Manage Jenkins → System → Extended E-mail Notification → Default Recipients</em>. You can change who gets notified without touching the Jenkinsfile.</span>
+          </div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- FULL COMBINED PIPELINE -->
+        <div class="session reveal">
+          <span class="session-date">Full Pipeline · Google Chat + Email Combined</span>
+          <h3>Production-Ready Jenkinsfile — Both Notifications</h3>
+          <div class="code-block"><span class="cm">// Production Jenkinsfile: Build → Test → Scan → Docker → EKS + notifications</span>
+pipeline {
+    <span class="kw">agent</span> any
+
+    <span class="kw">environment</span> {
+        APP_NAME   = <span class="st">'myapp'</span>
+        ECR_REPO   = <span class="st">'123456789.dkr.ecr.ca-central-1.amazonaws.com/myapp'</span>
+        GCHAT_URL  = credentials(<span class="st">'GCHAT_WEBHOOK'</span>)
+        EMAIL_LIST = <span class="st">'ssontamwork@gmail.com'</span>
+    }
+
+    <span class="kw">stages</span> {
+
+        <span class="kw">stage</span>(<span class="st">'Checkout'</span>) {
+            <span class="kw">steps</span> { checkout scm }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Build'</span>) {
+            <span class="kw">steps</span> { sh <span class="st">'mvn clean package -DskipTests'</span> }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Test and Security Scan'</span>) {
+            parallel {
+                <span class="kw">stage</span>(<span class="st">'Unit Tests'</span>) {
+                    <span class="kw">steps</span> { sh <span class="st">'mvn test'</span> }
+                }
+                <span class="kw">stage</span>(<span class="st">'Trivy Scan'</span>) {
+                    <span class="kw">steps</span> { sh <span class="st">'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'</span> }
+                }
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'SonarQube'</span>) {
+            <span class="kw">steps</span> {
+                withSonarQubeEnv(<span class="st">'SonarQube-Server'</span>) {
+                    sh <span class="st">'mvn sonar:sonar'</span>
+                }
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Docker Build and Push'</span>) {
+            <span class="kw">steps</span> {
+                sh <span class="st">'''
+                    aws ecr get-login-password --region ca-central-1 |
+                      docker login --username AWS --password-stdin $ECR_REPO
+                    docker build -t $APP_NAME:$BUILD_NUMBER .
+                    docker tag  $APP_NAME:$BUILD_NUMBER $ECR_REPO:$BUILD_NUMBER
+                    docker push $ECR_REPO:$BUILD_NUMBER
+                '''</span>
+            }
+        }
+
+        <span class="kw">stage</span>(<span class="st">'Deploy to EKS'</span>) {
+            when { branch <span class="st">'main'</span> }      <span class="cm">// Only deploy from main branch</span>
+            <span class="kw">steps</span> {
+                sh <span class="st">'''
+                    aws eks update-kubeconfig --name my-cluster
+                    kubectl set image deployment/$APP_NAME $APP_NAME=$ECR_REPO:$BUILD_NUMBER
+                    kubectl rollout status deployment/$APP_NAME
+                '''</span>
+            }
+        }
+    }
+
+    <span class="kw">post</span> {
+        <span class="kw">success</span> {
+            <span class="cm">// Notify Google Chat</span>
+            sh <span class="st">'''curl -s -X POST -H "Content-Type: application/json" \
+              -d "{\"text\": \"SUCCESS  *$JOB_NAME* #$BUILD_NUMBER  Branch: $GIT_BRANCH  $BUILD_URL\"}" \
+              "$GCHAT_URL"'''</span>
+            <span class="cm">// Send email</span>
+            emailext(
+                to:      <span class="st">"$EMAIL_LIST"</span>,
+                subject: <span class="st">"SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}"</span>,
+                body:    <span class="st">"Build passed. Branch: ${GIT_BRANCH}\n${BUILD_URL}"</span>
+            )
+        }
+        <span class="kw">failure</span> {
+            <span class="cm">// Notify Google Chat</span>
+            sh <span class="st">'''curl -s -X POST -H "Content-Type: application/json" \
+              -d "{\"text\": \"FAILED  *$JOB_NAME* #$BUILD_NUMBER  Branch: $GIT_BRANCH  Logs: $BUILD_URL\"}" \
+              "$GCHAT_URL"'''</span>
+            <span class="cm">// Send email with log attached</span>
+            emailext(
+                to:        <span class="st">"$EMAIL_LIST"</span>,
+                subject:   <span class="st">"FAILED: ${JOB_NAME} #${BUILD_NUMBER}"</span>,
+                body:      <span class="st">"Build failed. Branch: ${GIT_BRANCH}\n${BUILD_URL}"</span>,
+                attachLog: true
+            )
+        }
+        <span class="kw">always</span> {
+            cleanWs()    <span class="cm">// Always clean up workspace</span>
+        }
+    }
+}</div>
+        </div>
+
+        <hr class="session-divider">
+
+        <!-- CREDENTIALS & BEST PRACTICES -->
+        <div class="session reveal">
+          <span class="session-date">Credentials · Best Practices</span>
+          <h3>Managing Credentials &amp; Best Practices</h3>
+
+          <h4>Storing Secrets in Jenkins</h4>
+          <div class="code-block"><span class="cm"># Where: Manage Jenkins → Credentials → System → Global credentials</span>
+<span class="cm">#</span>
+<span class="cm"># Credential types:</span>
+<span class="cm">#   Secret text        → API keys, webhook URLs, tokens</span>
+<span class="cm">#   Username+Password  → Docker Hub, Nexus, database logins</span>
+<span class="cm">#   SSH Key            → GitHub SSH access, server access</span>
+<span class="cm">#   AWS Credentials    → access key + secret (needs AWS plugin)</span>
+<span class="cm">#   Certificate        → PKI / TLS certs</span>
+
+<span class="cm">// Use in Jenkinsfile — environment block</span>
+environment {
+    DOCKER_CREDS = credentials(<span class="st">'docker-hub-creds'</span>)
+    <span class="cm">// Creates: DOCKER_CREDS_USR (username) and DOCKER_CREDS_PSW (password)</span>
+}
+
+<span class="cm">// Use in a scoped block — safer, only available within this stage</span>
+withCredentials([usernamePassword(
+    credentialsId:     <span class="st">'docker-hub-creds'</span>,
+    usernameVariable:  <span class="st">'DOCKER_USER'</span>,
+    passwordVariable:  <span class="st">'DOCKER_PASS'</span>
+)]) {
+    sh <span class="st">'docker login -u $DOCKER_USER -p $DOCKER_PASS'</span>
+}</div>
+
+          <h4>Best Practices Checklist</h4>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <div class="concept-card-title">Always use Jenkinsfile</div>
+              <p>Never configure pipelines via GUI for real projects. Jenkinsfile in Git = version control, code review, and full auditability of your CI/CD process.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Never hardcode secrets</div>
+              <p>Use Jenkins Credentials store or integrate AWS Secrets Manager / HashiCorp Vault. A leaked credential in Git history is extremely hard to fully remediate.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Tag images with BUILD_NUMBER</div>
+              <p>Never push <code>:latest</code> from CI. Use <code>$BUILD_NUMBER</code> or <code>$GIT_COMMIT</code> so every deployed image is traceable to an exact build and commit.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">cleanWs() in post always</div>
+              <p>Always clean workspace after builds. Stale artifacts from previous builds cause mysterious failures and disk exhaustion on long-running agents.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Use parallel stages</div>
+              <p>Tests, security scans, and code quality checks can run simultaneously. Only run sequentially when one truly depends on another's output.</p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">Keep stages small and named</div>
+              <p>One stage = one responsibility. Small, clearly named stages make it easy to see exactly which step failed in Blue Ocean UI without digging through a huge log.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-jenkins -->
+
+      <!-- ═══════════════════════════════════════════════════════════
+           TAB 7 — GITHUB ACTIONS
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="tab-pane" id="tab-github-actions">
+
+        <div class="session reveal">
+          <span class="session-date">CI/CD with GitHub Actions</span>
+          <h3>Python Django CI/CD Pipelines</h3>
+          
+          <p>GitHub Actions provides powerful CI/CD capabilities for Python Django projects. It enables automated testing, code quality checks, security scanning, and deployment directly from your GitHub repository.</p>
+
+          <h4>GitHub Actions Fundamentals</h4>
+          <div class="concept-card">
+            <h5>Core Concepts</h5>
+            <ul>
+              <li><strong>Workflow:</strong> Automated process triggered by events (push, PR, schedule)</li>
+              <li><strong>Job:</strong> Set of steps that execute on the same runner</li>
+              <li><strong>Step:</strong> Individual task within a job (run command, use action)</li>
+              <li><strong>Runner:</strong> Server that executes workflows (GitHub-hosted or self-hosted)</li>
+              <li><strong>Action:</strong> Reusable unit of code that performs a specific task</li>
+            </ul>
+          </div>
+
+          <h4>Basic Django CI Workflow</h4>
+          <pre class="code-block">
+# .github/workflows/ci.yml
+name: Django CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PYTHON_VERSION: '3.11'
+  POETRY_VERSION: '1.6.1'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: ${{ env.POETRY_VERSION }}
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ env.PYTHON_VERSION }}-${{ hashFiles('**/poetry.lock') }}
+        
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --no-ansi
+      
+    - name: Run migrations
+      run: |
+        poetry run python manage.py migrate --settings=config.settings.test
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        REDIS_URL: redis://localhost:6379/0
+        
+    - name: Run tests
+      run: |
+        poetry run python manage.py test --settings=config.settings.test --verbosity=2
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        REDIS_URL: redis://localhost:6379/0
+        
+    - name: Generate coverage report
+      run: |
+        poetry run coverage run --source='.' manage.py test --settings=config.settings.test
+        poetry run coverage xml
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+</pre>
+
+          <h4>Code Quality & Linting Pipeline</h4>
+          <pre class="code-block">
+# .github/workflows/code-quality.yml
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install black isort flake8 mypy bandit safety pylint
+        
+    - name: Format check with Black
+      run: black --check --diff .
+      
+    - name: Import sorting check with isort
+      run: isort --check-only --diff .
+      
+    - name: Lint with flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
+        
+    - name: Type checking with mypy
+      run: mypy . --ignore-missing-imports --check-untyped-defs
+      
+    - name: Security check with bandit
+      run: bandit -r . -x tests/ --format json -o bandit-report.json
+      continue-on-error: true
+      
+    - name: Upload bandit results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: bandit-results
+        path: bandit-report.json
+        
+    - name: Dependency vulnerability check
+      run: safety check --json --output safety-report.json
+      continue-on-error: true
+      
+    - name: Code complexity with pylint
+      run: pylint --load-plugins=pylint_django --django-settings-module=config.settings.base $(find . -name "*.py" | grep -v migrations | head -20)
+      continue-on-error: true
+</pre>
+        </div>
+
+        <div class="session reveal">
+          <span class="session-date">Advanced Testing Strategies</span>
+          
+          <h4>Matrix Testing & Integration Tests</h4>
+          <pre class="code-block">
+# .github/workflows/comprehensive-test.yml
+name: Comprehensive Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+        django-version: ['4.1', '4.2', '5.0']
+        database: ['sqlite', 'postgres']
+        exclude:
+          # Django 5.0 doesn't support Python 3.9
+          - python-version: '3.9'
+            django-version: '5.0'
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install Django==${{ matrix.django-version }}
+        pip install -r requirements/test.txt
+        
+    - name: Run tests with SQLite
+      if: matrix.database == 'sqlite'
+      run: |
+        python manage.py test --settings=config.settings.test_sqlite
+        
+    - name: Run tests with PostgreSQL
+      if: matrix.database == 'postgres'
+      run: |
+        python manage.py test --settings=config.settings.test_postgres
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+
+  performance-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements/test.txt
+        pip install locust django-silk
+        
+    - name: Run performance tests
+      run: |
+        python manage.py collectstatic --noinput --settings=config.settings.test
+        python manage.py runserver --settings=config.settings.test &
+        sleep 10
+        locust -f tests/performance/locustfile.py --headless -u 10 -r 2 -t 60s --host=http://localhost:8000
+</pre>
+
+          <h4>Security & Vulnerability Scanning</h4>
+          <div class="concept-card">
+            <div class="concept-card-title">Multi-layered Security Approach</div>
+            <p><strong>Static Analysis:</strong> Bandit, Semgrep for code vulnerabilities<br>
+            <strong>Dependency Checks:</strong> Safety, pip-audit for package vulnerabilities<br>
+            <strong>Container Scanning:</strong> Trivy for Docker image security<br>
+            <strong>Dynamic Analysis:</strong> CodeQL for runtime vulnerability detection</p>
+          </div>
+
+          <pre class="code-block">
+# .github/workflows/security.yml
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly Monday 2 AM
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install security tools
+      run: |
+        pip install bandit[toml] safety semgrep pip-audit
+        
+    - name: Run Bandit security scan
+      run: |
+        bandit -r . -f json -o bandit-results.json -x tests/,venv/
+      continue-on-error: true
+      
+    - name: Run Safety vulnerability check
+      run: |
+        safety check --json --output safety-results.json
+      continue-on-error: true
+      
+    - name: Run Semgrep SAST
+      run: |
+        semgrep --config=auto --json --output=semgrep-results.json .
+      continue-on-error: true
+
+  codeql-analysis:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ['python']
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+</pre>
+        </div>
+
+        <div class="session reveal">
+          <span class="session-date">Docker & Container Registry</span>
+          
+          <h4>Multi-Platform Docker Builds</h4>
+          <pre class="code-block">
+# .github/workflows/docker.yml
+name: Docker Build & Push
+
+on:
+  push:
+    branches: [ main, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Log in to Container Registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: ${{ github.event_name != 'pull_request' }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+</pre>
+
+          <h4>Production Dockerfile</h4>
+          <pre class="code-block">
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    POETRY_VERSION=1.6.1
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Poetry
+RUN pip install poetry==$POETRY_VERSION
+
+# Copy dependency files
+COPY pyproject.toml poetry.lock ./
+
+# Configure poetry and install dependencies
+RUN poetry config virtualenvs.create false \
+    && poetry install --only=main --no-interaction --no-ansi
+
+# Copy application code
+COPY . .
+
+# Collect static files
+RUN python manage.py collectstatic --noinput --settings=config.settings.production
+
+# Create non-root user
+RUN adduser --disabled-password --gecos '' appuser
+RUN chown -R appuser:appuser /app
+USER appuser
+
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "config.wsgi:application"]
+</pre>
+        </div>
+
+        <div class="session reveal">
+          <span class="session-date">Deployment Workflows</span>
+          
+          <h4>Multi-Environment Deployment Strategy</h4>
+          <div class="concept-card">
+            <div class="concept-card-title">Environment Flow</div>
+            <p><strong>Development →</strong> Feature branches with PR checks<br>
+            <strong>Staging →</strong> Automatic deploy from develop branch<br>
+            <strong>Production →</strong> Tagged releases with manual approval</p>
+          </div>
+
+          <pre class="code-block">
+# .github/workflows/deploy.yml
+name: Deploy to Production
+
+on:
+  push:
+    tags: [ 'v*' ]
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Heroku Staging
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "myapp-staging"
+        heroku_email: "deploy@example.com"
+        
+    - name: Run staging tests
+      run: |
+        curl -f https://myapp-staging.herokuapp.com/health/ || exit 1
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: Deploy to AWS ECS
+      run: |
+        aws ecs update-service --cluster production --service django-app --force-new-deployment
+        
+    - name: Wait for deployment
+      run: |
+        aws ecs wait services-stable --cluster production --services django-app
+        
+    - name: Run smoke tests
+      run: |
+        curl -f https://api.example.com/health/ || exit 1
+        python scripts/smoke_tests.py
+      env:
+        API_BASE_URL: https://api.example.com
+
+  deploy-kubernetes:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - name: Set up kubectl
+      uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        
+    - name: Deploy to Kubernetes
+      run: |
+        sed -i 's|IMAGE_TAG|${{ github.sha }}|g' k8s/deployment.yaml
+        kubectl apply -f k8s/
+        kubectl rollout status deployment/django-app -n production
+</pre>
+        </div>
+
+        <div class="session reveal">
+          <span class="session-date">Advanced Patterns & Best Practices</span>
+          
+          <h4>Reusable Workflows</h4>
+          <pre class="code-block">
+# .github/workflows/reusable-django-ci.yml
+name: Reusable Django CI
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: false
+        type: string
+        default: '3.11'
+      django-version:
+        required: false
+        type: string
+        default: '4.2'
+    secrets:
+      codecov-token:
+        required: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    # ... rest of CI steps
+
+# Usage in other repositories:
+name: CI
+on: [push, pull_request]
+
+jobs:
+  call-reusable-workflow:
+    uses: organization/workflows/.github/workflows/reusable-django-ci.yml@main
+    with:
+      python-version: '3.11'
+      django-version: '4.2'
+    secrets:
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
+</pre>
+
+          <h4>Conditional Execution & Optimization</h4>
+          <pre class="code-block">
+# Skip duplicate workflows
+- name: Cancel Previous Runs
+  uses: styfle/cancel-workflow-action@0.11.0
+  with:
+    access_token: ${{ github.token }}
+
+# Conditional job execution based on file changes
+- name: Check for Python changes
+  uses: dorny/paths-filter@v2
+  id: changes
+  with:
+    filters: |
+      python:
+        - '**.py'
+        - 'requirements/**'
+        - 'pyproject.toml'
+
+- name: Run Python tests
+  if: steps.changes.outputs.python == 'true'
+  run: pytest
+
+# Environment-specific deployments
+- name: Deploy to staging
+  if: github.ref == 'refs/heads/develop'
+  run: echo "Deploying to staging"
+
+- name: Deploy to production
+  if: startsWith(github.ref, 'refs/tags/v')
+  run: echo "Deploying to production"
+</pre>
+
+          <h4>Monitoring & Notifications</h4>
+          <div class="concept-cards">
+            <div class="concept-card">
+              <div class="concept-card-title">✓ Best Practices</div>
+              <p>
+                <strong>Use caching:</strong> Dependencies, Docker layers, build artifacts<br>
+                <strong>Pin versions:</strong> Use specific action versions for reproducibility<br>
+                <strong>Fail fast:</strong> Quick checks before expensive operations<br>
+                <strong>Monitor costs:</strong> Track workflow performance and usage
+              </p>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-title">⚠ Common Pitfalls</div>
+              <p>
+                <strong>Exposed secrets:</strong> Never print secret values in logs<br>
+                <strong>Latest tags:</strong> Avoid using @latest, pin to versions<br>
+                <strong>Over-parallelization:</strong> Balance speed vs resource usage<br>
+                <strong>Missing cleanup:</strong> Remove temporary files and artifacts
+              </p>
+            </div>
+          </div>
+
+          <pre class="code-block">
+# Slack notifications on failure
+- name: Notify on failure
+  if: failure()
+  uses: rtCamp/action-slack-notify@v2
+  env:
+    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    SLACK_MESSAGE: |
+      🚨 Workflow failed: ${{ github.workflow }}
+      Repository: ${{ github.repository }}
+      Branch: ${{ github.ref }}
+      Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+# Performance monitoring
+- name: Measure workflow duration
+  run: |
+    end_time=$(date +%s)
+    duration=$((end_time - WORKFLOW_START_TIME))
+    echo "Workflow took ${duration} seconds"
+    
+    # Send metrics to monitoring
+    curl -X POST "https://api.datadog.com/api/v1/series" \
+      -H "DD-API-KEY: ${{ secrets.DD_API_KEY }}" \
+      -d "{\"series\": [{\"metric\": \"github.workflow.duration\", \"points\": [[$(date +%s), ${duration}]]}]}"
+</pre>
+        </div>
+
+      </div><!-- /tab-github-actions -->
+
+    </div><!-- /container -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">S<span>.</span>Sontam</div>
+          <nav class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <p class="footer-copy">© 2025 Sarath Sontam. Toronto, Ontario.</p>
+        </div>
+      </div>
+    </footer>
+  </div><!-- /page-container -->
+
+  <script src="../js/main.js"></script>
+  <script>
+    function switchTab(e, tabId) {
+      // Deactivate all tabs and panes
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      // Activate clicked
+      e.currentTarget.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+      // Scroll to top of tab bar for better UX
+      const tabBar = document.querySelector('.tab-bar');
+      if (tabBar) {
+        tabBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      // Re-trigger reveal animations for newly visible elements
+      document.querySelectorAll('#tab-' + tabId + ' .reveal').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 50);
+      });
+    }
+    // Trigger reveal on initial tab on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#tab-linux .reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 60);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Learning – Sarath Sontam</title>
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">S<span>.</span>Sontam</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="personal.html">What I Am</a></li>
+      <li class="nav-has-dropdown"><a href="learning.html" class="active">Learning</a><ul class="nav-dropdown"><li><a href="devops.html">DevOps &amp; AWS</a></li><li><a href="django.html">Django Framework</a></li></ul></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="container">
+        <div class="section-label">Learning</div>
+        <h1 class="section-title">Notes &amp;<br>Field Guides</h1>
+        <p class="section-subtitle">Structured notes from real production work — things I've learned building and shipping software at Sofvie Inc. and beyond.</p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="projects-grid">
+
+          <!-- DevOps & AWS card -->
+          <a href="devops.html" class="project-card reveal" style="text-decoration:none; display:block; cursor:pointer;">
+            <div class="project-number">01</div>
+            <h3 class="project-title">DevOps &amp; AWS</h3>
+            <p class="project-desc">
+              Docker, Kubernetes, AWS core services (EC2, S3, RDS, Lambda, EKS), GitHub Actions CI/CD pipelines,
+              VPN &amp; security, and real-world patterns from 4+ years in production.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Kubernetes</span>
+              <span class="tag">AWS</span>
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">CI/CD</span>
+              <span class="tag">EKS</span>
+            </div>
+            <div style="margin-top:1rem;">
+              <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); border:1px solid var(--border-accent); border-radius:var(--radius); padding:0.3rem 0.7rem; display:inline-flex; align-items:center; gap:0.35rem;">
+                Read Notes →
+              </span>
+            </div>
+          </a>
+
+          <!-- Placeholder future topic -->
+          <a href="django.html" class="project-card reveal" style="text-decoration:none; display:block; cursor:pointer;">
+            <div class="project-number">02</div>
+            <h3 class="project-title">Python Django Framework</h3>
+            <p class="project-desc">
+              Comprehensive guide to Django's core concepts: ORM, serialization, class-based & function-based views, 
+              REST APIs, and production best practices from building scalable web applications.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Django</span>
+              <span class="tag">Python</span>
+              <span class="tag">ORM</span>
+              <span class="tag">REST API</span>
+              <span class="tag">DRF</span>
+              <span class="tag">Serializers</span>
+            </div>
+            <div style="margin-top:1rem;">
+              <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); border:1px solid var(--border-accent); border-radius:var(--radius); padding:0.3rem 0.7rem; display:inline-flex; align-items:center; gap:0.35rem;">
+                Read Notes →
+              </span>
+            </div>
+          </a>
+
+          <div class="project-card reveal" style="border-style:dashed; border-color:var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:260px;">
+            <div style="font-size:2rem; margin-bottom:0.75rem; opacity:0.3;">+</div>
+            <div style="font-family:var(--font-mono); font-size:0.78rem; color:var(--text-muted); letter-spacing:0.1em;">
+              Coming Soon<br>
+              <span style="font-size:0.68rem; opacity:0.6; display:block; margin-top:0.4rem;">SQL Mastery · Analytics · Data Engineering</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">S<span>.</span>Sontam</div>
+          <nav class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <p class="footer-copy">© 2025 Sarath Sontam. Toronto, Ontario.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

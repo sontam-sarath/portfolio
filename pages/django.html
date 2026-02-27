@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Python Django Framework – Sarath Sontam</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* ── TAB SYSTEM ─────────────────────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 2.5rem;
+      padding: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+    }
+    .tab-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--accent); background: var(--accent-dim); }
+    .tab-btn.active {
+      color: var(--accent);
+      background: var(--accent-dim);
+      border-color: var(--border-accent);
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── SESSION BLOCKS ─────────────────────────────────────────── */
+    .session {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 160px;
+    }
+    .session-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+    .session h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem;
+    }
+    .session h4 {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 1.25rem 0 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .session p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .session ul, .session ol {
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .session li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
+    }
+    .session li strong {
+      color: var(--text-primary);
+    }
+    .session pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .session code {
+      background: var(--bg-card);
+      color: var(--accent);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+    }
+    .concept-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .concept-box h5 {
+      font-family: var(--font-display);
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pros, .cons {
+      background: var(--bg-card);
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+    }
+    .pros h5, .cons h5 {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+    .pros h5 { color: #4ade80; }
+    .cons h5 { color: #f87171; }
+    
+    @media (max-width: 768px) {
+      .tab-bar { top: 70px; }
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">S<span>.</span>Sontam</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="personal.html">What I Am</a></li>
+      <li class="nav-has-dropdown">
+        <a href="learning.html">Learning</a>
+        <ul class="nav-dropdown">
+          <li><a href="devops.html">DevOps &amp; AWS</a></li>
+          <li><a href="django.html" class="active">Django Framework</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="container">
+        <div class="section-label">Learning Notes</div>
+        <h1 class="section-title">Python Django<br>Framework</h1>
+        <p class="section-subtitle">
+          Comprehensive guide to Django's core concepts, architecture patterns, and production best practices. 
+          Notes from building scalable web applications and REST APIs with Django.
+        </p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+
+        <!-- Tab Navigation -->
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="overview">Overview</button>
+          <button class="tab-btn" data-tab="orm">ORM & Models</button>
+          <button class="tab-btn" data-tab="views">Views</button>
+          <button class="tab-btn" data-tab="serialization">Serialization</button>
+          <button class="tab-btn" data-tab="rest-apis">REST APIs</button>
+          <button class="tab-btn" data-tab="auth">Authentication</button>
+          <button class="tab-btn" data-tab="best-practices">Best Practices</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tab-pane active" id="overview">
+          
+          <div class="session">
+            <div class="session-date">Core Benefits</div>
+            <h3>Why Django?</h3>
+            
+            <p>Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. Built by experienced developers, it takes care of much of the hassle of web development so you can focus on writing your app.</p>
+
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>✓ Advantages</h5>
+                <ul>
+                  <li><strong>Batteries Included:</strong> Admin interface, ORM, authentication, security features</li>
+                  <li><strong>Security First:</strong> Built-in protection against CSRF, SQL injection, XSS</li>
+                  <li><strong>Scalable:</strong> Used by Instagram, Pinterest, Mozilla</li>
+                  <li><strong>DRY Principle:</strong> Don't Repeat Yourself philosophy</li>
+                  <li><strong>Great Documentation:</strong> Comprehensive and well-maintained docs</li>
+                  <li><strong>Active Community:</strong> Large ecosystem of packages</li>
+                </ul>
+              </div>
+              
+              <div class="cons">
+                <h5>⚠ Considerations</h5>
+                <ul>
+                  <li><strong>Learning Curve:</strong> Many concepts to master initially</li>
+                  <li><strong>Monolithic:</strong> Can be overkill for simple applications</li>
+                  <li><strong>Performance:</strong> Python overhead for high-performance needs</li>
+                  <li><strong>Template System:</strong> Less flexible than some alternatives</li>
+                  <li><strong>URL Routing:</strong> Can become complex in large applications</li>
+                </ul>
+              </div>
+            </div>
+
+            <h4>Django Architecture (MTV Pattern)</h4>
+            <div class="concept-box">
+              <h5>Model-Template-View Pattern</h5>
+              <ul>
+                <li><strong>Model:</strong> Defines data structure and business logic</li>
+                <li><strong>Template:</strong> Presentation layer (HTML with Django template tags)</li>
+                <li><strong>View:</strong> Business logic that processes requests and returns responses</li>
+                <li><strong>URL Dispatcher:</strong> Maps URLs to appropriate views</li>
+              </ul>
+            </div>
+
+            <h4>Project Structure</h4>
+            <pre>
+myproject/
+├── manage.py           # Django command-line utility
+├── myproject/          # Project settings package  
+│   ├── __init__.py
+│   ├── settings.py     # Main settings file
+│   ├── urls.py         # Root URL configuration
+│   └── wsgi.py         # WSGI deployment interface
+└── myapp/              # Django application
+    ├── __init__.py
+    ├── admin.py        # Admin interface config
+    ├── apps.py         # App configuration
+    ├── models.py       # Data models
+    ├── views.py        # View functions/classes
+    ├── urls.py         # App URL patterns
+    └── migrations/     # Database schema changes
+</pre>
+          </div>
+
+        </div>
+
+        <!-- ORM Tab -->
+        <div class="tab-pane" id="orm">
+          
+          <div class="session">
+            <div class="session-date">Object-Relational Mapping</div>
+            <h3>Django ORM Deep Dive</h3>
+            
+            <p>Django's ORM provides a Pythonic way to interact with databases. It translates Python code into SQL queries, handles database connections, and provides an abstraction layer over different database backends.</p>
+
+            <h4>Model Definition</h4>
+            <pre>
+from django.db import models
+from django.contrib.auth.models import User
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = "categories"
+        ordering = ['name']
+    
+    def __str__(self):
+        return self.name
+
+class Post(models.Model):
+    DRAFT = 'draft'
+    PUBLISHED = 'published'
+    
+    STATUS_CHOICES = [
+        (DRAFT, 'Draft'),
+        (PUBLISHED, 'Published'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    content = models.TextField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=DRAFT)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        
+    def __str__(self):
+        return self.title
+</pre>
+
+            <h4>Field Types & Relationships</h4>
+            <div class="concept-box">
+              <h5>Common Field Types</h5>
+              <ul>
+                <li><strong>CharField:</strong> Short text (max_length required)</li>
+                <li><strong>TextField:</strong> Long text</li>
+                <li><strong>IntegerField, FloatField, DecimalField:</strong> Numbers</li>
+                <li><strong>DateField, DateTimeField:</strong> Dates and timestamps</li>
+                <li><strong>BooleanField:</strong> True/False values</li>
+                <li><strong>EmailField, URLField:</strong> Validated email and URL fields</li>
+                <li><strong>FileField, ImageField:</strong> File uploads</li>
+              </ul>
+            </div>
+
+            <h4>Relationship Types</h4>
+            <ul>
+              <li><strong>ForeignKey:</strong> One-to-Many relationship</li>
+              <li><strong>ManyToManyField:</strong> Many-to-Many relationship</li>
+              <li><strong>OneToOneField:</strong> One-to-One relationship</li>
+            </ul>
+
+            <h4>QuerySet Operations</h4>
+            <pre>
+# Basic queries
+posts = Post.objects.all()
+published_posts = Post.objects.filter(status='published')
+recent_posts = Post.objects.filter(created_at__gte=datetime.now() - timedelta(days=7))
+
+# Complex queries
+posts = Post.objects.filter(
+    category__name='Technology',
+    status='published'
+).exclude(
+    title__icontains='deprecated'
+).order_by('-created_at')
+
+# Aggregation
+from django.db.models import Count, Avg
+stats = Post.objects.aggregate(
+    total_posts=Count('id'),
+    avg_content_length=Avg('content__len')
+)
+
+# Related object queries (avoiding N+1 problems)
+posts_with_authors = Post.objects.select_related('author', 'category')
+posts_with_tags = Post.objects.prefetch_related('tags')
+
+# Raw SQL when needed
+posts = Post.objects.raw('SELECT * FROM myapp_post WHERE created_at > %s', [date])
+</pre>
+
+            <h4>Migration System</h4>
+            <p>Django's migration system tracks changes to your models and applies them to the database schema:</p>
+            <pre>
+# Generate migrations after model changes
+python manage.py makemigrations
+
+# Apply migrations to database
+python manage.py migrate
+
+# View migration status
+python manage.py showmigrations
+
+# Create empty migration for custom operations
+python manage.py makemigrations --empty myapp
+</pre>
+
+          </div>
+
+        </div>
+
+        <!-- Views Tab -->
+        <div class="tab-pane" id="views">
+          
+          <div class="session">
+            <div class="session-date">View Architecture</div>
+            <h3>Function-Based vs Class-Based Views</h3>
+            
+            <p>Django provides two ways to handle requests: Function-Based Views (FBVs) and Class-Based Views (CBVs). Each has its strengths and use cases.</p>
+
+            <h4>Function-Based Views (FBVs)</h4>
+            <div class="concept-box">
+              <h5>Simple and Explicit</h5>
+              <p>FBVs are straightforward Python functions that take a request and return a response. They're easy to understand and debug.</p>
+            </div>
+
+            <pre>
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from .models import Post, Category
+from .forms import PostForm
+
+def post_list(request):
+    posts = Post.objects.filter(status='published').select_related('category', 'author')
+    categories = Category.objects.all()
+    
+    return render(request, 'blog/post_list.html', {
+        'posts': posts,
+        'categories': categories,
+    })
+
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug, status='published')
+    
+    return render(request, 'blog/post_detail.html', {
+        'post': post,
+    })
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def post_create(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_detail', slug=post.slug)
+    else:
+        form = PostForm()
+    
+    return render(request, 'blog/post_form.html', {
+        'form': form,
+        'title': 'Create Post'
+    })
+
+def api_post_list(request):
+    posts = Post.objects.filter(status='published').values('title', 'slug', 'created_at')
+    return JsonResponse(list(posts), safe=False)
+</pre>
+
+            <h4>Class-Based Views (CBVs)</h4>
+            <div class="concept-box">
+              <h5>DRY and Extensible</h5>
+              <p>CBVs provide reusable components and built-in functionality for common patterns. They use inheritance and mixins for code reuse.</p>
+            </div>
+
+            <pre>
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.db.models import Q
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        queryset = Post.objects.filter(status='published').select_related('category', 'author')
+        
+        # Add search functionality
+        search = self.request.GET.get('search')
+        if search:
+            queryset = queryset.filter(
+                Q(title__icontains=search) | Q(content__icontains=search)
+            )
+        
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('search', '')
+        return context
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
+    context_object_name = 'post'
+    
+    def get_queryset(self):
+        return Post.objects.filter(status='published').select_related('author', 'category')
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/post_form.html'
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('post_detail', kwargs={'slug': self.object.slug})
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/post_form.html'
+    
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
+
+# Custom mixins for reusability
+class AuthorRequiredMixin:
+    """Ensures only the author can modify their posts"""
+    def get_queryset(self):
+        return super().get_queryset().filter(author=self.request.user)
+</pre>
+
+            <h4>When to Use Each Approach</h4>
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Function-Based Views</h5>
+                <ul>
+                  <li>Simple, one-off views</li>
+                  <li>Complex business logic</li>
+                  <li>Custom request processing</li>
+                  <li>Easy to test and debug</li>
+                  <li>Direct control over flow</li>
+                </ul>
+              </div>
+              
+              <div class="cons">
+                <h5>Class-Based Views</h5>
+                <ul>
+                  <li>CRUD operations</li>
+                  <li>Code reuse across views</li>
+                  <li>Standard patterns (list, detail, forms)</li>
+                  <li>Multiple inheritance needs</li>
+                  <li>Built-in pagination, auth</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Serialization Tab -->
+        <div class="tab-pane" id="serialization">
+          
+          <div class="session">
+            <div class="session-date">Data Serialization</div>
+            <h3>Django REST Framework Serializers</h3>
+            
+            <p>Serializers in Django REST Framework provide a way to convert complex data types (like Django model instances) to Python data types that can then be easily rendered into JSON, XML, or other content types.</p>
+
+            <h4>Basic Serializer Types</h4>
+
+            <div class="concept-box">
+              <h5>ModelSerializer</h5>
+              <p>Automatically generates serializer fields based on the model. Most commonly used for CRUD operations.</p>
+            </div>
+
+            <pre>
+from rest_framework import serializers
+from .models import Post, Category, User
+
+class CategorySerializer(serializers.ModelSerializer):
+    post_count = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'slug', 'description', 'post_count']
+        
+    def get_post_count(self, obj):
+        return obj.post_set.filter(status='published').count()
+
+class AuthorSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'full_name', 'email']
+        
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}".strip() or obj.username
+
+class PostSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+    category_id = serializers.IntegerField(write_only=True)
+    word_count = serializers.SerializerMethodField()
+    reading_time = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Post
+        fields = [
+            'id', 'title', 'slug', 'content', 'status', 
+            'author', 'category', 'category_id',
+            'word_count', 'reading_time',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['slug', 'created_at', 'updated_at']
+    
+    def get_word_count(self, obj):
+        return len(obj.content.split())
+    
+    def get_reading_time(self, obj):
+        word_count = len(obj.content.split())
+        return max(1, word_count // 200)  # Assume 200 words per minute
+    
+    def validate_title(self, value):
+        if len(value) < 5:
+            raise serializers.ValidationError("Title must be at least 5 characters long.")
+        return value
+    
+    def validate(self, data):
+        if data.get('status') == 'published' and not data.get('content'):
+            raise serializers.ValidationError("Published posts must have content.")
+        return data
+</pre>
+
+            <h4>Custom Serializers</h4>
+            <pre>
+class Serializer(serializers.Serializer):
+    """For non-model data or custom validation logic"""
+    
+    title = serializers.CharField(max_length=200)
+    email = serializers.EmailField()
+    age = serializers.IntegerField(min_value=0, max_value=120)
+    website = serializers.URLField(required=False)
+    tags = serializers.ListField(
+        child=serializers.CharField(max_length=50),
+        allow_empty=False
+    )
+    
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email already in use.")
+        return value
+    
+    def create(self, validated_data):
+        # Custom creation logic
+        return MyModel.objects.create(**validated_data)
+    
+    def update(self, instance, validated_data):
+        # Custom update logic
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
+</pre>
+
+            <h4>Nested Serialization</h4>
+            <pre>
+class PostWithCommentsSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, read_only=True)
+    author_details = AuthorSerializer(source='author', read_only=True)
+    
+    class Meta:
+        model = Post
+        fields = '__all__'
+
+# Writable nested serialization
+class PostCreateSerializer(serializers.ModelSerializer):
+    tags = serializers.ListField(
+        child=serializers.CharField(max_length=50),
+        write_only=True
+    )
+    
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'category_id', 'tags']
+    
+    def create(self, validated_data):
+        tags_data = validated_data.pop('tags', [])
+        post = Post.objects.create(**validated_data)
+        
+        # Handle tags creation/association
+        for tag_name in tags_data:
+            tag, created = Tag.objects.get_or_create(name=tag_name)
+            post.tags.add(tag)
+        
+        return post
+</pre>
+
+            <h4>Serializer Performance Tips</h4>
+            <ul>
+              <li><strong>Use select_related/prefetch_related:</strong> Optimize database queries for nested data</li>
+              <li><strong>SerializerMethodField sparingly:</strong> They can't be optimized by the database</li>
+              <li><strong>Nested serializers:</strong> Consider depth and performance implications</li>
+              <li><strong>Read-only fields:</strong> Mark fields as read_only when appropriate</li>
+              <li><strong>Custom to_representation:</strong> For complex output formatting</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+        <!-- REST APIs Tab -->
+        <div class="tab-pane" id="rest-apis">
+          
+          <div class="session">
+            <div class="session-date">REST API Development</div>
+            <h3>Django REST Framework APIs</h3>
+            
+            <p>Django REST Framework (DRF) provides a powerful toolkit for building Web APIs. It includes serializers, viewsets, routers, authentication, and permissions.</p>
+
+            <h4>API Views & ViewSets</h4>
+
+            <div class="concept-box">
+              <h5>APIView vs ViewSets</h5>
+              <ul>
+                <li><strong>APIView:</strong> Class-based view for handling HTTP methods explicitly</li>
+                <li><strong>ViewSets:</strong> Combine logic for handling multiple related views</li>
+                <li><strong>Generic Views:</strong> Pre-built views for common patterns</li>
+              </ul>
+            </div>
+
+            <pre>
+from rest_framework import status, viewsets, permissions
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+
+# APIView approach
+class PostListAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+    def get(self, request):
+        posts = Post.objects.filter(status='published')
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Generic Views approach
+class PostListCreateView(ListCreateAPIView):
+    queryset = Post.objects.filter(status='published')
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['category', 'status']
+    search_fields = ['title', 'content']
+    ordering_fields = ['created_at', 'title']
+    ordering = ['-created_at']
+    
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+# ViewSet approach (most powerful)
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['category', 'status', 'author']
+    search_fields = ['title', 'content']
+    ordering_fields = ['created_at', 'updated_at', 'title']
+    
+    def get_queryset(self):
+        queryset = Post.objects.select_related('author', 'category')
+        
+        # Filter published posts for non-authors
+        if not self.request.user.is_staff:
+            if self.action in ['list', 'retrieve']:
+                queryset = queryset.filter(status='published')
+            elif self.action in ['update', 'partial_update', 'destroy']:
+                queryset = queryset.filter(author=self.request.user)
+        
+        return queryset
+    
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return PostCreateSerializer
+        elif self.action in ['list']:
+            return PostListSerializer
+        return PostSerializer
+    
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def like(self, request, pk=None):
+        post = self.get_object()
+        user = request.user
+        
+        if post.likes.filter(id=user.id).exists():
+            post.likes.remove(user)
+            liked = False
+        else:
+            post.likes.add(user)
+            liked = True
+        
+        return Response({
+            'liked': liked,
+            'total_likes': post.likes.count()
+        })
+    
+    @action(detail=False, methods=['get'])
+    def my_posts(self, request):
+        posts = self.get_queryset().filter(author=request.user)
+        serializer = self.get_serializer(posts, many=True)
+        return Response(serializer.data)
+    
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+</pre>
+
+            <h4>URL Routing</h4>
+            <pre>
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
+
+# Using routers with ViewSets (recommended)
+router = DefaultRouter()
+router.register(r'posts', views.PostViewSet)
+router.register(r'categories', views.CategoryViewSet)
+
+urlpatterns = [
+    path('api/v1/', include(router.urls)),
+    
+    # Manual routing for specific views
+    path('api/v1/posts/trending/', views.TrendingPostsView.as_view()),
+    path('api/v1/auth/', include('rest_framework.urls')),
+]
+
+# Generated URLs from router:
+# GET    /api/v1/posts/           - List posts
+# POST   /api/v1/posts/           - Create post  
+# GET    /api/v1/posts/{id}/      - Retrieve post
+# PUT    /api/v1/posts/{id}/      - Update post
+# PATCH  /api/v1/posts/{id}/      - Partial update
+# DELETE /api/v1/posts/{id}/      - Delete post
+# POST   /api/v1/posts/{id}/like/ - Custom action
+# GET    /api/v1/posts/my_posts/  - Custom list action
+</pre>
+
+            <h4>Authentication & Permissions</h4>
+            <pre>
+# settings.py
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+}
+
+# Custom permissions
+from rest_framework import permissions
+
+class IsAuthorOrReadOnly(permissions.BasePermission):
+    """Custom permission to only allow authors to edit their own posts."""
+    
+    def has_object_permission(self, request, view, obj):
+        # Read permissions for any request
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        # Write permissions only to the author
+        return obj.author == request.user
+
+# Usage in views
+class PostViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
+</pre>
+
+            <h4>API Documentation & Testing</h4>
+            <pre>
+# Install and configure drf-spectacular for OpenAPI schema
+pip install drf-spectacular
+
+# settings.py
+INSTALLED_APPS = [
+    'drf_spectacular',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Blog API',
+    'DESCRIPTION': 'A comprehensive blog API with user auth',
+    'VERSION': '1.0.0',
+}
+
+# urls.py
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+urlpatterns = [
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+]
+</pre>
+
+          </div>
+
+        </div>
+
+        <!-- Authentication Tab -->
+        <div class="tab-pane" id="auth">
+          
+          <div class="session">
+            <div class="session-date">Authentication & Authorization</div>
+            <h3>Django Auth System & JWT Implementation</h3>
+            
+            <p>Django provides a robust authentication system out of the box, but modern applications often require JWT (JSON Web Tokens) for stateless authentication in APIs and mobile applications.</p>
+
+            <h4>Custom User Model Setup</h4>
+            <div class="concept-box">
+              <h5>Why Custom User Models?</h5>
+              <p>Django's default User model uses username for authentication. Custom models provide flexibility for email-based auth, additional fields, and future extensibility.</p>
+            </div>
+
+            <pre>
+# models.py
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.base_user import BaseUserManager
+from django.db import models
+from django.utils import timezone
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('Email is required')
+        
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+        
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True')
+        
+        return self.create_user(email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
+    
+    # Additional fields for enhanced functionality
+    phone_number = models.CharField(max_length=15, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    is_email_verified = models.BooleanField(default=False)
+    email_verification_token = models.CharField(max_length=100, blank=True)
+    
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    
+    objects = UserManager()
+    
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+    
+    def __str__(self):
+        return self.email
+    
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}".strip()
+    
+    def get_short_name(self):
+        return self.first_name
+
+# Profile model for additional user data
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=100, blank=True)
+    website = models.URLField(blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.user.email}'s Profile"
+</pre>
+
+            <div class="concept-box">
+              <h5>Settings Configuration</h5>
+              <pre>
+# settings.py
+AUTH_USER_MODEL = 'accounts.User'
+
+# Password validation
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', 'OPTIONS': {'min_length': 8}},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+]
+</pre>
+            </div>
+
+            <h4>JWT Authentication with SimpleJWT</h4>
+            <p>JSON Web Tokens provide stateless authentication, perfect for APIs and mobile applications. They contain encoded user information and have built-in expiration.</p>
+
+            <pre>
+# Install dependencies
+pip install djangorestframework-simplejwt
+
+# settings.py
+from datetime import timedelta
+
+INSTALLED_APPS = [
+    'rest_framework',
+    'rest_framework_simplejwt',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+    
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'JTI_CLAIM': 'jti',
+}
+</pre>
+
+            <h4>Authentication Views & Serializers</h4>
+            <pre>
+# serializers.py
+from rest_framework import serializers
+from django.contrib.auth import authenticate
+from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import User, UserProfile
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, validators=[validate_password])
+    password_confirm = serializers.CharField(write_only=True)
+    
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'password', 'password_confirm']
+    
+    def validate(self, data):
+        if data['password'] != data['password_confirm']:
+            raise serializers.ValidationError("Passwords don't match")
+        return data
+    
+    def create(self, validated_data):
+        validated_data.pop('password_confirm')
+        user = User.objects.create_user(**validated_data)
+        
+        # Create user profile
+        UserProfile.objects.create(user=user)
+        
+        return user
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    
+    def validate(self, data):
+        email = data.get('email')
+        password = data.get('password')
+        
+        if email and password:
+            user = authenticate(email=email, password=password)
+            
+            if not user:
+                raise serializers.ValidationError('Invalid credentials')
+            
+            if not user.is_active:
+                raise serializers.ValidationError('Account is disabled')
+            
+            data['user'] = user
+            return data
+        
+        raise serializers.ValidationError('Email and password required')
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'first_name', 'last_name', 'is_active', 'date_joined', 'profile']
+        read_only_fields = ['id', 'date_joined']
+    
+    def get_profile(self, obj):
+        if hasattr(obj, 'profile'):
+            return {
+                'bio': obj.profile.bio,
+                'location': obj.profile.location,
+                'website': obj.profile.website,
+            }
+        return None
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField()
+    new_password = serializers.CharField(validators=[validate_password])
+    new_password_confirm = serializers.CharField()
+    
+    def validate(self, data):
+        if data['new_password'] != data['new_password_confirm']:
+            raise serializers.ValidationError("New passwords don't match")
+        return data
+    
+    def validate_old_password(self, value):
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError('Old password is incorrect')
+        return value
+</pre>
+
+            <h4>Authentication API Views</h4>
+            <pre>
+# views.py
+from rest_framework import status, generics, permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.contrib.auth import logout
+from .serializers import *
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserRegistrationSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        
+        # Generate tokens for new user
+        refresh = RefreshToken.for_user(user)
+        
+        return Response({
+            'user': UserSerializer(user).data,
+            'tokens': {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }
+        }, status=status.HTTP_201_CREATED)
+
+class LoginView(TokenObtainPairView):
+    serializer_class = LoginSerializer
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user = serializer.validated_data['user']
+        refresh = RefreshToken.for_user(user)
+        
+        return Response({
+            'user': UserSerializer(user).data,
+            'tokens': {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }
+        })
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def logout_view(request):
+    try:
+        refresh_token = request.data.get('refresh_token')
+        if refresh_token:
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+        
+        logout(request)
+        return Response({'message': 'Successfully logged out'})
+    except Exception as e:
+        return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+
+class ProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_object(self):
+        return self.request.user
+
+class ChangePasswordView(generics.UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_object(self):
+        return self.request.user
+    
+    def update(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user.set_password(serializer.validated_data['new_password'])
+        user.save()
+        
+        return Response({'message': 'Password updated successfully'})
+</pre>
+
+            <h4>Token Types & Security</h4>
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>Access Tokens</h5>
+                <ul>
+                  <li><strong>Short-lived (15-60 minutes)</strong></li>
+                  <li><strong>Used for API authentication</strong></li>
+                  <li><strong>Contains user information & permissions</strong></li>
+                  <li><strong>Sent with each request</strong></li>
+                  <li><strong>Automatically expires for security</strong></li>
+                </ul>
+              </div>
+              
+              <div class="cons">
+                <h5>Refresh Tokens</h5>
+                <ul>
+                  <li><strong>Long-lived (7-30 days)</strong></li>
+                  <li><strong>Used to get new access tokens</strong></li>
+                  <li><strong>Stored securely on client</strong></li>
+                  <li><strong>Can be blacklisted/revoked</strong></li>
+                  <li><strong>Rotated on each use</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <h4>Frontend JWT Implementation</h4>
+            <pre>
+// JavaScript/React example
+class AuthService {
+    constructor() {
+        this.baseURL = 'http://localhost:8000/api/auth/';
+        this.tokenKey = 'access_token';
+        this.refreshKey = 'refresh_token';
+    }
+    
+    // Login and store tokens
+    async login(email, password) {
+        const response = await fetch(`${this.baseURL}login/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            localStorage.setItem(this.tokenKey, data.tokens.access);
+            localStorage.setItem(this.refreshKey, data.tokens.refresh);
+            return data;
+        }
+        throw new Error('Login failed');
+    }
+    
+    // Get access token with automatic refresh
+    async getAccessToken() {
+        let token = localStorage.getItem(this.tokenKey);
+        
+        if (!token) return null;
+        
+        // Check if token is expired
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const isExpired = payload.exp * 1000 < Date.now();
+        
+        if (isExpired) {
+            token = await this.refreshAccessToken();
+        }
+        
+        return token;
+    }
+    
+    // Refresh access token
+    async refreshAccessToken() {
+        const refreshToken = localStorage.getItem(this.refreshKey);
+        
+        if (!refreshToken) {
+            this.logout();
+            return null;
+        }
+        
+        try {
+            const response = await fetch(`${this.baseURL}token/refresh/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ refresh: refreshToken })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem(this.tokenKey, data.access);
+                if (data.refresh) {
+                    localStorage.setItem(this.refreshKey, data.refresh);
+                }
+                return data.access;
+            }
+        } catch (error) {
+            console.error('Token refresh failed:', error);
+        }
+        
+        this.logout();
+        return null;
+    }
+    
+    // Make authenticated API calls
+    async apiCall(url, options = {}) {
+        const token = await this.getAccessToken();
+        
+        if (!token) {
+            throw new Error('No valid token');
+        }
+        
+        return fetch(url, {
+            ...options,
+            headers: {
+                ...options.headers,
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+    
+    logout() {
+        localStorage.removeItem(this.tokenKey);
+        localStorage.removeItem(this.refreshKey);
+        window.location.href = '/login';
+    }
+}
+
+// Usage
+const auth = new AuthService();
+
+// Login
+auth.login('user@example.com', 'password')
+    .then(data => console.log('Logged in:', data.user))
+    .catch(error => console.error('Login error:', error));
+
+// Make API calls
+auth.apiCall('http://localhost:8000/api/posts/')
+    .then(response => response.json())
+    .then(data => console.log('Posts:', data));
+</pre>
+
+            <h4>Permissions & Authorization</h4>
+            <pre>
+# Custom permissions
+from rest_framework import permissions
+
+class IsOwnerOrReadOnly(permissions.BasePermission):
+    """Custom permission to only allow owners to edit their objects."""
+    
+    def has_object_permission(self, request, view, obj):
+        # Read permissions for any request
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        # Write permissions only to owner
+        return obj.owner == request.user
+
+class IsAuthorOrStaffOrReadOnly(permissions.BasePermission):
+    """Allow authors to edit their content, staff for everything, others read-only."""
+    
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user and request.user.is_authenticated
+    
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        if request.user.is_staff:
+            return True
+        
+        return obj.author == request.user
+
+# Group-based permissions
+from django.contrib.auth.models import Group, Permission
+
+# Create groups and assign permissions
+editors_group, created = Group.objects.get_or_create(name='Editors')
+moderators_group, created = Group.objects.get_or_create(name='Moderators')
+
+# Usage in views
+class PostViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated, IsAuthorOrStaffOrReadOnly]
+    
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [permissions.AllowAny]
+        elif self.action == 'create':
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAuthenticated, IsAuthorOrStaffOrReadOnly]
+        
+        return [permission() for permission in permission_classes]
+</pre>
+
+            <h4>Security Best Practices</h4>
+            <div class="concept-box">
+              <h5>JWT Security Considerations</h5>
+              <ul>
+                <li><strong>Store securely:</strong> Use httpOnly cookies or secure storage, never localStorage for sensitive apps</li>
+                <li><strong>Short expiration:</strong> Keep access tokens short-lived (15-60 minutes)</li>
+                <li><strong>Token rotation:</strong> Rotate refresh tokens on each use</li>
+                <li><strong>Blacklisting:</strong> Implement token blacklisting for logout</li>
+                <li><strong>HTTPS only:</strong> Always use SSL/TLS in production</li>
+                <li><strong>Validate thoroughly:</strong> Check token signature, expiration, and claims</li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Best Practices Tab -->
+        <div class="tab-pane" id="best-practices">
+          
+          <div class="session">
+            <div class="session-date">Production Guidelines</div>
+            <h3>Django Best Practices</h3>
+
+            <h4>Project Structure & Organization</h4>
+            <pre>
+myproject/
+├── config/                 # Settings and configuration
+│   ├── settings/
+│   │   ├── __init__.py
+│   │   ├── base.py        # Common settings
+│   │   ├── development.py # Dev-specific settings
+│   │   ├── production.py  # Production settings
+│   │   └── testing.py     # Test settings
+│   ├── urls.py
+│   └── wsgi.py
+├── apps/                   # All Django apps
+│   ├── accounts/          # User management
+│   ├── blog/              # Blog functionality
+│   └── core/              # Shared utilities
+├── static/                # Static files
+├── media/                 # User uploads
+├── templates/             # Templates
+├── requirements/          # Dependencies
+│   ├── base.txt
+│   ├── development.txt
+│   └── production.txt
+├── manage.py
+└── README.md
+</pre>
+
+            <h4>Settings Management</h4>
+            <pre>
+# config/settings/base.py (common settings)
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    
+    # Third party apps
+    'rest_framework',
+    'corsheaders',
+    
+    # Local apps
+    'apps.accounts',
+    'apps.blog',
+    'apps.core',
+]
+
+# config/settings/development.py
+from .base import *
+
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# config/settings/production.py
+from .base import *
+import dj_database_url
+
+DEBUG = False
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
+
+# Security settings
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+</pre>
+
+            <h4>Security Best Practices</h4>
+            <div class="concept-box">
+              <h5>Essential Security Measures</h5>
+              <ul>
+                <li><strong>Environment Variables:</strong> Never commit secrets to version control</li>
+                <li><strong>HTTPS:</strong> Always use SSL in production</li>
+                <li><strong>CSRF Protection:</strong> Keep middleware enabled</li>
+                <li><strong>Content Security Policy:</strong> Implement CSP headers</li>
+                <li><strong>Regular Updates:</strong> Keep Django and dependencies updated</li>
+              </ul>
+            </div>
+
+            <pre>
+# Security settings for production
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Environment variables
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DATABASE_URL = os.environ.get('DATABASE_URL')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# Input validation
+from django.core.exceptions import ValidationError
+
+def validate_file_size(file):
+    if file.size > 5 * 1024 * 1024:  # 5MB limit
+        raise ValidationError('File size cannot exceed 5MB.')
+
+class Post(models.Model):
+    image = models.ImageField(
+        upload_to='posts/', 
+        validators=[validate_file_size]
+    )
+</pre>
+
+            <h4>Performance Optimization</h4>
+            <ul>
+              <li><strong>Database Optimization:</strong> Use select_related() and prefetch_related()</li>
+              <li><strong>Caching:</strong> Implement Redis/Memcached for frequently accessed data</li>
+              <li><strong>Database Indexing:</strong> Add indexes for commonly queried fields</li>
+              <li><strong>Query Optimization:</strong> Use django-debug-toolbar to identify N+1 queries</li>
+              <li><strong>Static Files:</strong> Serve static files through CDN in production</li>
+            </ul>
+
+            <pre>
+# Efficient querysets
+posts = Post.objects.select_related('author', 'category').prefetch_related('tags')
+
+# Caching
+from django.core.cache import cache
+
+def get_popular_posts():
+    posts = cache.get('popular_posts')
+    if posts is None:
+        posts = Post.objects.filter(status='published').order_by('-views')[:10]
+        cache.set('popular_posts', posts, timeout=60*15)  # 15 minutes
+    return posts
+
+# Database indexes
+class Post(models.Model):
+    title = models.CharField(max_length=200, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['status', 'created_at']),
+            models.Index(fields=['author', 'status']),
+        ]
+</pre>
+
+            <h4>Testing Strategy</h4>
+            <pre>
+from django.test import TestCase, TransactionTestCase
+from django.contrib.auth.models import User
+from rest_framework.test import APITestCase
+from .models import Post, Category
+
+class PostModelTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user('testuser', 'test@example.com', 'pass')
+        self.category = Category.objects.create(name='Tech', slug='tech')
+    
+    def test_post_creation(self):
+        post = Post.objects.create(
+            title='Test Post',
+            content='Test content',
+            author=self.user,
+            category=self.category
+        )
+        self.assertEqual(post.title, 'Test Post')
+        self.assertEqual(post.status, 'draft')  # Default status
+
+class PostAPITest(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user('testuser', 'test@example.com', 'pass')
+        self.category = Category.objects.create(name='Tech', slug='tech')
+    
+    def test_create_post_authenticated(self):
+        self.client.force_authenticate(user=self.user)
+        data = {
+            'title': 'New Post',
+            'content': 'Post content',
+            'category_id': self.category.id
+        }
+        response = self.client.post('/api/posts/', data)
+        self.assertEqual(response.status_code, 201)
+    
+    def test_create_post_unauthenticated(self):
+        data = {'title': 'New Post', 'content': 'Post content'}
+        response = self.client.post('/api/posts/', data)
+        self.assertEqual(response.status_code, 401)
+</pre>
+
+            <h4>Deployment Checklist</h4>
+            <ul>
+              <li><strong>Environment separation:</strong> Different settings for dev/staging/production</li>
+              <li><strong>Database migrations:</strong> Always run migrations during deployment</li>
+              <li><strong>Static files:</strong> Collect and serve static files properly</li>
+              <li><strong>Logging:</strong> Configure comprehensive logging</li>
+              <li><strong>Monitoring:</strong> Set up error tracking (Sentry) and performance monitoring</li>
+              <li><strong>Backup strategy:</strong> Regular database and media backups</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">S<span>.</span>Sontam</div>
+          <nav class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <p class="footer-copy">© 2025 Sarath Sontam. Toronto, Ontario.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script>
+    // Tab functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+      
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetTab = btn.dataset.tab;
+          
+          // Remove active class from all buttons and panes
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabPanes.forEach(p => p.classList.remove('active'));
+          
+          // Add active class to clicked button and corresponding pane
+          btn.classList.add('active');
+          document.getElementById(targetTab).classList.add('active');
+          
+          // Scroll to top of tab bar for better UX
+          const tabBar = document.querySelector('.tab-bar');
+          if (tabBar) {
+            tabBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
