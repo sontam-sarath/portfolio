@@ -11,18 +11,16 @@ window.addEventListener('scroll', () => {
 // Mobile menu helpers
 function closeMobileMenu() {
   navLinks.classList.remove('open');
+  navToggle.classList.remove('active');
+  navToggle.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
-  const spans = navToggle.querySelectorAll('span');
-  spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
 }
 
 function openMobileMenu() {
   navLinks.classList.add('open');
+  navToggle.classList.add('active');
+  navToggle.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden'; // lock background scroll
-  const spans = navToggle.querySelectorAll('span');
-  spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-  spans[1].style.opacity = '0';
-  spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
 }
 
 if (navToggle) {
