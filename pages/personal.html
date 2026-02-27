@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What I Am – Sarath Sontam</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    .value-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+    .value-list li { font-size: 0.88rem; color: var(--text-secondary); padding-left: 1.25rem; position: relative; line-height: 1.6; }
+    .value-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; }
+    .book-row { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+    .book-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0.75rem; background: var(--bg-hover); border-radius: var(--radius); border: 1px solid var(--border); }
+    .book-title { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+    .book-author { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .city-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.3rem 0.7rem; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 100px; color: var(--text-secondary); margin: 0.2rem; transition: all var(--transition); }
+    .city-tag.lived { border-color: var(--border-accent); color: var(--accent); }
+    .now-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .now-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+    .now-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .now-value { font-size: 0.88rem; color: var(--text-primary); font-weight: 500; line-height: 1.4; }
+    .now-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .values-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-top: 0.75rem; }
+    .value-col-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    @media (max-width: 768px) {
+      .now-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .personal-card[style*="span 2"] { grid-column: span 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">S<span>.</span>Sontam</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="personal.html">What I Am</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="container">
+        <div class="section-label">Personal</div>
+        <h1 class="section-title">What I Am<br>Beyond Code</h1>
+        <p class="section-subtitle">The interests, curiosities, and paths that make me who I am — the person behind the pull requests.</p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+
+        <!-- Personal Quote -->
+        <div class="reveal" style="margin-bottom: 3rem; padding: 2rem; background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-lg) var(--radius-lg) 0;">
+          <div style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; font-style: italic; line-height: 1.5;">
+            "I believe the best engineers are curious humans first — I try to learn something outside my domain every single week."
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">— Sarath Sontam</div>
+        </div>
+
+        <div class="personal-grid">
+
+          <!-- TWO COUNTRIES, ONE STORY -->
+          <div class="personal-card reveal">
+            <div class="personal-card-icon">🌏</div>
+            <h3 class="personal-card-title">Two Countries, One Story</h3>
+            <div style="margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
+              <span class="city-tag lived">📍 Hyderabad, India</span>
+              <span class="city-tag lived">📍 Sudbury, ON</span>
+              <span class="city-tag lived">📍 Toronto, ON</span>
+            </div>
+            <p class="personal-card-content">
+              I grew up in Hyderabad — a city where ancient forts stand next to glass tech campuses — then
+              moved to Canada for graduate school and stayed. Living across two very different cultures gave
+              me a useful superpower at work: I'm genuinely comfortable navigating ambiguity, building trust
+              with people who think differently, and finding common ground fast.
+            </p>
+            <p class="personal-card-content" style="margin-top: 0.75rem;">
+              Canada taught me to embrace winter (eventually), appreciate directness, and understand what
+              "work-life balance" means when a culture actually enforces it. India gave me resilience,
+              resourcefulness, and a high bar for hospitality. I carry both every day.
+            </p>
+          </div>
+
+          <!-- LEARNING & CURIOSITY -->
+          <div class="personal-card reveal">
+            <div class="personal-card-icon">🧠</div>
+            <h3 class="personal-card-title">Learning &amp; Curiosity</h3>
+            <p class="personal-card-content">
+              I got a BTech in Computer Science, then an MBA in Marketing — not because I couldn't decide,
+              but because both genuinely fascinated me. That combination pays dividends every day: I can
+              read a business requirement and translate it directly into an API design, or explain a
+              technical constraint to a sales team without losing them.
+            </p>
+            <p class="personal-card-content" style="margin-top: 0.75rem;">
+              My latest milestone was earning the <strong style="color: var(--accent);">AWS Certified Developer – Associate</strong>
+              in 2025. Before that I tutored students in Python, SQL, and Excel at Cambrian College —
+              because teaching is the fastest way to find gaps in your own understanding.
+            </p>
+            <ul class="value-list">
+              <li>Currently exploring: LLM application architecture and RAG pipelines</li>
+              <li>Deep interests: distributed systems, observability, developer tooling</li>
+              <li>Learning style: build a small project, break it, understand why</li>
+            </ul>
+          </div>
+
+          <!-- READING -->
+          <div class="personal-card reveal">
+            <div class="personal-card-icon">📚</div>
+            <h3 class="personal-card-title">Reading &amp; Ideas</h3>
+            <p class="personal-card-content" style="margin-bottom: 1rem;">
+              I read across technology, business, and psychology — because the most interesting problems
+              I've faced live at the intersection of all three. Books that have genuinely changed how I work:
+            </p>
+            <div class="book-row">
+              <div class="book-item">
+                <div style="font-size: 1.1rem; flex-shrink: 0;">📘</div>
+                <div>
+                  <div class="book-title">The Pragmatic Programmer</div>
+                  <div class="book-author">Andrew Hunt &amp; David Thomas</div>
+                </div>
+              </div>
+              <div class="book-item">
+                <div style="font-size: 1.1rem; flex-shrink: 0;">📗</div>
+                <div>
+                  <div class="book-title">Designing Data-Intensive Applications</div>
+                  <div class="book-author">Martin Kleppmann</div>
+                </div>
+              </div>
+              <div class="book-item">
+                <div style="font-size: 1.1rem; flex-shrink: 0;">📙</div>
+                <div>
+                  <div class="book-title">The Lean Startup</div>
+                  <div class="book-author">Eric Ries</div>
+                </div>
+              </div>
+              <div class="book-item">
+                <div style="font-size: 1.1rem; flex-shrink: 0;">📕</div>
+                <div>
+                  <div class="book-title">Thinking, Fast and Slow</div>
+                  <div class="book-author">Daniel Kahneman</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEACHING & MENTORING -->
+          <div class="personal-card reveal">
+            <div class="personal-card-icon">🎓</div>
+            <h3 class="personal-card-title">Teaching &amp; Mentoring</h3>
+            <p class="personal-card-content">
+              One of the most fulfilling things I've done professionally was peer-tutoring at Cambrian College —
+              finding exactly the right analogy to make Python or SQL click for someone who was genuinely stuck.
+              That feeling hasn't left me.
+            </p>
+            <p class="personal-card-content" style="margin-top: 0.75rem;">
+              At Sofvie I've been deliberate about mentoring junior developers and running code reviews
+              that teach rather than just correct. One thoughtful comment can level up someone's
+              understanding for their entire career.
+            </p>
+            <ul class="value-list">
+              <li>Peer Tutor — Python, SQL &amp; Excel @ Cambrian College</li>
+              <li>Code review culture advocate at Sofvie Inc.</li>
+              <li>Onboarding support for new engineers joining the team</li>
+            </ul>
+          </div>
+
+          <!-- PHOTOGRAPHY -->
+          <div class="personal-card reveal">
+            <div class="personal-card-icon">📷</div>
+            <h3 class="personal-card-title">Photography</h3>
+            <div style="height: 140px; background: var(--bg-hover); border: 2px dashed var(--border); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+              <div style="font-size: 1.5rem;">🖼</div>
+              <div>Add your photos here</div>
+            </div>
+            <p class="personal-card-content">
+              Moving between Hyderabad and Ontario gave me a habit of stopping to notice things — the way
+              light falls differently here than back home, the scale of the Canadian landscape compared to
+              the layered density of a South Indian city.
+            </p>
+            <p class="personal-card-content" style="margin-top: 0.75rem;">
+              I shoot on my phone mostly: street scenes, architecture, and the quiet moments between things.
+              Nothing formal — just a record of noticing.
+            </p>
+          </div>
+
+          <!-- SIDE PROJECTS -->
+          <div class="personal-card reveal">
+            <div class="personal-card-icon">⚙️</div>
+            <h3 class="personal-card-title">Side Projects &amp; Tinkering</h3>
+            <p class="personal-card-content">
+              Outside of work I build things that scratch my own itch. The IoT sensor visualization at
+              Cambrian College started as pure curiosity — connecting a Python script to Arduino hardware
+              just to see what would happen. That instinct never really went away.
+            </p>
+            <ul class="value-list" style="margin-top: 0.75rem;">
+              <li>Automating my own dev environment with shell scripts and Docker</li>
+              <li>Experimenting with FastAPI + LLM integrations and RAG patterns</li>
+              <li>Raspberry Pi home-automation experiments</li>
+              <li>Occasional open-source contributions to Python tooling</li>
+            </ul>
+            <p class="personal-card-content" style="margin-top: 0.75rem;">
+              The through-line is always the same: pick a real problem, build the smallest version, learn
+              from what breaks.
+            </p>
+          </div>
+
+          <!-- WHAT I'M INTO RIGHT NOW -->
+          <div class="personal-card reveal" style="grid-column: span 2; background: var(--bg-hover);">
+            <div class="personal-card-icon">⚡</div>
+            <h3 class="personal-card-title">What I'm Into Right Now</h3>
+            <p class="personal-card-content" style="margin-bottom: 1.25rem; max-width: 640px;">
+              A snapshot of what's occupying my brain in early 2025 — things I'm reading, building,
+              thinking about, and genuinely nerding out over right now.
+            </p>
+            <div class="now-grid">
+              <div class="now-item">
+                <div class="now-label">📖 Reading</div>
+                <div class="now-value">Designing Data-Intensive Applications</div>
+                <div class="now-sub">Deep-diving distributed systems fundamentals</div>
+              </div>
+              <div class="now-item">
+                <div class="now-label">🛠 Building</div>
+                <div class="now-value">FastAPI + RAG pipeline experiments</div>
+                <div class="now-sub">Exploring LLM-augmented backend services</div>
+              </div>
+              <div class="now-item">
+                <div class="now-label">🎧 Listening</div>
+                <div class="now-value">Lex Fridman Podcast &amp; Software Engineering Daily</div>
+                <div class="now-sub">Long walks + long-form tech conversations</div>
+              </div>
+              <div class="now-item">
+                <div class="now-label">🤔 Thinking About</div>
+                <div class="now-value">Observability in Python microservices</div>
+                <div class="now-sub">Structured logging, tracing, and making on-call less painful</div>
+              </div>
+              <div class="now-item">
+                <div class="now-label">☁️ Studying</div>
+                <div class="now-value">AWS Solutions Architect – Associate</div>
+                <div class="now-sub">Next cert after passing the Developer exam in 2025</div>
+              </div>
+              <div class="now-item">
+                <div class="now-label">🌆 Exploring</div>
+                <div class="now-value">Toronto's tech community &amp; meetups</div>
+                <div class="now-sub">New to Toronto — building connections in the city</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VALUES AT WORK -->
+          <div class="personal-card reveal" style="grid-column: span 2;">
+            <div class="personal-card-icon">🧭</div>
+            <h3 class="personal-card-title">How I Work &amp; What I Value</h3>
+            <div class="values-grid">
+              <div>
+                <div class="value-col-label">Reliability</div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65;">
+                  I show up, follow through, and write the kind of code I'd be happy to debug at 2am.
+                  Boring reliability is deeply underrated in software teams.
+                </p>
+              </div>
+              <div>
+                <div class="value-col-label">Clarity</div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65;">
+                  Good engineering is mostly good communication. I write code, comments, and
+                  docs that don't require a translator to understand a week later.
+                </p>
+              </div>
+              <div>
+                <div class="value-col-label">Ownership</div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65;">
+                  I care about outcomes, not just output. If something I built is causing pain,
+                  I want to know and I want to fix it — not wait for a ticket.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">S<span>.</span>Sontam</div>
+          <nav class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <p class="footer-copy">© 2025 Sarath Sontam. Toronto, Ontario.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

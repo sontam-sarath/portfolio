@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects – Sarath Sontam</title>
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">S<span>.</span>Sontam</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="personal.html">What I Am</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="container">
+        <div class="section-label">Portfolio</div>
+        <h1 class="section-title">Projects &amp;<br>Contributions</h1>
+        <p class="section-subtitle">A collection of backend systems, APIs, analytics platforms, and cloud infrastructure projects built over 6+ years.</p>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+
+        <!-- Filter Pills -->
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2.5rem;">
+          <button class="tech-pill featured filter-btn active" data-filter="all">All</button>
+          <button class="tech-pill filter-btn" data-filter="backend">Backend</button>
+          <button class="tech-pill filter-btn" data-filter="analytics">Analytics</button>
+          <button class="tech-pill filter-btn" data-filter="devops">DevOps</button>
+          <button class="tech-pill filter-btn" data-filter="frontend">Frontend</button>
+        </div>
+
+        <div class="projects-grid">
+
+          <div class="project-card reveal" data-category="backend">
+            <div class="project-number">01</div>
+            <h3 class="project-title">High-Performance REST API Platform</h3>
+            <p class="project-desc">
+              Designed and delivered RESTful APIs using Django and Flask enabling seamless integration between AngularJS frontends and Python backend services.
+              Optimized ORM queries, MySQL, and Pandas processing to cut latency and scale reliably under high data volumes.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span><span class="tag">Django REST</span>
+              <span class="tag">Flask</span><span class="tag">AngularJS</span><span class="tag">MySQL</span><span class="tag">Pandas</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Live Demo</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="analytics">
+            <div class="project-number">02</div>
+            <h3 class="project-title">Enterprise Analytics & Reporting Pipeline</h3>
+            <p class="project-desc">
+              Built Python-based reporting pipelines with Pandas automating data extraction and transformation for enterprise analytics dashboards.
+              FastAPI services integrated with MySQL stored procedures reduced reporting latency by ~35%.
+            </p>
+            <div class="project-tags">
+              <span class="tag">FastAPI</span><span class="tag">Pandas</span>
+              <span class="tag">Power BI</span><span class="tag">MySQL</span><span class="tag">Plotly</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Live Demo</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="devops">
+            <div class="project-number">03</div>
+            <h3 class="project-title">Cloud-Native Kubernetes Infrastructure</h3>
+            <p class="project-desc">
+              Containerized Python applications with Docker and orchestrated deployments across Kubernetes dev/test environments using AWS EKS.
+              Configured namespaces and pods for isolated parallel development, reducing environment issues by ~40%.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+              <span class="tag">AWS EKS</span><span class="tag">EC2</span><span class="tag">RDS</span><span class="tag">S3</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Case Study</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="backend">
+            <div class="project-number">04</div>
+            <h3 class="project-title">Enterprise Keycloak Auth System</h3>
+            <p class="project-desc">
+              Implemented secure Keycloak-based authentication with JWT/OAuth2 for enterprise clients handling sensitive data.
+              Integrated VPN-based AWS and Docker access to protect development environments and ensure compliance.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Keycloak</span><span class="tag">JWT</span>
+              <span class="tag">OAuth2</span><span class="tag">AWS VPN</span><span class="tag">Docker</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Case Study</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="analytics">
+            <div class="project-number">05</div>
+            <h3 class="project-title">Live IoT Data Visualization</h3>
+            <p class="project-desc">
+              Engineered real-time data visualization tools using Python and Arduino-based sensors for remote risk analysis.
+              Part of Cambrian College's Applied Research program; translated raw sensor data into actionable operational insights.
+            </p>
+            <div class="project-tags">
+              <span class="tag">Python</span><span class="tag">Arduino</span>
+              <span class="tag">Plotly</span><span class="tag">Data Viz</span><span class="tag">IoT</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Research Paper</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="frontend">
+            <div class="project-number">06</div>
+            <h3 class="project-title">Progressive Web Application</h3>
+            <p class="project-desc">
+              Built PWA features including service workers and offline capabilities for field-based clients with intermittent connectivity.
+              Developed reusable AngularJS components reducing duplicate code and improving frontend development velocity.
+            </p>
+            <div class="project-tags">
+              <span class="tag">PWA</span><span class="tag">Service Workers</span>
+              <span class="tag">JavaScript</span><span class="tag">AngularJS</span><span class="tag">Offline-first</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Live Demo</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="devops">
+            <div class="project-number">07</div>
+            <h3 class="project-title">CI/CD Deployment Pipeline</h3>
+            <p class="project-desc">
+              Streamlined CI/CD workflows with GitHub Actions and Docker, supporting reliable automated builds and deployments.
+              Reduced manual deployment effort and configuration drift across development, staging, and production environments.
+            </p>
+            <div class="project-tags">
+              <span class="tag">GitHub Actions</span><span class="tag">Docker</span>
+              <span class="tag">AWS</span><span class="tag">CI/CD</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Case Study</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="backend">
+            <div class="project-number">08</div>
+            <h3 class="project-title">SQL Performance & Stored Procedures</h3>
+            <p class="project-desc">
+              Optimized SQL queries, stored procedures, indexes, and views boosting backend performance and stability by 30–40%.
+              Reduced production incidents and time spent on troubleshooting across multiple enterprise client environments.
+            </p>
+            <div class="project-tags">
+              <span class="tag">MySQL</span><span class="tag">SQL Server</span>
+              <span class="tag">Stored Procedures</span><span class="tag">Query Optimization</span>
+            </div>
+            <div class="project-links">
+              <a href="#USER_LINK_HERE" class="project-link">↗ Case Study</a>
+              <a href="#USER_LINK_HERE" class="project-link">⎔ GitHub</a>
+            </div>
+          </div>
+
+          <!-- Placeholder for future project -->
+          <div class="project-card reveal" style="border-style: dashed; border-color: var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:260px;">
+            <div style="font-size:2rem; margin-bottom:0.75rem; opacity:0.4;">+</div>
+            <div style="font-family:var(--font-mono); font-size:0.78rem; color:var(--text-muted); letter-spacing:0.1em;">
+              YOUR_PROJECT_HERE<br>
+              <span style="font-size:0.68rem; margin-top:0.5rem; display:block; color:var(--text-muted); opacity:0.6;">Replace this card with your next project</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">S<span>.</span>Sontam</div>
+          <nav class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="experience.html">Experience</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <p class="footer-copy">© 2025 Sarath Sontam. Toronto, Ontario.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card[data-category]');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active', 'featured'));
+        btn.classList.add('active', 'featured');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
